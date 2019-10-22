@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{parent()}} {% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block mapLink %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+  <link rel="js" type="js" href=" {{ asset("js/main.js") }} ">
+{% endblock %}
+
+{% block body %} {{ parent() }} {% endblock %}
+{% block content %}
+
+    <!-- Contact Section -->
+  <div style='background-color: #1abc9c;margin:auto;padding:5%;'>
+  <section class=" jumbotron page-section" id="contact"  style='margin:auto;'>
+    <div class="container">
+
+      <!-- Contact Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registrar comedor</h2>
+
+      <!-- Icon Divider -->
+      <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <!-- Contact Section Form -->
+      <div class="row">
+        <div class="col-lg-9 mx-auto">
+          <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+          <div class="section">
+              <div class="row">
+                <div class="col-md-12 mb-4 order-2">
+                  <form action="#" method="post">
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label for="name">Nombre del Centro de Asistencia Alimentaria/comedor</label>
+                        <input type="text" id="name" class="form-control " required>
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <label for="phone">Nombre de usuario</label>
+                        <input type="text" id="phone" class="form-control " required>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                          <label for="name">Contraseña</label>
+                          <input type="text" id="name" class="form-control " required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <label for="phone">Repetir contraseña</label>
+                          <input type="text" id="phone" class="form-control " required>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6 form-group">
+                            <label for="name">Organizacion</label>
+                            <input type="text" id="name" class="form-control ">
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <label for="phone">Red Social</label>
+                            <input type="text" id="phone" class="form-control " required>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                              <label for="name">Direccion</label>
+                              <input type="text" id="name" class="form-control " required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                              <label for="phone">Telefono</label>
+                              <input type="text" id="phone" class="form-control " required>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 form-group">
+                                <label for="name">Nombre del referente a cargo</label>
+                                <input type="text" id="name" class="form-control " required>
+                              </div>
+                              <div class="col-md-6 form-group">
+                                <label for="phone">Apellido del referente a cargo</label>
+                                <input type="text" id="phone" class="form-control " required>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                  <label for="name">Mail del referente a cargo</label>
+                                  <input type="text" id="name" class="form-control " required>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                  <label for="phone">Telefono del referente a cargo</label>
+                                  <input type="text" id="phone" class="form-control " required>
+                                </div>
+                              </div>
+                            <div class="row">
+                              <div class="col-md-12 form-group">
+                                <label for="message">Descripcion</label>
+                                <textarea name="message" id="message" class="form-control " cols="30" rows="4" required></textarea>
+                              </div>      
+                            </div>  
+                            <div class="row">
+                              <div class="col-md-12 form-group">
+                                <label for="message">Dias y horarios de funcionamiento</label>
+                                <textarea name="message" id="message" class="form-control " cols="30" rows="3" required></textarea>
+                              </div>      
+                            </div>
+                            <div class="row"  style='padding: 20px'  >
+                                <div class="col-md-8 form-group custom-file">
+                                  <input type="file" class="custom-file-input" id="customFile">
+                                  <label class="custom-file-label" for="customFile">Cargar foto(opcional)</label>
+                                </div>
+                              </div>                      
+                            <div class="row">
+                              <div class="col-md-6 form-group">
+                                <input type="submit" value="Enviar Solicitud" class="btn btn-primary px-3 py-3">
+                                <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-3">
+                              </div>
+                      
+                    </div>
+                  </form>
+                
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  </div>
+
+  
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+			<script >
+				var map = L.map('mapid').setView([-34.868412, -58.093643], 10);
+			 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);
+	
+				L.marker([-34.868412, -58.093643]).addTo(map)
+					.bindPopup('Holaaaaaa')
+					.openPopup();
+			</script>       
+{% endblock %} 
+

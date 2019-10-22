@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tipos de alimentos{% endblock %}
+
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
+{% block body %} {{ parent() }} {% endblock %}
+{% block h2Encabezado %}
+    {{ 'Tipos de necesidades' }}
+{% endblock %}
+{% block content %}
+    {{ form_start(form) }}   
+
+   
+    <div class="col-md-12 mb-4 order-2">
+        <div class="row">
+            <div class="col-md-4 form-group">          
+                {{ form_widget(form.nombre) }}
+            </div>
+            <div class="col-md-4 form-group">
+                {{ form_widget(form.Cargar) }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
