@@ -94,4 +94,14 @@ class StandarController extends AbstractController
         return $this->render('standar/tiposDeNecesidad.html.twig', ['form'=> $form->createView()]);
     }
 
+    /**
+     * @Route("/listadoUsuariosPendientes", name="listadoUsuariosPendientes")
+     */
+
+    public function listadoUsuariosPendientes(Request $request)
+    {
+        return $this->render('standar/listadoUsuariosPendientes.html.twig');
+
+    }
+
 }
