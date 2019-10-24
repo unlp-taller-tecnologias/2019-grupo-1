@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Referente;
+use App\Entity\RegistroAlimentacion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Referente|null find($id, $lockMode = null, $lockVersion = null)
- * @method Referente|null findOneBy(array $criteria, array $orderBy = null)
- * @method Referente[]    findAll()
- * @method Referente[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method RegistroAlimentacion|null find($id, $lockMode = null, $lockVersion = null)
+ * @method RegistroAlimentacion|null findOneBy(array $criteria, array $orderBy = null)
+ * @method RegistroAlimentacion[]    findAll()
+ * @method RegistroAlimentacion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ReferenteRepository extends ServiceEntityRepository
+class RegistroAlimentacionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Referente::class);
+        parent::__construct($registry, RegistroAlimentacion::class);
     }
 
     // /**
-    //  * @return Referente[] Returns an array of Referente objects
+    //  * @return RegistroAlimentacion[] Returns an array of RegistroAlimentacion objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ReferenteRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Referente
+    public function findOneBySomeField($value): ?RegistroAlimentacion
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

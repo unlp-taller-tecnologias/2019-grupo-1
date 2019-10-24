@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\UsuarioConfianza;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method UsuarioConfianza|null find($id, $lockMode = null, $lockVersion = null)
- * @method UsuarioConfianza|null findOneBy(array $criteria, array $orderBy = null)
- * @method UsuarioConfianza[]    findAll()
- * @method UsuarioConfianza[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UsuarioConfianzaRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UsuarioConfianza::class);
+        parent::__construct($registry, User::class);
     }
 
     // /**
-    //  * @return UsuarioConfianza[] Returns an array of UsuarioConfianza objects
+    //  * @return User[] Returns an array of User objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class UsuarioConfianzaRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?UsuarioConfianza
+    public function findOneBySomeField($value): ?User
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')

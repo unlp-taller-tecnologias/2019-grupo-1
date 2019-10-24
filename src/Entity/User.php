@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UsuarioConfianzaRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class UsuarioConfianza
+class User
 {
     /**
      * @ORM\Id()
@@ -34,7 +36,7 @@ class UsuarioConfianza
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $contrasenia;
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -62,9 +64,30 @@ class UsuarioConfianza
     private $estado;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255)
      */
     private $privado;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $rol;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Evento", mappedBy="usuario")
+     */
+    private $eventos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ComedorUsuario", mappedBy="referente")
+     */
+    private $comedorUsuarios;
+
+    public function __construct()
+    {
+        $this->eventos = new ArrayCollection();
+        $this->comedorUsuarios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,14 +130,14 @@ class UsuarioConfianza
         return $this;
     }
 
-    public function getContrasenia(): ?string
+    public function getPassword(): ?string
     {
-        return $this->contrasenia;
+        return $this->password;
     }
 
-    public function setContrasenia(string $contrasenia): self
+    public function setPassword(string $password): self
     {
-        $this->contrasenia = $contrasenia;
+        $this->password = $password;
 
         return $this;
     }
@@ -179,14 +202,88 @@ class UsuarioConfianza
         return $this;
     }
 
-    public function getPrivado(): ?bool
+    public function getPrivado(): ?string
     {
         return $this->privado;
     }
 
-    public function setPrivado(bool $privado): self
+    public function setPrivado(string $privado): self
     {
         $this->privado = $privado;
+
+        return $this;
+    }
+
+    public function getRol(): ?string
+    {
+        return $this->rol;
+    }
+
+    public function setRol(string $rol): self
+    {
+        $this->rol = $rol;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Evento[]
+     */
+    public function getEventos(): Collection
+    {
+        return $this->eventos;
+    }
+
+    public function addEvento(Evento $evento): self
+    {
+        if (!$this->eventos->contains($evento)) {
+            $this->eventos[] = $evento;
+            $evento->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvento(Evento $evento): self
+    {
+        if ($this->eventos->contains($evento)) {
+            $this->eventos->removeElement($evento);
+            // set the owning side to null (unless already changed)
+            if ($evento->getUsuario() === $this) {
+                $evento->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ComedorUsuario[]
+     */
+    public function getComedorUsuarios(): Collection
+    {
+        return $this->comedorUsuarios;
+    }
+
+    public function addComedorUsuario(ComedorUsuario $comedorUsuario): self
+    {
+        if (!$this->comedorUsuarios->contains($comedorUsuario)) {
+            $this->comedorUsuarios[] = $comedorUsuario;
+            $comedorUsuario->setReferente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComedorUsuario(ComedorUsuario $comedorUsuario): self
+    {
+        if ($this->comedorUsuarios->contains($comedorUsuario)) {
+            $this->comedorUsuarios->removeElement($comedorUsuario);
+            // set the owning side to null (unless already changed)
+            if ($comedorUsuario->getReferente() === $this) {
+                $comedorUsuario->setReferente(null);
+            }
+        }
 
         return $this;
     }
