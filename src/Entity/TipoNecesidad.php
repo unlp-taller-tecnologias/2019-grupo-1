@@ -24,7 +24,7 @@ class TipoNecesidad
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Necesidad", mappedBy="tipoNecesidad")
+     * @ORM\OneToMany(targetEntity="App\Entity\Necesidad", mappedBy="TipoNecesidad")
      */
     private $necesidads;
 

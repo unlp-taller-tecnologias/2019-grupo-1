@@ -17,13 +17,13 @@ class ComedorUsuario
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\comedor", inversedBy="comedorUsuarios")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Comedor", inversedBy="comedorUsuarios")
      * @ORM\JoinColumn(nullable=false)
      */
     private $comedor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="comedorUsuarios")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comedorUsuarios")
      * @ORM\JoinColumn(nullable=false)
      */
     private $referente;

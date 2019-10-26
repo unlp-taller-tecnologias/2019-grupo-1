@@ -34,7 +34,7 @@ class StandarController extends AbstractController
      * @Route("/altaUsuario", name="altaUsuario")
      */
     public function altaUsuario()
-    { 
+    {
         $entityManager = $this ->getDoctrine() ->getManager();
         $comedor = new Comedor('prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba','prueba');
         
@@ -101,6 +101,26 @@ class StandarController extends AbstractController
     public function listadoUsuariosPendientes(Request $request)
     {
         return $this->render('standar/listadoUsuariosPendientes.html.twig');
+
+    }
+
+    /**
+     * @Route("/listadoComedoresPendientes", name="listadoUsuariosPendientes")
+     */
+
+    public function listadoComedoresPendientes(Request $request)
+    {
+        return $this->render('standar/listadoComedoresPendientes.html.twig');
+
+    }
+    
+    /**
+     * @Route("/prueba", name="prueba")
+     */
+
+    public function prueba(Request $request)
+    {
+        return $this->render('standar/prueba.html.twig');
 
     }
 

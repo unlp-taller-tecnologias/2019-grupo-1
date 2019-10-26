@@ -27,7 +27,7 @@ class Necesidad
     private $descripcion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\tipoNecesidad", inversedBy="necesidads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipoNecesidad", inversedBy="necesidads")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tipoNecesidad;
