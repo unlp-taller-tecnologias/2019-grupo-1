@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block styles %}
+    
+ {{super()}}
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+        <script src="static/js/jquery.dataTables.js"></script> 
+        <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>     
+    <script>
+      $(document).ready(function() {
+        var table = $('#example').DataTable({     
+        "bLengthChange":false,
+        //aca va el valor del paginado
+        "lengthMenu": [["{{cant}}"], ["{{cant}}"]],
+      })
+
+
+      $('.dataTables_filter input').unbind().bind('keyup click', function() {
+        var colIndex = document.querySelector('#select').selectedIndex;
+        table.column( colIndex).search( this.value ).draw();
+      });
+      $('#select').focus(function() {
+        document.getElementById('myInput').value = '';
+        var colIndex = document.querySelector('#select').selectedIndex;
+        table.column( colIndex).search( document.getElementById('myInput').value ).draw();
+      });
+
+      })
+    </script>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Alta usuario' %}
+
+  {% block cuerpo %}
+  
+      <!-- Contact Section -->
+        <div class="container">
+    
+          <!-- Contact Section Form -->
+          <div class="row">
+            <div class="col-lg-9 mx-auto">
+              <div class="card">
+              <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+              <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                  <div class="row">
+                    <div class="col-md-12 mb-4 order-2">
+                      <form id='formUser' action="{{ url_for('user_create') }}" onsubmit="return validateForm()" method="post">
+                          <div class="row">
+                              <div class="col-md-6 form-group">
+                                <label for="name">Nombre</label>
+                                <input type="text" id="name" name="nombre" class="form-control " required>
+                              </div>
+                              <div class="col-md-6 form-group">
+                                <label for="phone">Apellido</label>
+                                <input type="text" name="apellido" id="phone" class="form-control " required>
+                              </div>
+                            </div> 
+                        <div class="row">
+                           <div class="col-md-6 form-group">
+                            <label for="name">DNI</label>
+                            <input type="number"  name="dni" class="form-control " required>
+                          </div>
+                          <div class="col-md-6 form-group">
+                              <label for="name">Nombre de usuario</label>
+                              <input type="text"  name="user" class="form-control " required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                              <label for="name">Contraseña</label>
+                              <input type="password" name="pass" id="pass" class="form-control " required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                              <label for="phone">Repetir contraseña</label>
+                              <input type="password" id="pass1" class="form-control " required>
+                            </div>
+                          </div>
+                          
+                                          
+                        <div class="row">
+                          <div class="col-md-3">
+                            
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <input type="submit" value="Registrar" class="btn btn-primary px-3 py-2">
+                            <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-2">
+                          </div>
+                          <div class="col-md-3">
+                            
+                          </div>                         
+                        </div>
+                      </form>
+                    
+                      
+                    </div>
+                  </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  <br>
+    
+  {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script>
+    function validateForm() {
+      var pass = document.getElementById('pass').value;
+      var pass1 = document.getElementById('pass1').value;
+      if( pass != pass1){
+        $.alert({
+          title: 'Error al validar usuario',
+          content: 'Las contraseñas introducidas no coinciden!',
+          type: 'red',
+         });
+        return false}
+      return true
+      }
+  </script>
+
+  {% block verificarAlerta %}
+    {{ super() }}
+  {% endblock %}
+
+{% endblock %}
+
+

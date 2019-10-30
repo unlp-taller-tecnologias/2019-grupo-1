@@ -1,0 +1,32 @@
+{% block title%}
+<title>Orquesta escuela</title>
+{% endblock %}
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="static/css/inicios.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap">
+  <link rel="stylesheet" href="static/css/style.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+{% endblock %}
+
+{% block cuerpo%}
+    <body id="bodyIS" style="background-image: url('static/images/fondo.jpeg');">
+
+        <div class="box border border-secondary" style="max-width:90% ;">
+            <h1 style="color:white">No tiene permiso para estar en este sitio</h1>
+            <a id="boton" href="{{url_for('index')}}">Volver a Inicio</a>
+        </>      
+      </body>
+{% endblock %}
+{% block scripts %}
+  <script src="static/js/jquery-3.2.1.min.js"></script>
+  <script src="static/js/main.js"></script>
+  <script src="static/js/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
+{% endblock %}

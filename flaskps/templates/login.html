@@ -1,0 +1,40 @@
+{% block title%}
+<title>Orquesta escuela</title>
+{% endblock %}
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="static/css/inicios.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap">
+  <link rel="stylesheet" href="static/css/style.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+{% endblock %}
+{% block cuerpo%}
+    <body id="bodyIS" style="background-image: url('static/images/fondo.jpeg');">
+      {% with mensj = get_flashed_messages() %}
+        <form class="box border border-secondary" style="max-width:90% ;" action="{{ url_for('auth_authenticate') }}" onsubmit="return validar()" method="post">
+            <h1 style="color:white">Orquesta Escuela</h1>
+            {% if mensj %}
+              <h5 style="color:white">{{ mensj}}</h5>
+            {% endif %}
+            <hr style="border-top: 1px solid white">
+            <input type="text" name="username" id="user" placeholder="Ingrese Usuario" required>
+            <input type="password" name="pass" id="pass" placeholder="Ingrese Contraseña" required>
+            <input type="submit" name="" value="Login">
+            <hr>
+            <a id="boton" href="{{url_for('altaUser')}}">Registrarse</a>
+        </form>
+        {% endwith %}        
+      </body>
+{% endblock %}
+{% block scripts %}
+  <script src="static/js/jquery-3.2.1.min.js"></script>
+  <script src="static/js/main.js"></script>
+  <script src="static/js/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
+{% endblock %}
