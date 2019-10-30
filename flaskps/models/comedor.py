@@ -1,0 +1,52 @@
+class Comedor(object):
+
+    db = None
+
+    @classmethod
+    def all(cls):
+        sql = """SELECT * FROM comedor WHERE NOT estado=2 """
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
+
+    @classmethod
+    def create(cls, data):
+        sql = """
+            INSERT INTO comedor (nombre, direccion, descripcion, organizacion,foto,estado,telefono,red_social,latitud,longitud,dia_yhorario)
+            VALUES (%s, %s, %s, %s, %s, 0, %s, %s, %s, %s, %s)
+        """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, (data['nombre'], data['dir'], data['desc'], data['org'], data['foto'], data['tel'], data['red'],'data[lat]', 'data[long]', data['dias']))
+        cls.db.commit()
+
+        return True
+
+
+    
+    @classmethod
+    def find_comedor_by_id(cls, user):
+        sql = """
+            SELECT * FROM comedor AS u
+            WHERE u.id = %s """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, user)
+
+        return cursor.fetchone()
+
+
+   
+    @classmethod
+    def delete(cls,idUser):
+        sql="""UPDATE comedor SET estado=2 WHERE id=%s"""
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(idUser))
+        cls.db.commit()
+        return True
+
+
+
+    
+    

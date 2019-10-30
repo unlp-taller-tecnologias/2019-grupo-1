@@ -3,6 +3,7 @@ from flask import Flask, render_template, g, session
 from flaskps.resources import user
 from flaskps.resources import auth
 from flaskps.resources import sitio
+from flaskps.resources import comedor
 from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
@@ -25,13 +26,17 @@ app.add_url_rule("/listadoUsuario" , "user_list" , user.listadoUsuario)
 app.add_url_rule("/deleteUser" , "delete_user" , user.delete)
 app.add_url_rule("/userProfile" , "user_profile" , user.profile)
 
-#Admin
+# Comedores
+app.add_url_rule("/altaComedor", 'altaComedor', comedor.new , methods=['GET'])
+app.add_url_rule("/altaComedor/creado" , "comedor_create" , comedor.create, methods=['POST'])
+
+# Admin
+app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
 
 # Sitio
 app.add_url_rule("/" , "index" , sitio.hello)
 app.add_url_rule("/habSitio" , "updateStateSitioHabilitar" , sitio.habSitio)
 app.add_url_rule("/deshSitio" , "updateStateSitioDeshabilitar" , sitio.deshSitio)
-app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
 app.add_url_rule("/cambiarCantidad" , "cambiarCantidad" , sitio.cambiarCantidad, methods=['POST'])
 app.add_url_rule("/autorizacion" , "autorizacion" , sitio.autorizacion)
 

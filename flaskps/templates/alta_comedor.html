@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% set encabezado = 'Alta usuario' %}
+{% set encabezado = 'Alta Comedor' %}
 
   {% block cuerpo %}
   
@@ -15,21 +15,23 @@
               <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                   <div class="row">
                     <div class="col-md-12 mb-4 order-2">
-                      <form id='formUser' action="{{ url_for('user_create') }}" onsubmit="return validateForm()" method="post">
-                          <div class="row">
+                      <form id='formUser' action="{{ url_for('comedor_create') }}" onsubmit="return validateForm()" method="post">
+                          
+                        <h4> Acerca del Comedor</h4>
+                        <div class="row">
                               <div class="col-md-6 form-group">
-                                <label for="name">Nombre</label>
+                                <label for="name">Nombre </label>
                                 <input type="text" id="name" name="nombre" class="form-control " required>
                               </div>
                               <div class="col-md-6 form-group">
-                                <label for="phone">Apellido</label>
-                                <input type="text" name="apellido" id="phone" class="form-control " required>
+                                <label for="phone">Direccion</label>
+                                <input type="text" name="dir" id="phone" class="form-control " required>
                               </div>
                             </div> 
                         <div class="row">
                            <div class="col-md-6 form-group">
-                            <label for="name">Mail</label>
-                            <input type="email"  name="mail" class="form-control " required>
+                            <label for="name">Organizacion a cargo (Opcional)</label>
+                            <input type="text"  name="org" class="form-control " required>
                           </div>
                           <div class="col-md-6 form-group">
                               <label for="name">Nombre de usuario</label>
@@ -48,21 +50,58 @@
                         </div>
                         <div class="row">
                           <div class="col-md-6 form-group">
-                            <label for="name">Telefono</label>
-                            <input type="number" name="tel" id="pass" class="form-control " placeholder="Opcional">
+                            <label for="name">Telefono(Opcional)</label>
+                            <input type="number" name="tel" id="pass" class="form-control ">
                           </div>
                           <div class="col-md-6 form-group">
-                            <label for="phone">Foto</label>
-                            <input type="file" name="foto" id="pass1" class="form-control-file form-control " placeholder="Opcional">
+                            <label for="phone">Foto(Opcional)</label>
+                            <input type="file" name="foto" id="pass1" class="form-control-file form-control " >
                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                              <label for="name">Red Social(Opcional)</label>
+                              <input type="text" name="dias" id="pass" class="form-control ">
+                            </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="phone">Dias y horarios de funcionamiento</label>
+                                <input type="text" name="red" id="pass1" class="form-control-file form-control " required placeholder="Martes 18:00hs - Jueves 12:00hs">
+                            </div>
                         </div>
                         <div class="row">
                           <div class="col-md-12 form-group">
                             <label for="name">Descripcion</label>
                             <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>   
+                          </div> 
                         </div>
-                          
+
+                        <hr>
+                        <h4> Acerca del referente</h4>
+                         
+                        <div class="row">
+                          <div class="col-md-6 form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="nombre" class="form-control " required>
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <label for="phone">Apellido</label>
+                            <input type="text" name="apellido" id="phone" class="form-control " required>
+                          </div>
+                        </div> 
+                    <div class="row">
+                       <div class="col-md-6 form-group">
+                        <label for="name">Mail</label>
+                        <input type="email"  name="mail" class="form-control " required>
+                      </div>
+                      <div class="col-md-6 form-group">
+                          <label for="name">Telefono</label>
+                          <input type="number"  name="tel" class="form-control " required>
+                        </div>
+                    </div>
+
+                   
                                           
                         <div class="row">
                           <div class="col-md-3">
@@ -100,7 +139,7 @@
       var pass1 = document.getElementById('pass1').value;
       if( pass != pass1){
         $.alert({
-          title: 'Error al validar usuario',
+          title: 'Error al validar comedor',
           content: 'Las contraseñas introducidas no coinciden!',
           type: 'red',
          });

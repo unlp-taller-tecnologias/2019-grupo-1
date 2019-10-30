@@ -24,6 +24,19 @@ class User(object):
         return True
 
     @classmethod
+    def createRef(cls, data):
+        sql = """
+            INSERT INTO usuario (nombre, apellido, mail, password,user_name,descripcion,foto,telefono,estado,privado,rol)
+            VALUES (%s, %s, %s, %s, %s, %s, 'none' , %s, 0 , 0 , 1)
+        """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, (data['nombre'], data['apellido'], data['mail'], data['pass'], data['user'],data['desc'], data['tel']))
+        cls.db.commit()
+
+        return True
+
+    @classmethod
     def find_by_email_and_pass(cls, email, password):
         sql = """
             SELECT * FROM usuario AS u
