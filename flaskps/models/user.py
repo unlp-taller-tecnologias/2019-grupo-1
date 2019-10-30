@@ -4,7 +4,7 @@ class User(object):
 
     @classmethod
     def all(cls):
-        sql = """SELECT * FROM usuario WHERE NOT estado="Deleted" """
+        sql = """SELECT * FROM usuario WHERE NOT estado=2 """
         cursor = cls.db.cursor()
         cursor.execute(sql)
 
@@ -13,12 +13,12 @@ class User(object):
     @classmethod
     def create(cls, data):
         sql = """
-            INSERT INTO usuario (nombre, apellido, dni, nombre_usuario,password,rol,estado)
-            VALUES (%s, %s, %s, %s, %s,0 ,"activado")
+            INSERT INTO usuario (nombre, apellido, mail, password,user_name,descripcion,foto,telefono,estado,privado,rol)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0 , 0 , 0)
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombre'], data['apellido'], data['dni'], data['user'], data['pass']))
+        cursor.execute(sql, (data['nombre'], data['apellido'], data['mail'], data['pass'], data['user'],data['desc'], data['foto'], data['tel']))
         cls.db.commit()
 
         return True
@@ -27,7 +27,7 @@ class User(object):
     def find_by_email_and_pass(cls, email, password):
         sql = """
             SELECT * FROM usuario AS u
-            WHERE u.nombre_usuario = %s AND u.password = %s
+            WHERE u.user_name = %s AND u.password = %s
         """
 
         cursor = cls.db.cursor()
@@ -39,7 +39,7 @@ class User(object):
     def find_user(cls, user):
         sql = """
             SELECT * FROM usuario AS u
-            WHERE u.nombre_usuario = %s """
+            WHERE u.user_name = %s """
 
         cursor = cls.db.cursor()
         cursor.execute(sql, user)
@@ -57,29 +57,6 @@ class User(object):
 
         return cursor.fetchone()
 
-    @classmethod
-    def allUsersDeactivate(cls):
-        sql = """SELECT * FROM usuario WHERE estado="Desactivado" """
-        cursor = cls.db.cursor()
-        cursor.execute(sql)
-
-        return cursor.fetchall()
-
-    @classmethod
-    def unBlock(cls,idUser):
-        sql="""UPDATE usuario SET estado="Activado" WHERE id=%s"""
-        cursor=cls.db.cursor()
-        cursor.execute(sql,(idUser))
-        cls.db.commit()
-        return True
-
-    @classmethod
-    def block(cls,idUser):
-        sql="""UPDATE usuario SET estado="Desactivado" WHERE id=%s"""
-        cursor=cls.db.cursor()
-        cursor.execute(sql,(idUser))
-        cls.db.commit()
-        return True
 
     @classmethod
     def allUsers(cls):
@@ -92,20 +69,13 @@ class User(object):
    
     @classmethod
     def delete(cls,idUser):
-        sql="""UPDATE usuario SET estado="Deleted" WHERE id=%s"""
+        sql="""UPDATE usuario SET estado=2 WHERE id=%s"""
         cursor=cls.db.cursor()
         cursor.execute(sql,(idUser))
         cls.db.commit()
         return True
 
-    
-    @classmethod
-    def updateRol(cls,idUser,rol):
-        sql="""UPDATE usuario SET rol=%s WHERE id=%s"""
-        cursor=cls.db.cursor()
-        cursor.execute(sql,(rol,idUser))
-        cls.db.commit()
-        return True
+
 
     
     
