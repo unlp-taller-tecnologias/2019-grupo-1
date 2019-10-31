@@ -30,11 +30,24 @@ class Comedor(object):
         sql = """
             SELECT * FROM comedor AS u
             WHERE u.id = %s """
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+        return cursor.fetchall()
+
+    @classmethod
+    def allComedoresP(cls):
+        sql = """
+            SELECT comedor.id,comedor.nombre,usuario.nombre_u,usuario.apellido,comedor.direccion,comedor.estado 
+            FROM comedor
+            INNER JOIN comedor_usuario ON comedor.id = comedor_usuario.comedor_id
+            INNER JOIN usuario ON comedor_usuario.referente_id = usuario.id
+            WHERE comedor.estado=2
+            """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, user)
+        cursor.execute(sql)
 
-        return cursor.fetchone()
+        return cursor.fetchall()
 
 
    
@@ -46,6 +59,18 @@ class Comedor(object):
         cls.db.commit()
         return True
 
+    @classmethod
+    def allComedores(cls):
+        sql = """
+            SELECT comedor.id,comedor.nombre,usuario.nombre_u,usuario.apellido,comedor.direccion FROM comedor
+            INNER JOIN comedor_usuario ON comedor.id = comedor_usuario.comedor_id
+            INNER JOIN usuario ON comedor_usuario.referente_id = usuario.id
+            """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
 
 
     

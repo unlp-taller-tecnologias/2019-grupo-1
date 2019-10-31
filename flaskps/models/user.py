@@ -73,7 +73,7 @@ class User(object):
 
     @classmethod
     def allUsers(cls):
-        sql = """SELECT u.id,u.nombre,u.apellido,u.dni,u.estado,u.nombre_usuario FROM usuario AS u"""
+        sql = """SELECT u.id,u.nombre_u,u.mail_u,u.apellido,u.estado_u,u.user_name FROM usuario AS u"""
         cursor = cls.db.cursor()
         cursor.execute(sql)
 
@@ -87,6 +87,19 @@ class User(object):
         cursor.execute(sql,(idUser))
         cls.db.commit()
         return True
+
+    @classmethod
+    def allUsersP(cls):
+        sql = """SELECT u.id,u.nombre_u,u.mail_u,u.apellido,u.estado_u,u.user_name 
+        FROM usuario AS u
+        WHERE u.estado_u=2
+        """
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+        return cursor.fetchall()
+
+
+
 
 
 

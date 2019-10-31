@@ -1,10 +1,11 @@
 {% extends "tablaLayout.html" %}
 
-{% set encabezado = 'Listado de usuarios'  %}
+{% set encabezado = 'Listado de Usuarios Pendientes'  %}
 
 {% block cuerpo %}
 
 <div class="container">
+
         <br>
         <div class="table-responsive">
         <select id="select">
@@ -20,11 +21,11 @@
               <th class="th-sm">ID</th>
               <th class="th-sm">Nombre</th>
               <th class="th-sm">Apellido</th>
-              <th class="th-sm">Nombre usuario</th>
+              <th class="th-sm">Nombre Usuario</th>
               <th class="th-sm">Mail</th>
-              <th class="th-sm">Estado</th>
               <th class="th-sm">Ver perfil</th>
               <th class="th-sm">Eliminar</th>
+              <th class="th-sm">Ver</th>
             </tr>
           </thead>
           <tbody>
@@ -35,16 +36,15 @@
               <td>{{elem.apellido}}</td>
               <td>{{elem.user_name}}</td>
               <td>{{elem.mail_u}}</td>
-              <td>aca puede ir si esta eliminado</td>
-              <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'user_profile' , idUser=elem.id) }}';">Ver</button></td>
-              <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Eliminar</button></td>
+              <td align="center"><button style="width:85px" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'user_profile' , idUser=elem.id) }}';">Ver</button></td>
+              <td align="center"><button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Aceptar</button></td>
+              <td align="center"><button style="width:85px" type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Rechazar</button></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
         </div>
         </div>
-        
   <br>    
 {% endblock %}
 

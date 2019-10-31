@@ -16,7 +16,7 @@ def authenticate():
     if not user:
         flash('El nombre de usuario y/o contraseña son incorrectas.')
         return redirect(url_for('auth_login'))
-    session['username'] = user['nombre_usuario']
+    session['username'] = user['user_name']
     session['rol'] = user['rol']
     return redirect(url_for('index'))
 

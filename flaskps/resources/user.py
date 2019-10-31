@@ -25,7 +25,7 @@ def listadoUsuario():
     User.db=get_db()
     Sitio.db=get_db()
     cantPag=Sitio.cantPaginado()    
-    usuarios=User.all()
+    usuarios=User.allUsers()
     return render_template('listadoUsuario.html',cant=cantPag[0]['cant_paginado'],users=usuarios,tam=len(usuarios))
 
 
@@ -46,4 +46,12 @@ def profile():
     User.db=get_db()
     us = User.find_user_by_id(request.args.get('idUser'))
     return render_template('userProfile.html', user=us)    
-
+    
+def listadoUsuarioP():
+    if not session:
+        return render_template('autorizacion.html')
+    User.db=get_db()
+    Sitio.db=get_db()
+    cantPag=Sitio.cantPaginado()    
+    users= User.allUsersP()
+    return render_template('listadoUsuariosPendientes.html', users=users,cant=cantPag[0]['cant_paginado'])  

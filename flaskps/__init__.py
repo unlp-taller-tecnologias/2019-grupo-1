@@ -25,10 +25,14 @@ app.add_url_rule("/altaUsuario/creado" , "user_create" , user.create, methods=['
 app.add_url_rule("/listadoUsuario" , "user_list" , user.listadoUsuario)
 app.add_url_rule("/deleteUser" , "delete_user" , user.delete)
 app.add_url_rule("/userProfile" , "user_profile" , user.profile)
+app.add_url_rule("/listadoUsuariosPendientes" , "usuario_list_p" , user.listadoUsuarioP)
 
 # Comedores
+app.add_url_rule("/listadoComedoresPendientes" , "comedor_list_p" , comedor.listadoComedorP)
 app.add_url_rule("/altaComedor", 'altaComedor', comedor.new , methods=['GET'])
 app.add_url_rule("/altaComedor/creado" , "comedor_create" , comedor.create, methods=['POST'])
+app.add_url_rule("/listadoComedor" , "comedor_list" , comedor.listadoComedor)
+
 
 # Admin
 app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
