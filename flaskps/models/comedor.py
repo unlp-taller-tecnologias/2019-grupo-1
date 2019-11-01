@@ -18,7 +18,7 @@ class Comedor(object):
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombreC'], data['dir'], data['desc'], data['org'], data['foto'], data['telC'], data['red'],'data[lat]', 'data[long]', data['dias']))
+        cursor.execute(sql, (data['nombreC'], data['dir'], data['desc'], data['org'], data['foto'], data['telC'], data['red'],data['lat'], data['lng'], data['dias']))
         cls.db.commit()
         
         return True

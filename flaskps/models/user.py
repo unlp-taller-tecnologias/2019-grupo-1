@@ -36,7 +36,7 @@ class User(object):
 
         return True
 
-     @classmethod
+    @classmethod
     def last_user(cls):
         sql = """
            SELECT id FROM usuario ORDER BY id DESC LIMIT 1;"""
