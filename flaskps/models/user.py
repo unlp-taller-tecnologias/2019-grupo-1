@@ -36,6 +36,17 @@ class User(object):
 
         return True
 
+     @classmethod
+    def last_user(cls):
+        sql = """
+           SELECT id FROM usuario ORDER BY id DESC LIMIT 1;"""
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+        cls.db.commit()
+
+        return cursor.fetchone()
+    
     @classmethod
     def find_by_email_and_pass(cls, email, password):
         sql = """

@@ -13,7 +13,7 @@ def create():
     exist = User.find_user(data['user'])
     if not exist:
         User.create(data)
-        flash("El usuario debe ser confirmado por el Admin")
+        flash("El usuario debe ser confirmado por el Admin para poder ser utilizado.")
         return redirect(url_for('altaUser' ))
     flash("Ya existe un usuario con ese nombre, elija otro!")   
     return redirect(url_for('altaUser'))

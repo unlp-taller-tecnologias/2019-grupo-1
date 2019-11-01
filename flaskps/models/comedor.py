@@ -18,9 +18,9 @@ class Comedor(object):
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombre'], data['dir'], data['desc'], data['org'], data['foto'], data['tel'], data['red'],'data[lat]', 'data[long]', data['dias']))
+        cursor.execute(sql, (data['nombreC'], data['dir'], data['desc'], data['org'], data['foto'], data['telC'], data['red'],'data[lat]', 'data[long]', data['dias']))
         cls.db.commit()
-
+        
         return True
 
 
@@ -50,7 +50,17 @@ class Comedor(object):
         return cursor.fetchall()
 
 
-   
+    @classmethod
+    def last_comedor(cls):
+        sql = """
+           SELECT id FROM comedor ORDER BY id DESC LIMIT 1;"""
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+        cls.db.commit()
+
+        return cursor.fetchone()
+
     @classmethod
     def delete(cls,idUser):
         sql="""UPDATE comedor SET estado=2 WHERE id=%s"""

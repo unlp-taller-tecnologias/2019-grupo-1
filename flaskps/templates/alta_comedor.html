@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 
-{% set encabezado = 'Alta Comedor' %}
+{% set encabezado = 'Registrar Comedor' %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+{% endblock %}
 
   {% block cuerpo %}
   
@@ -17,21 +23,21 @@
                     <div class="col-md-12 mb-4 order-2">
                       <form id='formUser' action="{{ url_for('comedor_create') }}" onsubmit="return validateForm()" method="post">
                           
-                        <h4> Acerca del Comedor</h4>
+                        <h4>Acerca del comedor</h4>
                         <div class="row">
                               <div class="col-md-6 form-group">
                                 <label for="name">Nombre </label>
-                                <input type="text" id="name" name="nombre" class="form-control " required>
+                                <input type="text" id="nameC" name="nombreC" class="form-control " required>
                               </div>
                               <div class="col-md-6 form-group">
                                 <label for="phone">Direccion</label>
-                                <input type="text" name="dir" id="phone" class="form-control " required>
+                                <input type="text" name="dir" id="phon" class="form-control " required>
                               </div>
                             </div> 
                         <div class="row">
                            <div class="col-md-6 form-group">
                             <label for="name">Organizacion a cargo (Opcional)</label>
-                            <input type="text"  name="org" class="form-control " required>
+                            <input type="text"  name="org" class="form-control " >
                           </div>
                           <div class="col-md-6 form-group">
                               <label for="name">Nombre de usuario</label>
@@ -51,29 +57,29 @@
                         <div class="row">
                           <div class="col-md-6 form-group">
                             <label for="name">Telefono(Opcional)</label>
-                            <input type="number" name="tel" id="pass" class="form-control ">
+                            <input type="number" name="telC" id="telC" class="form-control ">
                           </div>
                           <div class="col-md-6 form-group">
                             <label for="phone">Foto(Opcional)</label>
-                            <input type="file" name="foto" id="pass1" class="form-control-file form-control " >
+                            <input type="file" name="foto" id="fotoC" class="form-control-file form-control " >
                           </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
                               <label for="name">Red Social(Opcional)</label>
-                              <input type="text" name="dias" id="pass" class="form-control ">
+                              <input type="text" name="dias" id="RedS" class="form-control ">
                             </div>                           
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="phone">Dias y horarios de funcionamiento</label>
-                                <input type="text" name="red" id="pass1" class="form-control-file form-control " required placeholder="Martes 18:00hs - Jueves 12:00hs">
+                                <input type="text" name="red" id="dias" class="form-control-file form-control " required placeholder="Martes 18:00hs - Jueves 12:00hs">
                             </div>
                         </div>
                         <div class="row">
                           <div class="col-md-12 form-group">
                             <label for="name">Descripcion</label>
-                            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea required placeholder="Contanos sobre el comedor y sus objetivos.">
                           </div> 
                         </div>
 
@@ -100,10 +106,11 @@
                           <input type="number"  name="tel" class="form-control " required>
                         </div>
                     </div>
-
-                   
-                                          
-                        <div class="row">
+                    
+                    <hr>
+                    <h4> Ubicacion</h4>
+                    <div id="map" style="height:400px"></div>                                         
+                    <div class="row">
                           <div class="col-md-3">
                             
                           </div>
@@ -132,8 +139,10 @@
 
 {% block scripts %}
   {{ super() }}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  
+ 
   <script>
+
     function validateForm() {
       var pass = document.getElementById('pass').value;
       var pass1 = document.getElementById('pass1').value;
@@ -146,6 +155,36 @@
         return false}
       return true
       }
+  </script>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <script>
+      var map = L.map('map',{
+        center: [-34.92035241690136, -57.954786306945614],
+        zoom: 12,
+        maxZoom: 18,
+        minZoom: 8
+      });
+      latlng=0
+
+      layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+    
+      var layer = L.marker([-34.92035241690136, -57.954786306945614]).addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+
+
+      map.on('click', function(ev){
+        
+        var latlng = map.mouseEventToLatLng(ev.originalEvent);
+        layer.remove()
+        
+        
+      });
+        
+      
   </script>
 
   {% block verificarAlerta %}
