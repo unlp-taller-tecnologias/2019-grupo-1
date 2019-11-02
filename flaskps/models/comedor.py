@@ -2,6 +2,8 @@ class Comedor(object):
 
     db = None
 
+    # estado : 0= pendiente , 1= aceptado , 2 eliminado
+    
     @classmethod
     def all(cls):
         sql = """SELECT * FROM comedor WHERE NOT estado=2 """
@@ -26,22 +28,22 @@ class Comedor(object):
 
     
     @classmethod
-    def find_comedor_by_id(cls, user):
+    def find_comedor_by_id(cls, id):
         sql = """
             SELECT * FROM comedor AS u
             WHERE u.id = %s """
         cursor = cls.db.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, id)
         return cursor.fetchall()
 
     @classmethod
     def allComedoresP(cls):
         sql = """
-            SELECT comedor.id,comedor.nombre,usuario.nombre_u,usuario.apellido,comedor.direccion,comedor.estado 
+            SELECT comedor.id,comedor.nombre,usuario.user_name,usuario.apellido,comedor.direccion,comedor.estado 
             FROM comedor
             INNER JOIN comedor_usuario ON comedor.id = comedor_usuario.comedor_id
             INNER JOIN usuario ON comedor_usuario.referente_id = usuario.id
-            WHERE comedor.estado=2
+            WHERE comedor.estado=0
             """
 
         cursor = cls.db.cursor()
@@ -72,9 +74,10 @@ class Comedor(object):
     @classmethod
     def allComedores(cls):
         sql = """
-            SELECT comedor.id,comedor.nombre,usuario.nombre_u,usuario.apellido,comedor.direccion FROM comedor
+            SELECT comedor.id,comedor.nombre,usuario.user_name,usuario.apellido,comedor.direccion FROM comedor
             INNER JOIN comedor_usuario ON comedor.id = comedor_usuario.comedor_id
             INNER JOIN usuario ON comedor_usuario.referente_id = usuario.id
+            WHERE comedor.estado=1
             """
 
         cursor = cls.db.cursor()

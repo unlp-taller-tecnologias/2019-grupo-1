@@ -43,3 +43,11 @@ def listadoComedor():
     comedores=Comedor.allComedores()
     return render_template('listadoComedoresPendientes.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
     
+def profile():
+    if not session:
+        return render_template('autorizacion.html')
+    Comedor.db=get_db()
+    comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
+    return render_template('comedorProfile.html', comedor=comedor)
+
+    

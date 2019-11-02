@@ -1,6 +1,7 @@
 from flask import redirect, render_template, request, url_for, abort, session, flash
 from flaskps.db import get_db
 from flaskps.models.user import User
+from flaskps.models.comedor_usuario import Comedor_usuario
 
 
 def login():
@@ -9,7 +10,7 @@ def login():
 
 def authenticate():
     params = request.form
-
+    Comedor_usuario.db = get_db()
     User.db = get_db()
     user = User.find_by_email_and_pass(params['username'], params['pass'])
 
@@ -17,11 +18,15 @@ def authenticate():
         flash('El nombre de usuario y/o contraseña son incorrectas.')
         return redirect(url_for('auth_login'))
     session['username'] = user['user_name']
+    session['id'] = user['id']
     session['rol'] = user['rol']
-    return redirect(url_for('index'))
+    if user['rol'] == '1':
+        session['idComedor'] = Comedor_usuario.find_comedor_by_userid(user['id'])['comedor_id']
+    return redirect(url_for('index' ))
 
 
 def logout():
     del session['username']
     del session['rol']
+    del session['id']
     return redirect(url_for('index'))

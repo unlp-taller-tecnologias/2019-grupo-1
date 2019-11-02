@@ -2,6 +2,8 @@ class User(object):
 
     db = None
 
+    # estado : 0= pendiente , 1= aceptado , 2 eliminado
+
     @classmethod
     def all(cls):
         sql = """SELECT * FROM usuario WHERE NOT estado=2 """
@@ -44,7 +46,6 @@ class User(object):
         cursor = cls.db.cursor()
         cursor.execute(sql)
         cls.db.commit()
-
         return cursor.fetchone()
     
     @classmethod

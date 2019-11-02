@@ -1,11 +1,7 @@
 {% extends "layout.html" %}
 
-{% block title %}Home{% endblock %}
+{% set encabezado = 'Perfil usuario' %}
 
-{% block head %}
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  {{ super() }}
-{% endblock %}
 
 {% block styles %}
 {{super()}}
@@ -13,9 +9,6 @@
 <link rel="stylesheet" type="text/css" href="static/css/profile.css">
 	
 {% endblock %}
-
-
-{% block content %} {{ super()}} {% endblock %}
   
   {% block cuerpo %}
   <div class="slider-item overlay" data-stellar-background-ratio="0.5"

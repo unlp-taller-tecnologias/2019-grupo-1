@@ -22,3 +22,14 @@ class Comedor_usuario(object):
         cls.db.commit()
 
         return True
+    
+    @classmethod
+    def find_comedor_by_userid(cls, user):
+        sql = """
+            SELECT * FROM comedor_usuario AS u
+            WHERE u.referente_id = %s """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, user)
+
+        return cursor.fetchone()

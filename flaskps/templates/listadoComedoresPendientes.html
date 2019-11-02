@@ -23,9 +23,9 @@
               <th class="th-sm">Nombre referente</th>
               <th class="th-sm">Apellido referente</th>
               <th class="th-sm">Direccion</th>
-              <th class="th-sm">Ver perfil</th>
-              <th class="th-sm">Eliminar</th>
-              <th class="th-sm">Ver</th>
+              <th class="th-sm">Ver Perfil</th>
+              <th class="th-sm">Aceptar</th>
+              <th class="th-sm">Rechazar</th>
             </tr>
           </thead>
           <tbody>
@@ -36,7 +36,7 @@
               <td>{{elem.nombre_u}}</td>
               <td>{{elem.apellido}}</td>
               <td>{{elem.direccion}}</td>
-              <td align="center"><button style="width:85px" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'user_profile' , idUser=elem.id) }}';">Ver</button></td>
+              <td align="center"><button style="width:85px" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.id) }}';">Ver</button></td>
               <td align="center"><button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Aceptar</button></td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Rechazar</button></td>
             </tr>

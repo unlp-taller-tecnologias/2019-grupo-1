@@ -44,8 +44,14 @@ def profile():
     if not session:
         return render_template('autorizacion.html')
     User.db=get_db()
-    us = User.find_user_by_id(request.args.get('idUser'))
-    return render_template('userProfile.html', user=us)    
+    getUser= request.args.get('idUser')
+    if getUser == 'me':
+        us = User.find_user_by_id(session['id'])
+        me= True
+    else:
+        us = User.find_user_by_id(getUser)
+        me= False
+    return render_template('userProfile.html', user=us, me= me)    
     
 def listadoUsuarioP():
     if not session:
