@@ -1,5 +1,6 @@
 from os import path
 from flask import Flask, render_template, g, session
+from flask_cors import CORS
 from flaskps.resources import user
 from flaskps.resources import auth
 from flaskps.resources import sitio
@@ -11,6 +12,7 @@ from flaskps.db import get_db
 # Configuración inicial de la app
 app = Flask(__name__)
 Bootstrap(app)
+CORS(app)
 app.config.from_object(Config)
 
 # Autenticación

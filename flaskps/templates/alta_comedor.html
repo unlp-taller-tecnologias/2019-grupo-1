@@ -4,8 +4,10 @@
 
 {% block styles %}
   {{ super() }}
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  
 {% endblock %}
 
   {% block cuerpo %}
@@ -26,38 +28,39 @@
                         <h4>Acerca del comedor</h4>
                         <div class="row">
                               <div class="col-md-6 form-group">
-                                <label for="name">Nombre </label>
-                                <input type="text" id="nameC" name="nombreC" class="form-control " required>
+                                <label for="name">Nombre del comedor </label>
+                                <input type="text" id="nameC" name="nombreC" class="form-control " required maxlength="30">
                               </div>
                               <div class="col-md-6 form-group">
-                                <label for="phone">Direccion</label>
-                                <input type="text" name="dir" id="phon" class="form-control " required>
+                                <label for="name">Nombre de usuario</label>
+                                <input type="text"  name="user" class="form-control " required maxlength="30">
                               </div>
+                             
                             </div> 
                         <div class="row">
                            <div class="col-md-6 form-group">
                             <label for="name">Organizacion a cargo (Opcional)</label>
-                            <input type="text"  name="org" class="form-control " >
+                            <input type="text"  name="org" class="form-control " maxlength="30" >
                           </div>
                           <div class="col-md-6 form-group">
-                              <label for="name">Nombre de usuario</label>
-                              <input type="text"  name="user" class="form-control " required>
-                            </div>
+                              <label for="phone">Direccion</label>
+                              <input type="text" name="dir" id="phon" class="form-control " required maxlength="50">
+                            </div>  
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
                               <label for="name">Contraseña</label>
-                              <input type="password" name="pass" id="pass" class="form-control " required>
+                              <input type="password" name="pass" id="pass" class="form-control " required minlength="8" maxlength="16">
                             </div>
                             <div class="col-md-6 form-group">
                               <label for="phone">Repetir contraseña</label>
-                              <input type="password" id="pass1" class="form-control " required>
+                              <input type="password" id="pass1" class="form-control " required minlength="8" maxlength="16">
                             </div>
                         </div>
                         <div class="row">
                           <div class="col-md-6 form-group">
                             <label for="name">Telefono(Opcional)</label>
-                            <input type="number" name="telC" id="telC" class="form-control ">
+                            <input type="number" name="telC" id="telC" class="form-control " maxlength="30">
                           </div>
                           <div class="col-md-6 form-group">
                             <label for="phone">Foto(Opcional)</label>
@@ -67,13 +70,13 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                               <label for="name">Red Social(Opcional)</label>
-                              <input type="text" name="dias" id="RedS" class="form-control ">
+                              <input type="text" name="dias" id="RedS" class="form-control " maxlength="50">
                             </div>                           
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="phone">Dias y horarios de funcionamiento</label>
-                                <input type="text" name="red" id="dias" class="form-control-file form-control " required placeholder="Martes 18:00hs - Jueves 12:00hs">
+                                <input type="text" name="red" id="dias" class="form-control-file form-control " required maxlength="60" placeholder="Martes 18:00hs - Jueves 12:00hs">
                             </div>
                         </div>
                         <div class="row">
@@ -111,8 +114,8 @@
                     <h4> Ubicacion</h4>
                     <p>Presione en el mapa,  la ubicacion del comedor lo mas preciso posible!</p>
                     <div id="map" style="height:400px;margin-bottom:15px;"></div>                    
-                    <input id="lat" name="lat" type="hidden" value="">
-                    <input id="lng" name="lng" type="hidden" value="">                                         
+                    <input id="lat" name="lat" type="hidden" value="0">
+                    <input id="lng" name="lng" type="hidden" value="0">                                         
                     <div class="row">
                           <div class="col-md-3">
                             
@@ -142,8 +145,11 @@
 
 {% block scripts %}
   {{ super() }}
-  
- 
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+     
   <script>
 
     function validateForm() {
@@ -156,11 +162,18 @@
           type: 'red',
          });
         return false}
-      return true
-      }
+
+      if(document.getElementById('lat').value == 0){
+        $.alert({
+          title: 'Error al validar comedor',
+          content: 'Debe elegir una ubicacion en el mapa!',
+          type: 'red',
+         });
+        return false}
+      
+      return true}
   </script>
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  
   <script>
       var mymap = L.map('map',{
         center: [-34.92035241690136, -57.954786306945614],
@@ -177,15 +190,12 @@
         id: 'mapbox.streets'
       }).addTo(mymap);
 
-      
-
       var popup = L.popup();
       popup
           .setLatLng([-34.92035241690136, -57.954786306945614])
           .setContent("<b>Aca se ubicaria el comedor!</b>")
           .openOn(mymap);
       
-
       function onMapClick(e) {
         document.getElementById('lat').value = e.latlng['lat']
         document.getElementById('lng').value = e.latlng['lng']
@@ -194,12 +204,8 @@
           .setContent("<b>Aca se ubicaria el comedor!</b>")
           .openOn(mymap);
       }
-
       mymap.on('click', onMapClick);
-        
-      
   </script>
-  
   {% block verificarAlerta %}
     {{ super() }}
   {% endblock %}

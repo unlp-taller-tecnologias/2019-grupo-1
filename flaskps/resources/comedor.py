@@ -6,7 +6,7 @@ from flaskps.models.sitio import Sitio
 from flaskps.helpers.auth import authenticated
 from flaskps.db import get_db
 
-def new():
+def new():  
     return render_template('alta_comedor.html' )
 
 def create():
