@@ -37,7 +37,7 @@
               <td>{{elem.direccion}}</td>>
               <td>aca puede ir si esta eliminado</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.id) }}';">Ver</button></td>
-              <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Eliminar</button></td>
+              <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_com' , idComedor=elem.id) }}';">Eliminar</button></td>
             </tr>
             {% endfor %}
           </tbody>

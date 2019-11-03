@@ -85,6 +85,15 @@ class Comedor(object):
 
         return cursor.fetchall()
 
+    # Solo elimina, No controla que haya publicaciones pendientes
+    @classmethod
+    def delete(cls,idComedor):
+        sql="""UPDATE comedor SET estado=2 WHERE id=%s"""
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(idComedor))
+        cls.db.commit()
+        return True
+
 
     
     

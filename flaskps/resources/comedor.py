@@ -50,4 +50,13 @@ def profile():
     comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
     return render_template('comedorProfile.html', comedor=comedor)
 
-    
+def delete():
+    if not session:
+        return render_template('autorizacion.html')
+    if session['rol'] == "3":
+        Comedor.db=get_db()
+        Comedor.delete(request.args.get('idComedor'))
+        flash("El comedor se elimino exitosamente")
+        return redirect(url_for('comedor_list'))
+    else:
+        return render_template('autorizacion.html')

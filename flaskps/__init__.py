@@ -35,6 +35,7 @@ app.add_url_rule("/altaComedor", 'altaComedor', comedor.new , methods=['GET'])
 app.add_url_rule("/altaComedor/creado" , "comedor_create" , comedor.create, methods=['POST'])
 app.add_url_rule("/listadoComedor" , "comedor_list" , comedor.listadoComedor)
 app.add_url_rule("/comedorProfile" , "comedor_profile" , comedor.profile)
+app.add_url_rule("/deleteComedor" , "delete_comedor" , comedor.delete)
 
 # Admin
 app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
