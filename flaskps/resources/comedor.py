@@ -41,7 +41,7 @@ def listadoComedor():
     Comedor.db=get_db()
     cantPag=Sitio.cantPaginado()
     comedores=Comedor.allComedores()
-    return render_template('listadoComedoresPendientes.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
+    return render_template('listadoComedor.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
     
 def profile():
     if not session:

@@ -9,13 +9,13 @@ from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
 
-# Configuración inicial de la app
+# Configuracion inicial de la app
 app = Flask(__name__)
 Bootstrap(app)
 CORS(app)
 app.config.from_object(Config)
 
-# Autenticación
+# Autenticacion
 app.add_url_rule("/login", 'auth_login', auth.login)
 app.add_url_rule("/cerrar_sesion", 'auth_logout', auth.logout)
 app.add_url_rule("/autenticacion",'auth_authenticate',auth.authenticate,methods=['POST'])
@@ -35,7 +35,7 @@ app.add_url_rule("/altaComedor", 'altaComedor', comedor.new , methods=['GET'])
 app.add_url_rule("/altaComedor/creado" , "comedor_create" , comedor.create, methods=['POST'])
 app.add_url_rule("/listadoComedor" , "comedor_list" , comedor.listadoComedor)
 app.add_url_rule("/comedorProfile" , "comedor_profile" , comedor.profile)
-app.add_url_rule("/deleteComedor" , "delete_comedor" , comedor.delete)
+app.add_url_rule("/deleteComedor" , "delete_com" , comedor.delete)
 
 # Admin
 app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
