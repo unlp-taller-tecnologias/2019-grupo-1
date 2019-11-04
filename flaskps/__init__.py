@@ -49,7 +49,10 @@ app.add_url_rule("/deshSitio" , "updateStateSitioDeshabilitar" , sitio.deshSitio
 app.add_url_rule("/cambiarCantidad" , "cambiarCantidad" , sitio.cambiarCantidad, methods=['POST'])
 app.add_url_rule("/autorizacion" , "autorizacion" , sitio.autorizacion)
 
-# API-rest
+# Tipos de Alimentos
+app.add_url_rule("/altaAlimento" , "create_alimento" , tiposDeAlimentos.create, methods=['POST'])
+app.add_url_rule("/listadoAlimentos" , "alimentos_list" , tiposDeAlimentos.listadoAlimentos)
+app.add_url_rule("/deleteAlimento" , "delete_alimento" , tiposDeAlimentos.delete)
 
 
 

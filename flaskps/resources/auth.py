@@ -19,14 +19,17 @@ def authenticate():
         return redirect(url_for('auth_login'))
     session['username'] = user['user_name']
     session['id'] = user['id']
-    session['rol'] = user['rol']
+    session['rol'] = str(user['rol'])
     if user['rol'] == '1':
         session['idComedor'] = Comedor_usuario.find_comedor_by_userid(user['id'])['comedor_id']
     return redirect(url_for('index' ))
 
 
+
 def logout():
-    del session['username']
-    del session['rol']
+    del session['username']  
     del session['id']
+    if session['rol'] == '1':
+        del session['idComedor']
+    del session['rol']
     return redirect(url_for('index'))

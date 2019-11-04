@@ -1,0 +1,165 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Tipos de Alimentos'  %}
+
+{% block cuerpo %}
+
+
+    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+<div class="row">
+  <div class="col-md-12 mb-4 order-2">
+    <form id='formUser' action"" onsubmit="create()" method="post">
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <input type="text" id="alimento" name="nombre" placeholder="Ingrese el nuevo alimento" class="form-control " maxlength="24">
+        </div>
+        <div class="col-md-6 form-group">
+          <input type="submit" class="btn btn-primary px-3 py-2" value="Cargar alimento">
+        </div>
+      </div> 
+    </form> 
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+        <br>
+        <div class="table-responsive">
+        <select id="select">
+          <option>ID</option>
+          <option>Nombre</option>
+        </select>
+        <table id="table" class="table table-striped table-bordered table-sm dt-responsive" >
+          <thead>
+            <tr>
+              <th class="th-sm">ID</th>
+              <th class="th-sm">Nombre</th>
+              <th class="th-sm">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            {% for elem in alimentos %}
+            <tr id="{{elem.nombre}}">
+              <td>{{elem.id}}</td>
+              <td>{{elem.nombre}}</td>
+              <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.nombre}}')">Eliminar</button></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        </div>
+        
+  <br> 
+  
+  
+{% endblock %}
+
+{% block scripts %}
+ {{super()}}
+  <script>
+    function create(){
+      var tableRef = document.getElementById('tbody');
+      var alimento = document.getElementById('alimento') ;
+      var idBuscado = document.getElementById(alimento.value);
+      console.log(alimento)
+      console.log(idBuscado)
+      if(alimento.value === ""){
+        $.alert({
+          title: 'Mensaje informativo',
+          content:  'Debe ingresar el nombre del alimento' ,
+          type: ('red'),
+        });  
+      }else if(idBuscado != null){
+        $.alert({
+          title: 'Mensaje informativo',
+          content:  'Ya existe un alimento con ese nombre' ,
+          type: ('red'),
+        });
+      }
+      else{ 
+      console.log(nombre)
+      $.confirm({
+        type:'green',
+        title: 'Actualizar rol',
+        content: 'Crear un nuevo alimento:  ' +nombre ,
+        buttons: {
+            Confirmar: function () {
+              $.ajax({url: "{{ url_for('create_alimento', idAlm='' ) }}"+id, success: function(result){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se creo el alimento correctamente ' ,
+                  type: ('green'),
+                });
+                var NewRow   = tableRef.insertRow(-1);
+                NewRow.id = alimento.value ; 
+                var Newcell1 = NewRow.insertCell(-1); 
+                var Newcell2 = NewRow.insertCell(-1); 
+                var Newcell3 = NewRow.insertCell(-1);
+                Newcell1.innerHTML = (tableRef.rows.length + 1) ;
+                Newcell2.innerHTML = alimento.value ;
+                let bt = document.createElement("BUTTON");
+                bt.type = "BUTTON" ;
+                bt.innerHTML = "Eliminar";    
+                bt.addEventListener("click",function(){deleteA((tableRef.rows.length + 1), alimento.value)});
+                Newcell3.appendChild(bt);  
+              }});
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };}
+    
+    function deleteA(id,nombre){
+      $.confirm({
+        type:'green',
+        title: 'Actualizar rol',
+        content: 'Eliminar a ' +nombre +' de alimentos?',
+        buttons: {
+            Confirmar: function () {
+              $.ajax({url: "{{ url_for('delete_alimento', idAlm='' ) }}"+id, success: function(result){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se elimino el alimento correctamente ' ,
+                  type: ('green'),
+                });
+                var elem = document.getElementById(id);
+                return elem.parentNode.removeChild(elem);  
+              }});
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
+    
+  </script>      
+
+
+  {% endblock %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+          <script>
+            $.alert({
+              title: 'Mensaje informativo',
+              content:  ('{{ message }}') ,
+              type: ('green'),
+            });
+          </script>           
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}    
+
+
+
+
+
