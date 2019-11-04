@@ -60,3 +60,13 @@ def delete():
         return redirect(url_for('comedor_list'))
     else:
         return render_template('autorizacion.html')
+
+def actualizarEstado():
+    if not session:
+        return render_template('autorizacion.html')
+    if session['rol'] == 3:
+        Comedor.db=get_db()
+        Comedor.updateRol(request.args.get('rol'),request.args.get('idCom'))
+        return jsonify(True)
+    else:
+        return render_template('autorizacion.html')

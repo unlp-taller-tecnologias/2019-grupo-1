@@ -14,7 +14,7 @@ def create():
     if not exist:
         User.create(data)
         flash("El usuario debe ser confirmado por el Admin para poder ser utilizado.")
-        return redirect(url_for('altaUser' ))
+        return redirect(url_for('altaUser'))
     flash("Ya existe un usuario con ese nombre, elija otro!")   
     return redirect(url_for('altaUser'))
 
@@ -60,4 +60,14 @@ def listadoUsuarioP():
     Sitio.db=get_db()
     cantPag=Sitio.cantPaginado()    
     users= User.allUsersP()
-    return render_template('listadoUsuariosPendientes.html', users=users,cant=cantPag[0]['cant_paginado'])  
+    return render_template('listadoUsuariosPendientes.html', users=users,cant=cantPag[0]['cant_paginado'])
+
+def actualizarEstado():
+    if not session:
+        return render_template('autorizacion.html')
+    if session['rol'] == 3:
+        User.db=get_db()
+        User.updateRol(request.args.get('rol'),request.args.get('idUser'))
+        return jsonify(True)
+    else:
+        return render_template('autorizacion.html')

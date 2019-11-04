@@ -3,121 +3,106 @@
 {% set encabezado = 'Panel de Administrador'  %}
 {% block title %}{{ encabezado }}{% endblock %}
 
-{% block cuerpo %}
+{%block style%}<style type="text/css">
+  .sidebar {
+    padding-left: 0;
+}
 
-    <div class="section">
+.main-container { 
+    background: #FFF;
+    padding-top: 15px;
+    margin-top: -20px;}
+
+  </style> 
+  {%endblock%}
+{% block cuerpo %}
+<div class="container mt-3">
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Sitio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Usuarios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Comedores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu3">Alimentacion</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <h3>HOME</h3>
+      <div class="card">
+  <div class="card-body text-center border border-secondary">
+      <h2>La cantidad actual de paginado es:</h2>
+      <h2>{{cantPaginado}}</h2>
+      <hr class="border border-secondary">
+      <h2>Cambiar cantidad por página</h2>
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 mr-auto mb-12">
-            <h3 class="d-block text-uppercase text-secondary">Estado del sitio</h3>
-            <span class="divider my-4"></span>
-            <div class="card">
-              <div class="card-body text-center border border-secondary">
-                
-              {% if state == 1 %}
-              <div class="alert alert-success" role="alert">
-                El sitio se encuentra habilitado  
-              </div>              
-              <h3>Para deshabilitar el sitio presione Deshabilitar Sitio</h3>
-              <button class="btn btn-danger btn-lg" role="button" onclick="confirmarDeshabilitar()">Deshabilitar Sitio</button>
-
-              {% else %}
-              <div class="alert alert-danger" role="alert">
-                El sitio se encuentra deshabilitado
-              </div>
-
-              <h2>Para que esté de nuevo en funcionamiento presione Habilitar Sitio</h2>
-              <button class="btn btn-success btn-lg" role="button" onclick="confirmarHabilitar()">Habilitar Sitio</button>                   
-
-              {% endif %}
-             </div>
-            </div>
+          <div class="col-md-4">
+          </div>                      
+          <div class="col-md-5">
+          <form action="{{ url_for('cambiarCantidad') }}" onsubmit="return validar()" novalidate method="post">
+            <input type="text" id="select" name="select" class="border border-secondary" value="{{cantPaginado}}">    
+          
+            <button type="submit" class="btn btn-success">Cambiar</button>
+          </form>
+          </div>
+          <div class="col-md-3 text-left">
 
           </div>
         </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-12 mr-auto mb-12">
-            <h3 class="d-block text-uppercase text-secondary">Cantidad por página</h3>
-            <span class="divider my-4"></span>
-            <div class="card">
-              <div class="card-body text-center border border-secondary">
-                  <h2>La cantidad actual de paginado es:</h2>
-                  <h2>{{cantPaginado}}</h2>
-                  <hr class="border border-secondary">
-                  <h2>Cambiar cantidad por página</h2>
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-4">
-                      </div>                      
-                      <div class="col-md-5">
-                      <form action="{{ url_for('cambiarCantidad') }}" onsubmit="return validar()" novalidate method="post">
-                        <input type="text" id="select" name="select" class="border border-secondary" value="{{cantPaginado}}">    
-                      
-                        <button type="submit" class="btn btn-success">Cambiar</button>
-                      </form>
-                      </div>
-                      <div class="col-md-3 text-left">
-            
-                      </div>
-                    </div>
-                  </div>
-             </div>
-            </div> 
-          </div>
-        </div>
-
-        <br>
-
-        <div class="row">
-          <div class="col-lg-12 mr-auto mb-12">
-            <h3 class="d-block text-uppercase text-secondary">Usuarios Deshabilitados</h3>
-            <span class="divider my-4"></span>
-
-            <div class="card">
-              <div class="card-body text-center border border-secondary">
-                <h2>Si desea ver los usuarios deshabilitados o habilitar algún usuario  presione el siguiente botón</h2>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='{{ url_for( 'user_activarUsuario') }}';">Usuarios <br> deshabilitados</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <br>
-
-        <div class="row">
-          <div class="col-lg-12 mr-auto mb-12">
-            <h3 class="d-block text-uppercase text-secondary">Usuarios </h3>
-            <span class="divider my-4"></span>
-
-            <div class="card">
-              <div class="card-body text-center border border-secondary">
-                <h2>Si desea ver los usuarios y ver o eliminar algún usuario  presione el siguiente botón</h2>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='{{ url_for( 'user_list') }}';">Usuarios</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-lg-12 mr-auto mb-12">
-            <h3 class="d-block text-uppercase text-secondary">Asignar Roles</h3>
-            <span class="divider my-4"></span>
-
-            <div class="card">
-              <div class="card-body text-center border border-secondary">
-                <h2>Si desea asignar roles a algún usuario  presione el siguiente botón</h2>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='{{ url_for( 'asign_rol') }}';">Asignar <br> Roles</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+ </div>
+</div>
+
+
+<div class="card">
+  <div class="card-body text-center border border-secondary">
+    
+  {% if state == 1 %}
+  <div class="alert alert-success" role="alert">
+    El sitio se encuentra habilitado  
+  </div>              
+  <h3>Para deshabilitar el sitio presione Deshabilitar Sitio</h3>
+  <button class="btn btn-danger btn-lg" role="button" onclick="confirmarDeshabilitar()">Deshabilitar Sitio</button>
+
+  {% else %}
+  <div class="alert alert-danger" role="alert">
+    El sitio se encuentra deshabilitado
+  </div>
+
+  <h2>Para que esté de nuevo en funcionamiento presione Habilitar Sitio</h2>
+  <button class="btn btn-success btn-lg" role="button" onclick="confirmarHabilitar()">Habilitar Sitio</button>                   
+
+  {% endif %}
+ </div>
+</div>
+
     </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
-
 {% block scripts %}
     {{super()}}
         <script src="static/js/panelAdmin.js"></script> 
@@ -153,7 +138,6 @@
         })
       };
 </script>
-
   {% if alertChangeCant %}
        <script>
         $.alert({

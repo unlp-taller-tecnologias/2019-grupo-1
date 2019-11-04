@@ -39,7 +39,7 @@ class Comedor(object):
     @classmethod
     def allComedoresP(cls):
         sql = """
-            SELECT comedor.id,comedor.nombre,usuario.user_name,usuario.apellido,comedor.direccion,comedor.estado 
+            SELECT DISTINCT comedor.id,comedor.nombre,usuario.user_name,usuario.apellido,comedor.direccion,comedor.estado 
             FROM comedor
             INNER JOIN comedor_usuario ON comedor.id = comedor_usuario.comedor_id
             INNER JOIN usuario ON comedor_usuario.referente_id = usuario.id
@@ -93,6 +93,15 @@ class Comedor(object):
         cursor.execute(sql,(idComedor))
         cls.db.commit()
         return True
+
+    @classmethod
+    def updateRol(cls,rol,idCom):
+        sql="""UPDATE comedor SET estado=%s WHERE id=%s"""
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(rol,idCom))
+        cls.db.commit()
+        return True
+
 
 
     

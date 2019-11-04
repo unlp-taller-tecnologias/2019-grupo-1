@@ -102,13 +102,21 @@ class User(object):
 
     @classmethod
     def allUsersP(cls):
-        sql = """SELECT u.id,u.nombre,u.mail,u.apellido,u.estado,u.user_name 
+        sql = """SELECT u.id,u.nombre_u,u.mail_u,u.apellido,u.estado_u,u.user_name 
         FROM usuario AS u
-        WHERE u.estado=0
+        WHERE u.estado_u=0
         """
         cursor = cls.db.cursor()
         cursor.execute(sql)
         return cursor.fetchall()
+
+    @classmethod
+    def updateRol(cls,rol,idUser):
+        sql="""UPDATE usuario SET estado_u=%s WHERE id=%s"""
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(rol,idUser))
+        cls.db.commit()
+        return True
 
 
 

@@ -28,6 +28,7 @@ app.add_url_rule("/listadoUsuario" , "user_list" , user.listadoUsuario)
 app.add_url_rule("/deleteUser" , "delete_user" , user.delete)
 app.add_url_rule("/userProfile" , "user_profile" , user.profile)
 app.add_url_rule("/listadoUsuariosPendientes" , "usuario_list_p" , user.listadoUsuarioP)
+app.add_url_rule("/actualizarEstadoUsuario","usuario_actualizar_estado",user.actualizarEstado,methods=['GET'])
 
 # Comedores
 app.add_url_rule("/listadoComedoresPendientes" , "comedor_list_p" , comedor.listadoComedorP)
@@ -36,6 +37,7 @@ app.add_url_rule("/altaComedor/creado" , "comedor_create" , comedor.create, meth
 app.add_url_rule("/listadoComedor" , "comedor_list" , comedor.listadoComedor)
 app.add_url_rule("/comedorProfile" , "comedor_profile" , comedor.profile)
 app.add_url_rule("/deleteComedor" , "delete_com" , comedor.delete)
+app.add_url_rule("/actualizarEstadoComedor","comedor_actualizar_estado",comedor.actualizarEstado,methods=['GET'])
 
 # Admin
 app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
