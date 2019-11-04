@@ -5,6 +5,7 @@ from flaskps.resources import user
 from flaskps.resources import auth
 from flaskps.resources import sitio
 from flaskps.resources import comedor
+from flaskps.resources import tiposDeAlimentos
 from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
@@ -29,6 +30,7 @@ app.add_url_rule("/deleteUser" , "delete_user" , user.delete)
 app.add_url_rule("/userProfile" , "user_profile" , user.profile)
 app.add_url_rule("/listadoUsuariosPendientes" , "usuario_list_p" , user.listadoUsuarioP)
 app.add_url_rule("/actualizarEstadoUsuario","usuario_actualizar_estado",user.actualizarEstado,methods=['GET'])
+app.add_url_rule("/usuarioProfile" , "usuario_profile" , user.profile)
 
 # Comedores
 app.add_url_rule("/listadoComedoresPendientes" , "comedor_list_p" , comedor.listadoComedorP)

@@ -85,7 +85,7 @@ class User(object):
 
     @classmethod
     def allUsers(cls):
-        sql = """SELECT u.id,u.nombre,u.mail,u.apellido,u.estado,u.user_name FROM usuario AS u"""
+        sql = """SELECT u.id,u.nombre_u,u.mail_u,u.apellido,u.estado_u,u.user_name FROM usuario AS u"""
         cursor = cls.db.cursor()
         cursor.execute(sql)
 

@@ -71,3 +71,10 @@ def actualizarEstado():
         return jsonify(True)
     else:
         return render_template('autorizacion.html')
+
+def profile():
+    if not session:
+        return render_template('autorizacion.html')
+    User.db=get_db()
+    user = User.find_user_by_id(request.args.get('idUser'))
+    return render_template('usuarioProfile.html', usuario=user)

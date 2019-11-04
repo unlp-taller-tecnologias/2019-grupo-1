@@ -30,7 +30,7 @@ def deshSitio():
 def renderPanelAdmin():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == 3:
+    if session['rol'] == '3':
         Sitio.db=get_db()
         stateSitio=Sitio.stateSitio()
         cantP=Sitio.cantPaginado()
