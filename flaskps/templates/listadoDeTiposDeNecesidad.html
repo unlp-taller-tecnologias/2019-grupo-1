@@ -1,6 +1,6 @@
 {% extends "tablaLayout.html" %}
 
-{% set encabezado = 'Tipos de Alimentos'  %}
+{% set encabezado = 'Tipos de Necesidad'  %}
 
 {% block cuerpo %}
 
@@ -10,10 +10,10 @@
   <div class="col-md-12 mb-4 order-2">
       <div class="row">
         <div class="col-md-6 form-group">
-          <input type="text" id="alimento" name="nombre" placeholder="Ingrese el nuevo alimento" class="form-control " maxlength="24">
+          <input type="text" id="tipo" name="nombre" placeholder="Ingrese el nuevo tipo de necesidad" class="form-control " maxlength="24">
         </div>
         <div class="col-md-6 form-group">
-          <input type="button" onclick="create()" class="btn btn-primary px-3 py-2" value="Cargar alimento">
+          <input type="button" onclick="create()" class="btn btn-primary px-3 py-2" value="Cargar Tipo de Necesidad">
         </div>
       </div> 
     </div>
@@ -36,7 +36,7 @@
             {% for elem in alimentos %}
             <tr id="{{elem.nombre|upper}}">
               <td>{{elem.nombre|upper}}</td>
-              <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.nombre|upper}}')">Eliminar</button></td>
+              <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.nombre}}')">Eliminar</button></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -53,19 +53,19 @@
  {{super()}}
   <script>
     function create(){
-      var alimento = document.getElementById('alimento').value ;
-      alimento = alimento.toUpperCase();
-      var idBuscado = document.getElementById(alimento);
-      if(alimento === ""){
+      var tipo = document.getElementById('tipo').value ;
+      tipo = tipo.toUpperCase()
+      var idBuscado = document.getElementById(tipo);      
+      if(tipo === ""){
         $.alert({
           title: 'Error al cargar',
-          content:  'Debe ingresar el nombre del alimento' ,
+          content:  'Debe ingresar el nombre tipo de necesidad' ,
           type: ('red'),
         });  
       }else if(idBuscado != null){
         $.alert({
           title: 'Error al cargar',
-          content:  'Ya existe un alimento con ese nombre' ,
+          content:  'Ya existe un tipo de necesidad con ese nombre' ,
           type: ('red'),
         });
       }
@@ -73,13 +73,13 @@
       $.confirm({
         type:'green',
         title: 'Carga exitosa',
-        content: 'Crear un nuevo alimento:  ' +alimento ,
+        content: 'Crear un nuevo tipo de necesidad:  ' +tipo ,
         buttons: {
             Confirmar: function () {
-              $.ajax({url: "{{ url_for('create_alimento', nombre='' ) }}"+alimento, success: function(result){
+              $.ajax({url: "{{ url_for('create_tipo_necesidad', nombre='' ) }}"+tipo, success: function(result){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se creo el alimento correctamente ' ,
+                  content:  'Se creo el tipo de necesidad correctamente ' ,
                   type: ('green'),
                 });
                 location.reload()               
@@ -95,14 +95,14 @@
     function deleteA(id,nombre){
       $.confirm({
         type:'red',
-        title: 'Eliminar alimento',
-        content: 'Eliminar a ' +nombre +' de alimentos y todos los registros en los que aparece?',
+        title: 'Eliminar tipo de necesidad',
+        content: 'Eliminar a ' +nombre.toUpperCase() +' de tipo de necesidad? Se eliminaran todas las necesidades asociadas',
         buttons: {
             Confirmar: function () {
-              $.ajax({url: "{{ url_for('delete_alimento', idAlm='' ) }}"+id, success: function(result){
+              $.ajax({url: "{{ url_for('delete_tipo_necesidad', id='' ) }}"+id, success: function(result){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se elimino el alimento correctamente ' ,
+                  content:  'Se elimino el tipo de necesidad correctamente ' ,
                   type: ('green'),
                 });
                 var elem = document.getElementById(nombre);
@@ -121,7 +121,7 @@
 
 
   {% endblock %}
-
+   
 
 
 

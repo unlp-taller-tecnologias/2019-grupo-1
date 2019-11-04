@@ -56,4 +56,19 @@
 {% block scripts %}
   {{ super()}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+          <script>
+            $.alert({
+              title: 'Mensaje informativo',
+              content:  ('{{ message }}') ,
+              type: ('red'),
+            });
+          </script>           
+
+        {% endfor %}
+    {% endif %}
+{% endwith %} 
 {% endblock %}
