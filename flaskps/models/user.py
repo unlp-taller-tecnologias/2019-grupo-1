@@ -20,7 +20,7 @@ class User(object):
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombre_u'], data['apellido'], data['mail_u'], data['pass'], data['user'],data['desc'], data['foto'], data['tel']))
+        cursor.execute(sql, (data['nombre'], data['apellido'], data['mail'], data['pass'], data['user'],data['desc'], data['foto'], data['tel']))
         cls.db.commit()
 
         return True
@@ -33,7 +33,7 @@ class User(object):
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombre_u'], data['apellido'], data['mail_u'], data['pass'], data['user'],data['desc'], data['tel']))
+        cursor.execute(sql, (data['nombre'], data['apellido'], data['mail'], data['pass'], data['user'],data['desc'], data['tel']))
         cls.db.commit()
 
         return True

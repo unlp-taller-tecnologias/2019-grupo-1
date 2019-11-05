@@ -29,12 +29,10 @@ class Comedor(object):
     
     @classmethod
     def find_comedor_by_id(cls, id):
-        sql = """
-            SELECT * FROM comedor AS u
-            WHERE u.id = %s """
+        sql = """ SELECT * FROM comedor WHERE id=%s """
         cursor = cls.db.cursor()
-        cursor.execute(sql, id)
-        return cursor.fetchall()
+        cursor.execute(sql,id)
+        return cursor.fetchone()
 
     @classmethod
     def allComedoresP(cls):
@@ -62,14 +60,6 @@ class Comedor(object):
         cls.db.commit()
 
         return cursor.fetchone()
-
-    @classmethod
-    def delete(cls,idUser):
-        sql="""UPDATE comedor SET estado=2 WHERE id=%s"""
-        cursor=cls.db.cursor()
-        cursor.execute(sql,(idUser))
-        cls.db.commit()
-        return True
 
     @classmethod
     def allComedores(cls):

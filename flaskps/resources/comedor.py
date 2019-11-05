@@ -5,6 +5,7 @@ from flaskps.models.comedor_usuario import Comedor_usuario
 from flaskps.models.sitio import Sitio
 from flaskps.helpers.auth import authenticated
 from flaskps.db import get_db
+import json
 
 def new():  
     return render_template('alta_comedor.html' )
@@ -44,8 +45,6 @@ def listadoComedor():
     return render_template('listadoComedor.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
     
 def profile():
-    if not session:
-        return render_template('autorizacion.html')
     Comedor.db=get_db()
     comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
     return render_template('comedorProfile.html', comedor=comedor)
@@ -70,3 +69,15 @@ def actualizarEstado():
         return jsonify(True)
     else:
         return render_template('autorizacion.html')
+   
+#API
+
+def mapInfoOne():
+    Comedor.db=get_db()
+    comedor = Comedor.find_comedor_by_id(request.args.get('id'))
+    return jsonify(comedor = comedor)
+
+def mapInfoAll():
+    Comedor.db=get_db()
+    comedor = Comedor.all()
+    return jsonify(comedores = comedor)     

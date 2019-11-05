@@ -62,4 +62,7 @@ app.add_url_rule("/altaTipoNecesidad" , "create_tipo_necesidad" , tiposDeNecesid
 app.add_url_rule("/listadoTipoNecesidad" , "tipo_necesidad_list" , tiposDeNecesidad.listadoTipos)
 app.add_url_rule("/deleteTipoNecesidad" , "delete_tipo_necesidad" , tiposDeNecesidad.delete)
 
+#API
+app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])
+app.add_url_rule("/mapInfoAll" , "mapInfoAll" , comedor.mapInfoAll, methods=['GET'])
 

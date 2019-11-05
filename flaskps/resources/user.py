@@ -41,17 +41,10 @@ def delete():
         return render_template('autorizacion.html')
     
 def profile():
-    if not session:
-        return render_template('autorizacion.html')
+    
     User.db=get_db()
-    getUser= request.args.get('idUser')
-    if getUser == 'me':
-        us = User.find_user_by_id(session['id'])
-        me= True
-    else:
-        us = User.find_user_by_id(getUser)
-        me= False
-    return render_template('userProfile.html', user=us, me= me)    
+    us = User.find_user_by_id(request.args.get('idUser'))
+    return render_template('usuarioProfile.html', user=us)    
     
 def listadoUsuarioP():
     if not session:
@@ -72,9 +65,3 @@ def actualizarEstado():
     else:
         return render_template('autorizacion.html')
 
-def profile():
-    if not session:
-        return render_template('autorizacion.html')
-    User.db=get_db()
-    user = User.find_user_by_id(request.args.get('idUser'))
-    return render_template('usuarioProfile.html', usuario=user)

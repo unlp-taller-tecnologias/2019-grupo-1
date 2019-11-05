@@ -1,11 +1,14 @@
 from flask import redirect, render_template, request, url_for, session, abort
 from flaskps.db import get_db
 from flaskps.models.sitio import Sitio
+from flaskps.models.comedor import Comedor
 from flaskps.helpers.auth import authenticated
 
 
 def hello():
-    return render_template('home.html')
+    Comedor.db = get_db()
+    comedores = Comedor.all()
+    return render_template('home.html',comedores=comedores)
 
 def habSitio():
     if not session:
