@@ -94,7 +94,7 @@ class User(object):
    
     @classmethod
     def delete(cls,idUser):
-        sql="""UPDATE usuario SET estado=2 WHERE id=%s"""
+        sql="""UPDATE usuario SET estado_u=2 WHERE id=%s"""
         cursor=cls.db.cursor()
         cursor.execute(sql,(idUser))
         cls.db.commit()
