@@ -22,7 +22,7 @@ def listadoTipos():
         Sitio.db=get_db()
         cantPag=Sitio.cantPaginado()    
         tipos=Tipo_necesidad.all()
-        return render_template('listadoDeTiposDeNecesidad.html',cant=cantPag[0]['cant_paginado'],alimentos=tipos,tam=len(tipos))
+        return render_template('admin/listadoDeTiposDeNecesidad.html',cant=cantPag[0]['cant_paginado'],alimentos=tipos,tam=len(tipos))
     else:
         return render_template('autorizacion.html')
 

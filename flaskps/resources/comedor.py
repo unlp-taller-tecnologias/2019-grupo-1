@@ -8,7 +8,7 @@ from flaskps.db import get_db
 import json
 
 def new():  
-    return render_template('alta_comedor.html' )
+    return render_template(  'comedor/alta_comedor.html' )
 
 def create():
 
@@ -33,7 +33,7 @@ def listadoComedorP():
     Comedor.db=get_db()
     cantPag=Sitio.cantPaginado()
     comedores=Comedor.allComedoresP()
-    return render_template('listadoComedoresPendientes.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
+    return render_template('comedor/listadoComedoresPendientes.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
 
 def listadoComedor():
     if not session:
@@ -42,12 +42,12 @@ def listadoComedor():
     Comedor.db=get_db()
     cantPag=Sitio.cantPaginado()
     comedores=Comedor.allComedores()
-    return render_template('listadoComedor.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
+    return render_template('comedor/listadoComedor.html',cant=cantPag[0]['cant_paginado'],come=comedores,tam=len(comedores))
     
 def profile():
     Comedor.db=get_db()
     comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
-    return render_template('comedorProfile.html', comedor=comedor)
+    return render_template('comedor/comedorProfile.html', comedor=comedor)
 
 def delete():
     if not session:

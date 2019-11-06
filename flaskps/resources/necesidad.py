@@ -14,17 +14,10 @@ def create():
     else:
         return render_template('autorizacion.html')
 
-def listadoAlimentos():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
-        Alimento.db=get_db()
-        Sitio.db=get_db()
-        cantPag=Sitio.cantPaginado()    
-        alimentos=Alimento.all()
-        return render_template('admin/listadoTiposDeAlimentos.html',cant=cantPag[0]['cant_paginado'],alimentos=alimentos,tam=len(alimentos))
-    else:
-        return render_template('autorizacion.html')
+def listado_necesidades():
+
+    return render_template('listado_necesidades.html')
+
 
 def delete():
     if not session:

@@ -7,6 +7,7 @@ from flaskps.resources import sitio
 from flaskps.resources import comedor
 from flaskps.resources import tiposDeAlimentos
 from flaskps.resources import tiposDeNecesidad
+from flaskps.resources import necesidad
 from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
@@ -61,6 +62,12 @@ app.add_url_rule("/deleteAlimento" , "delete_alimento" , tiposDeAlimentos.delete
 app.add_url_rule("/altaTipoNecesidad" , "create_tipo_necesidad" , tiposDeNecesidad.create, methods=['GET'])
 app.add_url_rule("/listadoTipoNecesidad" , "tipo_necesidad_list" , tiposDeNecesidad.listadoTipos)
 app.add_url_rule("/deleteTipoNecesidad" , "delete_tipo_necesidad" , tiposDeNecesidad.delete)
+
+#Necesidades
+
+app.add_url_rule("/altaNecesidad" , "create_necesidad" , necesidad.create, methods=['GET'])
+app.add_url_rule("/listadoNecesidades" , "necesidad_list" , necesidad.listado_necesidades)
+app.add_url_rule("/deleteNecesidad" , "delete_necesidad" , necesidad.delete,methods=['GET'])
 
 #API
 app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])

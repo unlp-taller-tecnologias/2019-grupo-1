@@ -5,7 +5,7 @@ from flaskps.models.sitio import Sitio
 from flaskps.db import get_db
 
 def new():
-    return render_template('alta_usuario.html' )
+    return render_template('user/alta_usuario.html' )
 
 def create():
     User.db = get_db()
@@ -26,7 +26,7 @@ def listadoUsuario():
     Sitio.db=get_db()
     cantPag=Sitio.cantPaginado()    
     usuarios=User.allUsers()
-    return render_template('listadoUsuario.html',cant=cantPag[0]['cant_paginado'],users=usuarios,tam=len(usuarios))
+    return render_template('user/listadoUsuario.html',cant=cantPag[0]['cant_paginado'],users=usuarios,tam=len(usuarios))
 
 
 def delete():
@@ -44,7 +44,7 @@ def profile():
     
     User.db=get_db()
     us = User.find_user_by_id(request.args.get('idUser'))
-    return render_template('usuarioProfile.html', user=us)    
+    return render_template('user/usuarioProfile.html', user=us)    
     
 def listadoUsuarioP():
     if not session:
@@ -53,7 +53,7 @@ def listadoUsuarioP():
     Sitio.db=get_db()
     cantPag=Sitio.cantPaginado()    
     users= User.allUsersP()
-    return render_template('listadoUsuariosPendientes.html', users=users,cant=cantPag[0]['cant_paginado'])
+    return render_template('user/listadoUsuariosPendientes.html', users=users,cant=cantPag[0]['cant_paginado'])
 
 def actualizarEstado():
     if not session:

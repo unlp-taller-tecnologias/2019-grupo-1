@@ -27,9 +27,5 @@ def authenticate():
 
 
 def logout():
-    del session['username']  
-    del session['id']
-    if session['rol'] == '1':
-        del session['idComedor']
-    del session['rol']
+    session.clear()
     return redirect(url_for('index'))
