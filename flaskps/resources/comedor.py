@@ -64,8 +64,9 @@ def editando():
     Comedor_usuario.db = get_db()
     data = request.form
     Comedor.edite(data)
+    User.editeRef(data)
     flash("La informacion se actualizo correctamente")   
-    return redirect(url_for('comedor_profile'))
+    return redirect(url_for('comedor_profile', idComedor= data['idComedor']))
 
 def delete():
     if not session:
@@ -97,5 +98,5 @@ def mapInfoOne():
 
 def mapInfoAll():
     Comedor.db=get_db()
-    comedor = Comedor.all()
+    comedor = Comedor.allActives()
     return jsonify(comedores = comedor)     

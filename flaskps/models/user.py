@@ -120,8 +120,15 @@ class User(object):
 
 
 
-
-
+    @classmethod
+    def editeRef(cls, data):
+        sql = """UPDATE usuario SET nombre_u= %s, apellido= %s, mail_u=%s, password=%s, user_name=%s, telefono=%s
+                WHERE id=%s"""
+        cursor = cls.db.cursor()
+        cursor.execute(sql,(data['nombreR'],data['apellidoR'],data['mailR'],data['pass'],data['user'],data['telR'],data['idRef']))
+        cls.db.commit()
+        
+        return True
 
     
     

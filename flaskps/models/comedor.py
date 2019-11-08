@@ -11,6 +11,14 @@ class Comedor(object):
         cursor.execute(sql)
 
         return cursor.fetchall()
+        
+    @classmethod
+    def allActives(cls):
+        sql = """SELECT * FROM comedor WHERE estado=1 """
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
 
     @classmethod
     def create(cls, data):
@@ -27,10 +35,10 @@ class Comedor(object):
 
     @classmethod
     def edite(cls, data):
-        sql = """UPDATE comedor SET (nombre=&s)
-                WHERE id=18"""
+        sql = """UPDATE comedor SET nombre = %s, direccion=%s, descripcion=%s, organizacion=%s,foto=%s,telefono=%s,red_social=%s,latitud=%s,longitud=%s,dia_yhorario=%s
+                WHERE id=%s"""
         cursor = cls.db.cursor()
-        cursor.execute(sql, 'asd')
+        cursor.execute(sql,(data['nombreC'],data['dir'],data['desc'],data['org'],data['foto'],data['telC'],data['red'],data['lat'], data['lng'], data['dias'],data['idComedor']))
         cls.db.commit()
         
         return True

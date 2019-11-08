@@ -34,7 +34,17 @@ class Necesidad(object):
         cursor.execute(sql, user)
 
         return cursor.fetchone()
-   
+    
+        
+    @classmethod
+    def find_tipo_necesidades(cls):
+        sql = """  SELECT tipo_necesidad_id FROM necesidad """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
+    
     @classmethod
     def delete(cls,id):
         sql="""DELETE FROM necesidad WHERE id=%s"""

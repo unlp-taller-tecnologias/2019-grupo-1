@@ -64,8 +64,12 @@
         .openPopup();
        
     }});
-              
+
   </script>
+      
+  {% block verificarAlerta %}
+  {{ super() }}
+  {% endblock %}
   
 {% endblock %}
 

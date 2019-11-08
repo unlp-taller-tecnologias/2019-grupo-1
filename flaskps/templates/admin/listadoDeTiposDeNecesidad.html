@@ -96,18 +96,27 @@
       $.confirm({
         type:'red',
         title: 'Eliminar tipo de necesidad',
-        content: 'Eliminar a ' +nombre.toUpperCase() +' de tipo de necesidad? Se eliminaran todas las necesidades asociadas',
+        content: 'Eliminar a ' +nombre.toUpperCase() +' de tipo de necesidad? ',
         buttons: {
             Confirmar: function () {
-              $.ajax({url: "{{ url_for('delete_tipo_necesidad', id='' ) }}"+id, success: function(result){
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('delete_tipo_necesidad', id='' ) }}"+id, success: function(result){
+                if(result['ok']){
                 $.alert({
                   title: 'Mensaje informativo',
                   content:  'Se elimino el tipo de necesidad correctamente ' ,
                   type: ('green'),
                 });
                 var elem = document.getElementById(nombre);
-                return elem.parentNode.removeChild(elem);  
-              }});
+                elem.parentNode.removeChild(elem);  
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Debe eliminar las necesidades relacionadas a este tipo primero ' ,
+                  type: ('red'),
+                });
+              }}});              
             },
             Cancelar: function () {
                 null
