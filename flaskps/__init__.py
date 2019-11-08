@@ -38,6 +38,8 @@ app.add_url_rule("/usuarioProfile" , "usuario_profile" , user.profile)
 app.add_url_rule("/listadoComedoresPendientes" , "comedor_list_p" , comedor.listadoComedorP)
 app.add_url_rule("/altaComedor", 'altaComedor', comedor.new , methods=['GET'])
 app.add_url_rule("/altaComedor/creado" , "comedor_create" , comedor.create, methods=['POST'])
+app.add_url_rule("/editarComedor", 'editar_comedor', comedor.edite , methods=['GET'])
+app.add_url_rule("/editandoComedor" , "editando_comedor" , comedor.editando, methods=['POST','GET'])
 app.add_url_rule("/listadoComedor" , "comedor_list" , comedor.listadoComedor)
 app.add_url_rule("/comedorProfile" , "comedor_profile" , comedor.profile)
 app.add_url_rule("/deleteComedor" , "delete_com" , comedor.delete)
@@ -65,8 +67,9 @@ app.add_url_rule("/deleteTipoNecesidad" , "delete_tipo_necesidad" , tiposDeNeces
 
 #Necesidades
 
-app.add_url_rule("/altaNecesidad" , "create_necesidad" , necesidad.create, methods=['GET'])
-app.add_url_rule("/listadoNecesidades" , "necesidad_list" , necesidad.listado_necesidades)
+app.add_url_rule("/altaNecesidad" , "create_necesidad" , necesidad.create, methods=['POST'])
+app.add_url_rule("/newNecesidad" , "new_necesidad" , necesidad.new_necesidad)
+app.add_url_rule("/listadoNecesidades" , "listado_necesidades" , necesidad.listado_necesidades)
 app.add_url_rule("/deleteNecesidad" , "delete_necesidad" , necesidad.delete,methods=['GET'])
 
 #API

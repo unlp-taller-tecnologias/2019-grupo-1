@@ -1,4 +1,4 @@
-class Tipo_necesidad(object):
+class Necesidad(object):
 
     db = None
 
@@ -13,12 +13,12 @@ class Tipo_necesidad(object):
     @classmethod
     def create(cls, data):
         sql = """
-            INSERT INTO necesidad (nombre)
-            VALUES (%s)
+            INSERT INTO necesidad (tipo_necesidad_id,estado,descripcion,comedor_id)
+            VALUES (%s,0,%s,%s)
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, nombre)
+        cursor.execute(sql, (data['tipo'],data['desc'],data['comedor']))
         cls.db.commit()
 
         return True

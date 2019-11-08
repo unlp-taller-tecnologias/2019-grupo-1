@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Crear necesidad'  %}
+{% block cuerpo %}
+    <!-- Contact Section -->
+    <div class="container">
+    
+        <!-- Contact Section Form -->
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="card">
+            <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                <div class="row">
+                  <div class="col-md-12 mb-4 order-2">
+                    <form id='formUser' action="{{ url_for('create_necesidad')}}" method="post">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="name">Comedor: </label>
+                                <select name="comedor" required>
+                                  
+                                  {% for elem in comedores %}
+                                  <option value={{ elem.id}}  selected>{{elem.nombre|upper}}</option>
+                                  {% endfor %}
+                                </select>             
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="name">Tipo de necesidad: </label>
+                                <select name="tipo">
+                                  {% for elem in tipo_necesidades %}
+                                  <option value="{{ elem.id}}"  selected>{{elem.nombre}}</option>
+                                  {% endfor %}
+                                </select>                 
+                             </div>
+                          </div>
+                      <div class="row">
+                         <div class="col-md-12 form-group">
+                            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="2" placeholder="Contanos acerca de la necesidad del comedor." required></textarea  >
+                        </div>
+                        
+                      </div>
+                  
+                      <div class="row">
+                        <div class="col-md-3">
+                          
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <input type="submit" value="Crear necesidad" class="btn btn-primary px-3 py-2">
+                        </div>                       
+                      </div>
+                    </form>
+                  
+                    
+                  </div>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+
+      
+
+{% endblock %}
+
+{% block scripts %}
+    {{super()}} 
+{% endblock %}        
+
+
+
+

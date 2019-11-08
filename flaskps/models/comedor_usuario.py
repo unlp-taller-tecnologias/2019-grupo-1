@@ -33,3 +33,11 @@ class Comedor_usuario(object):
         cursor.execute(sql, user)
 
         return cursor.fetchone()
+    
+    @classmethod
+    def find_user_by_comedorid(cls, cm):
+        sql = """ SELECT * FROM comedor_usuario WHERE comedor_id = %s """
+        cursor = cls.db.cursor()
+        cursor.execute(sql, cm)
+
+        return cursor.fetchone()

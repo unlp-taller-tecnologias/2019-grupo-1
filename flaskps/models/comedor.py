@@ -25,6 +25,15 @@ class Comedor(object):
         
         return True
 
+    @classmethod
+    def edite(cls, data):
+        sql = """UPDATE comedor SET (nombre=&s)
+                WHERE id=18"""
+        cursor = cls.db.cursor()
+        cursor.execute(sql, 'asd')
+        cls.db.commit()
+        
+        return True
 
     
     @classmethod

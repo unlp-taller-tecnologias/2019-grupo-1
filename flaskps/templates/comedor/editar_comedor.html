@@ -1,0 +1,215 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Editar Comedor' %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  
+{% endblock %}
+
+  {% block cuerpo %}
+  
+      <!-- Contact Section -->
+        <div class="container">
+    
+          <!-- Contact Section Form -->
+          <div class="row">
+            <div class="col-lg-9 mx-auto">
+              <div class="card">
+              <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+              <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                  <div class="row">
+                    <div class="col-md-12 mb-4 order-2">
+                      <form id='formUser' action="{{ url_for('editando_comedor' , idComedor='{{ comedor.id }}' ) }}" onsubmit="return validateForm()" method="post">
+                          
+                        <h4>Acerca del comedor</h4>
+                        <div class="row">
+                              <div class="col-md-6 form-group">
+                                <label for="name">Nombre del comedor </label>
+                                <input type="text" value="{{ comedor.nombre}}" id="nameC" name="nombreC" class="form-control " required maxlength="30">
+                              </div>
+                              <div class="col-md-6 form-group">
+                                <label for="name">Nombre de usuario</label>
+                                <input type="text" value="{{ ref.user_name}}" name="user" class="form-control " required maxlength="30">
+                              </div>
+                             
+                            </div> 
+                        <div class="row">
+                           <div class="col-md-6 form-group">
+                            <label for="name">Organizacion a cargo (Opcional)</label>
+                            <input type="text" value="{{ comedor.organizacion}}"   name="org" class="form-control " maxlength="30" >
+                          </div>
+                          <div class="col-md-6 form-group">
+                              <label for="phone">Direccion</label>
+                              <input type="text" value="{{ comedor.direccion}}" name="dir" id="phon" class="form-control " required maxlength="50">
+                            </div>  
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                              <label for="name">Contraseña</label>
+                              <input type="password" value="{{ ref.password}}" name="pass" id="pass" class="form-control " required minlength="8" maxlength="16">
+                            </div>
+                            <div class="col-md-6 form-group">
+                              <label for="phone">Repetir contraseña</label>
+                              <input type="password" value="{{ ref.password}}" id="pass1" class="form-control " required minlength="8" maxlength="16">
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 form-group">
+                            <label for="name">Telefono(Opcional)</label>
+                            <input type="number" value="{{ comedor.telefono}}" name="telC" id="telC" class="form-control " maxlength="30">
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <label for="phone">Foto(Opcional)</label>
+                            <input type="file" value="{{ comedor.foto}}" name="foto" id="fotoC" class="form-control-file form-control " >
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                              <label for="name">Red Social(Opcional)</label>
+                              <input type="text" value="{{ comedor.red_social}}" name="red" id="RedS" class="form-control " maxlength="50">
+                            </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="phone">Dias y horarios de funcionamiento</label>
+                                <input type="text" value="{{ comedor.dia_yhorario}}" name="dias" id="dias" class="form-control-file form-control " required maxlength="60" placeholder="Martes 18:00hs - Jueves 12:00hs">
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="name">Descripcion</label>
+                            <textarea class="form-control" value="{{ comedor.descripcion }}" name="desc" id="exampleFormControlTextarea1" rows="3">{{ comedor.descripcion }}</textarea required placeholder="Contanos sobre el comedor y sus objetivos.">
+                          </div> 
+                        </div>
+                        <hr>
+                        <h4> Acerca del referente</h4>
+                         
+                        <div class="row">
+                          <div class="col-md-6 form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" value="{{ ref.nombre_u}}" id="name" name="nombre" class="form-control " required>
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <label for="phone">Apellido</label>
+                            <input type="text" value="{{ ref.apellido}}" name="apellido" id="phone" class="form-control " required>
+                          </div>
+                        </div> 
+                    <div class="row">
+                       <div class="col-md-6 form-group">
+                        <label for="name">Mail</label>
+                        <input type="email" value="{{ ref.mail_u}}"  name="mail" class="form-control " required>
+                      </div>
+                      <div class="col-md-6 form-group">
+                          <label for="name">Telefono</label>
+                          <input type="number" value="{{ ref.telefono}}"  name="tel" class="form-control " required>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <h4> Ubicacion</h4>
+                    <p>Presione en el mapa,  la ubicacion del comedor lo mas preciso posible!</p>
+                    <div id="map" style="height:400px;margin-bottom:15px;"></div>                    
+                    <input id="lat" name="lat" type="hidden" value="0">
+                    <input id="lng" name="lng" type="hidden" value="0">                                         
+                    <div class="row">
+                          <div class="col-md-3">
+                            
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <input type="submit" value="Editar" class="btn btn-primary px-3 py-2">
+                            <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-2">
+                          </div>
+                          <div class="col-md-3">
+                            
+                          </div>                         
+                        </div>
+                        
+                      </form>
+                    
+                      
+                    </div>
+                  </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  <br>
+    
+  {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+     
+  <script>
+
+    function validateForm() {
+      var pass = document.getElementById('pass').value;
+      var pass1 = document.getElementById('pass1').value;
+      if( pass != pass1){
+        $.alert({
+          title: 'Error al validar comedor',
+          content: 'Las contraseñas introducidas no coinciden!',
+          type: 'red',
+         });
+        return false}
+
+      if(document.getElementById('lat').value == 0){
+        $.alert({
+          title: 'Error al validar comedor',
+          content: 'Debe elegir una ubicacion en el mapa!',
+          type: 'red',
+         });
+        return false}
+      
+      return true}
+  </script>
+  
+  <script>
+      var mymap = L.map('map',{
+        center: [-34.92035241690136, -57.954786306945614],
+        zoom: 13,
+        maxZoom: 18,
+        minZoom: 8
+      });
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox.streets'
+      }).addTo(mymap);
+
+      var popup = L.popup();
+      popup
+          .setLatLng([-34.92035241690136, -57.954786306945614])
+          .setContent("<b>Aca se ubicaria el comedor!</b>")
+          .openOn(mymap);
+      
+      function onMapClick(e) {
+        document.getElementById('lat').value = e.latlng['lat']
+        document.getElementById('lng').value = e.latlng['lng']
+        popup
+          .setLatLng(e.latlng)
+          .setContent("<b>Aca se ubicaria el comedor!</b>")
+          .openOn(mymap);
+      }
+      mymap.on('click', onMapClick);
+  </script>
+  {% block verificarAlerta %}
+    {{ super() }}
+  {% endblock %}
+
+{% endblock %}
+
+

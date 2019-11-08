@@ -49,6 +49,24 @@ def profile():
     comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
     return render_template('comedor/comedorProfile.html', comedor=comedor)
 
+def edite():
+    Comedor.db=get_db()
+    Comedor_usuario.db=get_db()
+    User.db=get_db()
+    comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
+    ref= Comedor_usuario.find_user_by_comedorid(request.args.get('idComedor'))['referente_id']
+    user = User.find_user_by_id(ref)                                        
+    return render_template('comedor/editar_comedor.html', comedor=comedor, ref= user)
+
+def editando():    
+    Comedor.db = get_db()
+    User.db = get_db()
+    Comedor_usuario.db = get_db()
+    data = request.form
+    Comedor.edite(data)
+    flash("La informacion se actualizo correctamente")   
+    return redirect(url_for('comedor_profile'))
+
 def delete():
     if not session:
         return render_template('autorizacion.html')
