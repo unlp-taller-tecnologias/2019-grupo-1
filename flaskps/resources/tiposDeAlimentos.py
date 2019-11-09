@@ -31,9 +31,11 @@ def delete():
         return render_template('autorizacion.html')
     if session['rol'] == '3':
         Alimento.db=get_db()
-        Alimento.delete(request.args.get('idAlm'))
-        # eliminar de los registros
-        return jsonify(True)
+        try:
+            Alimento.delete(request.args.get('idAlm'))
+        except:
+            return jsonify(ok=False)
+        return jsonify(ok=True)
     else:
         return render_template('autorizacion.html')
  

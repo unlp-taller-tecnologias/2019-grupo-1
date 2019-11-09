@@ -71,6 +71,9 @@ app.add_url_rule("/altaNecesidad" , "create_necesidad" , necesidad.create, metho
 app.add_url_rule("/newNecesidad" , "new_necesidad" , necesidad.new_necesidad)
 app.add_url_rule("/listadoNecesidades" , "listado_necesidades" , necesidad.listado_necesidades)
 app.add_url_rule("/deleteNecesidad" , "delete_necesidad" , necesidad.delete,methods=['GET'])
+app.add_url_rule("/cumplirNecesidad" , "cumplir_necesidad" , necesidad.cumplir,methods=['GET'])
+app.add_url_rule("/editeNecesidad" , "edite_necesidad" , necesidad.edite,methods=['POST','GET'])
+app.add_url_rule("/editandoNecesidad" , "editando_necesidad" , necesidad.editando,methods=['POST'])
 
 #API
 app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])

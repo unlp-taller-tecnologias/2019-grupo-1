@@ -42,7 +42,6 @@ class Comedor(object):
         cls.db.commit()
         
         return True
-
     
     @classmethod
     def find_comedor_by_id(cls, id):

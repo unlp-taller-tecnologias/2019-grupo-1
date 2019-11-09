@@ -3,6 +3,7 @@ from flaskps.models.user import User
 from flaskps.models.comedor import Comedor
 from flaskps.models.comedor_usuario import Comedor_usuario
 from flaskps.models.sitio import Sitio
+from flaskps.models.necesidad import Necesidad
 from flaskps.helpers.auth import authenticated
 from flaskps.db import get_db
 import json
@@ -46,8 +47,11 @@ def listadoComedor():
     
 def profile():
     Comedor.db=get_db()
+    Necesidad.db=get_db()
+    necesidades = Necesidad.find_tipo_necesidad_by_comedorid(request.args.get('idComedor'))
     comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
-    return render_template('comedor/comedorProfile.html', comedor=comedor)
+    
+    return render_template('comedor/comedorProfile.html', comedor=comedor, necesidades= necesidades)
 
 def edite():
     Comedor.db=get_db()

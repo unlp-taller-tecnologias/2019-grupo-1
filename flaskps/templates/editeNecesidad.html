@@ -1,0 +1,175 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Editar necesidad'  %} 
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+    <!-- Contact Section -->
+    <div class="container">
+    
+        <!-- Contact Section Form -->
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="card">
+            <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                <div class="row">
+                  <div class="col-md-12 mb-4 order-2">
+                    <form id='formUser' action="{{ url_for('editando_necesidad')}}" method="post">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="name">Comedor: </label>
+                                <select name="comedor" required>
+                                  {% set com = False %}
+                                  {% if session['idComedor'] %}
+                                    {% set com = True %}
+                                  {% endif %}  
+                                  {% for elem in comedores %}
+                                    {% if ( com == False) %}
+                                      <option value={{ elem.id}}  {% if elem.id == necesidad.comedor_id %} selected {% endif %}>{{elem.nombre|upper}}</option>
+                                    {% endif %}
+                                    {% if (com) and (session['idComedor'] == elem.id) %}
+                                      <option value={{ session['idComedor']}}  {% if elem.id == necesidad.comedor_id %} selected {% endif %}>{{elem.nombre|upper}}</option>
+                                    {% endif %}
+                                  {% endfor %}
+                                  
+                                </select>             
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="name">Tipo de necesidad: </label>
+                                <select name="tipo">
+                                  {% for elem in tipo_necesidades %}
+                                  <option value="{{ elem.id}}" {% if elem.id == necesidad.tipo_necesidad_id %} selected {% endif %}>{{elem.nombre}}</option>
+                                  {% endfor %}
+                                </select>                 
+                             </div>
+                          </div>
+                      <div class="row">
+                         <div class="col-md-12 form-group">
+                            <textarea class="form-control"  value='{{ necesidad.descripcion}}' name="desc" id="exampleFormControlTextarea1" rows="2" placeholder="Contanos acerca de la necesidad del comedor." required>{{ necesidad.descripcion}}</textarea  >
+                        </div>
+                        <input type="hidden" value="{{necesidad.id}}" name="idU" id="idU">
+                        
+                      </div>
+                  
+                      <div class="row">
+                        <div class="col-md-3">
+                            
+                          
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <input type="submit" value="Editar necesidad" class="btn btn-info px-3 py-2">
+                          
+                        </div>
+                        <div class="col-md-6 form-group">
+                                
+                        </div>                       
+                      </div>
+                    </form>
+                  
+                    <button style="width:90px;padding:1px;"  class="btn btn-success" onclick="cumplir('{{necesidad.id}}')" >Cumplir</button>
+                    <button style="width:90px;padding:1px;"  class="btn btn-danger" onclick="deleteN('{{necesidad.id}}')" >Eliminar</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+
+      
+
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script>
+    function deleteN(id){
+        $.confirm({
+          type:'red',
+          title: 'Eliminar',
+          content: 'Desea eliminar la necesidad definitivamente? ',          
+          buttons: {
+            Confirmar: function () {
+              $.ajax({
+                url: "{{ url_for('delete_necesidad', id='' ) }}"+id, success: function(result){
+                    window.location.href='{{ url_for( 'listado_necesidades') }}'
+                }
+                });              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
+    function cumplir(id){
+        $.confirm({
+          type:'green',
+          title: 'Cumplir necesidad',
+          content: 'Desea cumplir la necesidad? ',          
+          buttons: {
+            Confirmar: function () {
+              $.ajax({
+                url: "{{ url_for('cumplir_necesidad', id='' ) }}"+id, success: function(result){
+                    window.location.href='{{ url_for( 'listado_necesidades') }}'
+                }
+                });              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
+    </script>
+    
+{% endblock %}        
+
+
+
+
+function deleteA(id,nombre){
+    $.confirm({
+      type:'red',
+      title: 'Eliminar tipo de necesidad',
+      content: 'Eliminar a ' +nombre.toUpperCase() +' de tipo de necesidad? ',
+      buttons: {
+          Confirmar: function () {
+            var ok=true;
+            $.ajax({
+              url: "{{ url_for('delete_tipo_necesidad', id='' ) }}"+id, success: function(result){
+              if(result['ok']){
+              $.alert({
+                title: 'Mensaje informativo',
+                content:  'Se elimino el tipo de necesidad correctamente ' ,
+                type: ('green'),
+              });
+              var elem = document.getElementById(nombre);
+              elem.parentNode.removeChild(elem);  
+              }else{
+              $.alert({
+                title: 'Error al eliminar',
+                content:  'Debe eliminar las necesidades relacionadas a este tipo primero ' ,
+                type: ('red'),
+              });
+            }}});              
+          },
+          Cancelar: function () {
+              null
+          },
+      }
+  })             
+  };
+
+  
+</script>

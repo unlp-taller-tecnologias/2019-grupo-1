@@ -1,0 +1,57 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Necesidades'  %}
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+
+<div class="container">
+        <br>
+        <div class="table-responsive">
+        <select id="select">
+          <option>Tipo</option>
+          <option>Descripcion</option>
+        </select>
+        <table id="example" class="table table-striped table-bordered table-sm dt-responsive" >
+          <thead>
+            <tr>
+                <th class="th-sm">Tipo</th>
+                <th class="th-sm">Descripcion</th>
+                <th class="th-sm">Comedor</th>
+                {% if session['rol'] == '3' %}
+                    <th class="th-sm">Modificar</th>
+                {% endif %}          
+            </tr>
+          </thead>
+          <tbody>
+            {% for elem in necesidades %}
+            <tr style="background-color: rgb(241, 157, 131);" >
+                <td>{{elem.nombre}}</td>
+                <td>{{elem.descripcion}}</td>
+                <td align="center"><button style="width:90px;padding:1px;" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.idC) }}';">{{elem.nombreC}}</button></td>
+                {% if session['rol'] == '3' %}
+                    <td align="center"><button style="width:90px;padding:1px;"  class="btn btn-danger" onclick="window.location.href='{{ url_for( 'edite_necesidad' , id=elem.id) }}';">Modificar</button></td>
+                {% endif %}   
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+</div>
+        
+  <br>    
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+{{ super() }}
+    
+{% endblock %}
+
+
+
+
+

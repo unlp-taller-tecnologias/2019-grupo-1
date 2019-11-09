@@ -35,7 +35,6 @@ def delete():
         return render_template('autorizacion.html')
     if session['rol'] == '3':
         Tipo_necesidad.db=get_db()
-        Necesidad.db=get_db()
         try:
             Tipo_necesidad.delete(request.args.get('id'))
         except:

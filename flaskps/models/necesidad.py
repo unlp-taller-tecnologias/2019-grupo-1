@@ -4,11 +4,29 @@ class Necesidad(object):
 
     @classmethod
     def all(cls):
-        sql = """SELECT * FROM necesidad """
+        sql = """
+            SELECT necesidad.id,necesidad.descripcion,tipo_necesidad.nombre, comedor.id as idC, comedor.nombre as nombreC FROM necesidad
+            INNER JOIN tipo_necesidad ON tipo_necesidad.id = necesidad.tipo_necesidad_id
+            INNER JOIN comedor ON comedor.id = necesidad.comedor_id
+            WHERE necesidad.estado=0
+            """
         cursor = cls.db.cursor()
         cursor.execute(sql)
 
         return cursor.fetchall()
+    
+    @classmethod
+    def find_tipo_necesidad_by_comedorid(cls,id):
+        sql = """
+            SELECT necesidad.id as idN, necesidad.descripcion,necesidad.estado,tipo_necesidad.nombre, comedor.id, comedor.nombre as nombreC FROM necesidad
+            INNER JOIN tipo_necesidad ON tipo_necesidad.id = necesidad.tipo_necesidad_id
+            INNER JOIN comedor ON comedor.id = necesidad.comedor_id
+            WHERE comedor.id=%s
+            """   
+        cursor = cls.db.cursor()
+        cursor.execute(sql, id)
+
+        return cursor.fetchall()     
 
     @classmethod
     def create(cls, data):
@@ -25,10 +43,30 @@ class Necesidad(object):
 
     
     @classmethod
-    def find_tipo_necesidad_by_id(cls, user):
-        sql = """
-            SELECT * FROM necesidad AS u
-            WHERE u.id = %s """
+    def edite(cls, data):
+        sql = """  UPDATE necesidad  SET tipo_necesidad_id=%s,comedor_id=%s, descripcion=%s WHERE id =%s """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, ( data['tipo'],data['comedor'],data['desc'],data['idU']))
+        cls.db.commit()
+
+        return True
+    
+        
+    @classmethod
+    def cumplir(cls, id):
+        sql = """  UPDATE necesidad  SET estado= 1 WHERE id = %s """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, id)
+        cls.db.commit()
+
+        return True
+    
+    @classmethod
+    def find_necesidad_by_id(cls, user):
+        sql = """   SELECT * FROM necesidad WHERE id = %s """
+        
 
         cursor = cls.db.cursor()
         cursor.execute(sql, user)

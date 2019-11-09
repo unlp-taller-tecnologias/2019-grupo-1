@@ -31,11 +31,33 @@ def create():
     flash("Se creo la necesidad exitosamente!")   
     return redirect(url_for('listado_necesidades'))
 
-def delete():
+def edite():
+    Necesidad.db = get_db()
+    necesidad = Necesidad.find_necesidad_by_id(request.args.get('id'))
+    Tipo_necesidad.db=get_db()
+    Comedor.db=get_db()
+    tipo_necesidades = Tipo_necesidad.all()
+    comedores = Comedor.all()
+    return render_template('editeNecesidad.html', necesidad = necesidad,tipo_necesidades= tipo_necesidades, comedores= comedores)
+
+def editando():    
     Necesidad.db = get_db()
     data = request.form
-    Necesidad.create(data)
-    flash("Se creo la necesidad exitosamente!")   
+    Necesidad.edite(data)
+    flash("Se edito la necesidad exitosamente!")     
     return redirect(url_for('listado_necesidades'))
+
+    
+def cumplir():
+    Necesidad.db = get_db()
+    Necesidad.cumplir(request.args.get('id'))
+    flash("Se cumplio la necesidad exitosamente!")   
+    return jsonify(ok=True)
+
+def delete():
+    Necesidad.db = get_db()
+    Necesidad.delete(request.args.get('id'))
+    flash("Se elimino la necesidad exitosamente!")   
+    return jsonify(ok=True)
 
  

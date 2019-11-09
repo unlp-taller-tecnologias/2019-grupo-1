@@ -18,10 +18,19 @@
                             <div class="col-md-6 form-group">
                                 <label for="name">Comedor: </label>
                                 <select name="comedor" required>
-                                  
+                                  {% set com = False %}
+                                  {% if session['idComedor'] %}
+                                    {% set com = True %}
+                                  {% endif %}  
                                   {% for elem in comedores %}
-                                  <option value={{ elem.id}}  selected>{{elem.nombre|upper}}</option>
+                                    {% if ( com == False) %}
+                                      <option value={{ elem.id}}  selected>{{elem.nombre|upper}}</option>
+                                    {% endif %}
+                                    {% if (com) and (session['idComedor'] == elem.id) %}
+                                      <option value={{ elem.id}}  selected>{{elem.nombre|upper}}</option>
+                                    {% endif %}
                                   {% endfor %}
+                                  
                                 </select>             
                             </div>
                             <div class="col-md-6 form-group">

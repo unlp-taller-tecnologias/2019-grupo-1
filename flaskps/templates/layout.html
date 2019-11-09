@@ -49,9 +49,9 @@
                   <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">Publicaciones</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="#">Necesidades</a>
+                  <a class="dropdown-item" href="{{ url_for('listado_necesidades') }}">Necesidades</a>
                   <a class="dropdown-item" href="#">Noticias</a>
-                  <a class="dropdown-item" href="#">Eventos</a>                  
+                  <a class="dropdown-item" href="">Eventos</a>                  
                 </div>
               </li>
               {% if  'username' in session %}
@@ -65,7 +65,6 @@
                   {% else %}
                   <a class="dropdown-item" href="{{ url_for('user_profile' , idUser='') }}{{ session['id']|string }}">Mi perfil</a>
                   {% endif %}
-                  <a class="dropdown-item" href="#">Otros Usuarios</a>
                   <a class="dropdown-item" href="{{ url_for('auth_logout') }}">Cerrar sesion</a>
                 </div>
                 </li>
@@ -95,7 +94,7 @@
   {% endblock %}
 
   {% block plantillaContenido %}
-  <div style='background-color: #1abc9c;margin:auto;padding:5%;'>
+  <div style='background-color: rgb(75, 207, 75);margin:auto;padding:5%;'>
   <section class=" jumbotron page-section" id="contact"  style='margin:auto;'>
       <div class="container">
 
@@ -181,7 +180,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
   <script src="https://kit.fontawesome.com/0d1e8a0e70.js" crossorigin="anonymous"></script>	
 
-{% block verificarAlerta %}
   {% with messages = get_flashed_messages() %}
   {% if messages %}
       {% for message in messages %}
@@ -196,5 +194,4 @@
       {% endfor %}
   {% endif %}
   {% endwith %}
-{% endblock %}
 {% endblock %}

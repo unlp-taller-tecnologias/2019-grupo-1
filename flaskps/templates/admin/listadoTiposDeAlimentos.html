@@ -91,36 +91,42 @@
         }
     })             
     };}
-    
+
     function deleteA(id,nombre){
       $.confirm({
         type:'red',
-        title: 'Eliminar alimento',
-        content: 'Eliminar a ' +nombre +' de alimentos y todos los registros en los que aparece?',
+        title: 'Eliminar tipo de necesidad',
+        content: 'Eliminar a ' +nombre.toUpperCase() +' de alimentos? ',
         buttons: {
             Confirmar: function () {
+              var ok=true;
               $.ajax({url: "{{ url_for('delete_alimento', idAlm='' ) }}"+id, success: function(result){
+                if(result['ok']){
                 $.alert({
                   title: 'Mensaje informativo',
                   content:  'Se elimino el alimento correctamente ' ,
                   type: ('green'),
                 });
                 var elem = document.getElementById(nombre);
-                return elem.parentNode.removeChild(elem);  
-              }});
+                elem.parentNode.removeChild(elem);  
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Debe eliminar los registros alimenticios relacionadas a este tipo primero ' ,
+                  type: ('red'),
+                });
+              }}});              
             },
             Cancelar: function () {
                 null
             },
         }
-    })             
+      })             
     };
 
     
   </script>      
-
-
-  {% endblock %}
+{% endblock %}
 
 
 
