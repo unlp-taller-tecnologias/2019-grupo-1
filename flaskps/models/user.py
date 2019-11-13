@@ -129,6 +129,16 @@ class User(object):
         cls.db.commit()
         
         return True
+    
+    @classmethod
+    def edite(cls, data):
+        sql = """UPDATE usuario SET nombre_u= %s, apellido= %s, mail_u=%s, password=%s, user_name=%s, descripcion=%s , telefono=%s
+                WHERE id=%s"""
+        cursor = cls.db.cursor()
+        cursor.execute(sql,(data['nombre'],data['apellido'],data['mail'],data['pass'],data['user'],data['desc'],data['tel'],data['idU']))
+        cls.db.commit()
+        
+        return True
 
     
     

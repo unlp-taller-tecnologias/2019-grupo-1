@@ -33,6 +33,8 @@ app.add_url_rule("/altaUsuario/creado" , "user_create" , user.create, methods=['
 app.add_url_rule("/listadoUsuario" , "user_list" , user.listadoUsuario)
 app.add_url_rule("/deleteUser" , "delete_user" , user.delete)
 app.add_url_rule("/userProfile" , "user_profile" , user.profile)
+app.add_url_rule("/editarUser", 'editar_user', user.edite , methods=['GET'])
+app.add_url_rule("/editandoUser" , "editando_user" , user.editando, methods=['POST','GET'])
 app.add_url_rule("/listadoUsuariosPendientes" , "usuario_list_p" , user.listadoUsuarioP)
 app.add_url_rule("/actualizarEstadoUsuario","usuario_actualizar_estado",user.actualizarEstado,methods=['GET'])
 app.add_url_rule("/usuarioProfile" , "usuario_profile" , user.profile)

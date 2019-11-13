@@ -65,3 +65,25 @@ def actualizarEstado():
     else:
         return render_template('autorizacion.html')
 
+def edite():
+    User.db=get_db()
+    user = User.find_user_by_id(request.args.get('id'))                                       
+    return render_template('user/editar_usuario.html', user= user)
+
+def editando():    
+    User.db = get_db()
+    data = request.form                  
+    exist = User.find_user(data['user'])
+    ok= False
+    if not exist:
+        ok= True    
+    elif exist['id'] == data['idU']:
+        ok= True
+    if ok:
+        flash("La informacion se actualizo correctamente")
+        User.edite(data)
+        session['name'] = data['user']
+        return redirect(url_for( 'user_profile' , idUser=data['idU']))    
+    flash("Ya existe un usuario con ese nombre, elija otro!")   
+    return redirect(url_for( 'user_profile' , idUser=data['idU']))
+    

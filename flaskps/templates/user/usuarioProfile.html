@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "tablaLayout.html" %}
 
 {% set encabezado = 'Perfil Usuario' %}
 
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <input type="button" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_user' , id='') }}{{ request.args.get('idUser') }}'" name="btnAddMore" value="Editar"/>
                     </div>
                 </div>
                 <div class="row">
@@ -114,3 +114,18 @@
         </div>
 {% endblock %} 
 
+{% block scripts %} {{super()}} {% endblock %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+          <script>
+            $.alert({
+              title: 'Mensaje informativo',
+              content:  ('{{ message }}') ,
+              type: ('green'),
+            });
+          </script>           
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}  
