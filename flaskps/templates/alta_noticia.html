@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Crear Noticia'  %}
+{% block cuerpo %}
+
+    <!-- Contact Section -->
+    <div class="container">
+    
+        <!-- Contact Section Form -->
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="card">
+            <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                <div class="row">
+                  <div class="col-md-12 mb-4 order-2">
+                     <form id='formNoticia' action="{{ url_for('create_noticia') }}" method="post">
+                          <div class="row">
+                              <div class="col-md-12 form-group">
+                                <label for="titulo">Titulo</label>
+                                <input type="text" id="titulo" name="titulo" class="form-control " required maxlength="24">
+                              </div>
+                            </div>
+                             <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="descripcion">Descripcion</label>
+                            <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
+                          </div>   
+                        </div>
+                         <div class="row">
+                              <div class="col-md-12 form-group">
+                                <label for="foto">Fto</label>
+                                <input type="text" id="foto" name="foto" class="form-control " maxlength="24">
+                              </div>
+                            </div>              
+                                          
+                        <div class="row">
+                          <div class="col-md-3">
+                            
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <input type="submit" value="Registrar" class="btn btn-primary px-3 py-2">
+                            <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-2">
+                          </div>
+                          <div class="col-md-3">
+                            
+                          </div>                         
+                        </div>
+                      </form>
+                  
+                    
+                  </div>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+
+      
+
+{% endblock %}
+
+{% block scripts %}
+    {{super()}} 
+{% endblock %}        
+
+
+
+
