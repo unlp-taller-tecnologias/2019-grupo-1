@@ -62,6 +62,7 @@
                   
                   {% if session['idComedor'] %}
                   <a class="dropdown-item" href="{{ url_for('comedor_profile' , idComedor='') }}{{ session['idComedor']|string }}">Mi Comedor</a>
+                  <a class="dropdown-item" href="{{ url_for('new_registro') }}">Alta registro</a>
                   {% else %}
                   <a class="dropdown-item" href="{{ url_for('user_profile' , idUser='') }}{{ session['id']|string }}">Mi perfil</a>
                   {% endif %}

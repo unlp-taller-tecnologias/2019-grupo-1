@@ -10,6 +10,7 @@ from flaskps.resources import tiposDeNecesidad
 from flaskps.resources import necesidad
 from flaskps.resources import evento
 from flaskps.resources import noticia
+from flaskps.resources import registro
 from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
@@ -76,6 +77,10 @@ app.add_url_rule("/deleteNecesidad" , "delete_necesidad" , necesidad.delete,meth
 app.add_url_rule("/cumplirNecesidad" , "cumplir_necesidad" , necesidad.cumplir,methods=['GET'])
 app.add_url_rule("/editeNecesidad" , "edite_necesidad" , necesidad.edite,methods=['POST','GET'])
 app.add_url_rule("/editandoNecesidad" , "editando_necesidad" , necesidad.editando,methods=['POST'])
+
+#Registro de Alimentacion
+app.add_url_rule("/altaRegistroAlimentacion" , "new_registro" , registro.new,methods=['POST','GET'])
+app.add_url_rule("/newRegister" , "create_registro" , registro.create,methods=['POST'])
 
 #API
 app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])
