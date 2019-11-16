@@ -27,13 +27,35 @@ class Registro(object):
 
 	@classmethod
 	def getRegistros(cls,idComedor):
-		sql = """ SELECT al_reg.registro_id,a.nombre,comedor.nombre,r_a.fecha,r_a.asistentes,r_a.observaciones,r_a.horario_comida
+		sql = """ SELECT r_a.*, comedor.nombre
 				FROM registro_alimentacion AS r_a
 				INNER JOIN comedor ON (r_a.id_comedor = comedor.id)
-				INNER JOIN alimento_xreg as al_reg ON (al_reg.registro_id = r_a.id)
-				INNER JOIN alimento AS a ON (a.id = al_reg.alimento_id)
 				WHERE (comedor.id = """+ idComedor +""")"""
 		cursor = cls.db.cursor()
 		cursor.execute(sql)
-		
-		return cursor.fetchall()
+		regis = cursor.fetchall()
+		for elem in regis:
+			elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
+			sql2= """ SELECT a.nombre 
+					FROM alimento_xreg AS ax 
+					INNER JOIN alimento AS a ON (ax.alimento_id = a.id)
+					WHERE (ax.registro_id ="""+ str(elem['id']) +""")
+			"""
+			cursor = cls.db.cursor()
+			cursor.execute(sql2)
+			comidas = cursor.fetchall()
+			elem['comidas'] = []
+			for c in comidas:
+				elem['comidas'].append(c['nombre'])
+		return regis
+
+	@classmethod
+	def delete(cls,idR):
+		sql = """ DELETE FROM registro_alimentacion WHERE registro_alimentacion.id = """+idR
+		sql2 = """ DELETE FROM alimento_xreg  WHERE alimento_xreg.registro_id = """+idR
+		cursor = cls.db.cursor()
+		cursor.execute(sql2)
+		cursor.execute(sql)
+
+		cls.db.commit()
+

@@ -25,8 +25,16 @@ def create():
 	return redirect(url_for('new_registro'))
 
 def listar():
+	registrosCom = []
 	Registro.db = get_db()
 	Sitio.db = get_db()
 	cantPag=Sitio.cantPaginado()
 	registrosCom = Registro.getRegistros(request.args.get('idComedor'))
 	return render_template('listadoRegistroComedor.html', regis = registrosCom, cant=cantPag[0]['cant_paginado'])
+
+def eliminar():
+	Registro.db = get_db()
+	Registro.delete(request.args.get('idReg'))
+	flash("El registro se elimino correctamente")
+	#falta lo de redireccionar con el idComedor= en el link
+	return redirect(url_for('list_registro', idComedor=request.args.get('idComedor')))	
