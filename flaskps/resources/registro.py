@@ -10,8 +10,10 @@ from flaskps.db import get_db
 
 def new():
 	Alimento.db = get_db()
+	Comedor.db = get_db()
 	tiposAli = Alimento.all()
-	return render_template('alta_registro_alimentacion.html',alimentos=tiposAli)
+	comedores = Comedor.allActives()
+	return render_template('alta_registro_alimentacion.html',alimentos=tiposAli, comedores=comedores)
 
 def create():
 	Alimento.db = get_db()
@@ -21,3 +23,10 @@ def create():
 	Registro.create(data, alimentos)
 	flash("Se creo la necesidad exitosamente!")   
 	return redirect(url_for('new_registro'))
+
+def listar():
+	Registro.db = get_db()
+	Sitio.db = get_db()
+	cantPag=Sitio.cantPaginado()
+	registrosCom = Registro.getRegistros(request.args.get('idComedor'))
+	return render_template('listadoRegistroComedor.html', regis = registrosCom, cant=cantPag[0]['cant_paginado'])

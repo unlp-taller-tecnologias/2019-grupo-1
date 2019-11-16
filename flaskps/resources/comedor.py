@@ -86,10 +86,15 @@ def delete():
 def actualizarEstado():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == 3:
+    if session['rol'] == '3':
         Comedor.db=get_db()
-        Comedor.updateRol(request.args.get('rol'),request.args.get('idCom'))
-        return jsonify(True)
+        rol = request.args.get('rol')
+        Comedor.updateRol(rol,request.args.get('idCom'))
+        if rol == '1':    
+            flash("El comedor es parte del sistema")
+        else:
+            flash("El comedor fue rechazado, no es parte del sistema")    
+        return redirect(url_for('comedor_list_p'))
     else:
         return render_template('autorizacion.html')
    

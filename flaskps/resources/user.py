@@ -58,10 +58,15 @@ def listadoUsuarioP():
 def actualizarEstado():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == 3:
-        User.db=get_db()
-        User.updateRol(request.args.get('rol'),request.args.get('idUser'))
-        return jsonify(True)
+    if session['rol'] == '3':
+        User.db = get_db()
+        rol = request.args.get('rol')
+        User.updateRol(rol,request.args.get('idUser'))
+        if rol == '1':
+            flash("El usuario es parte del sistema")
+        else:
+            flash("El usuario fue rechazado del sistema")
+        return redirect(url_for('usuario_list_p'))
     else:
         return render_template('autorizacion.html')
 

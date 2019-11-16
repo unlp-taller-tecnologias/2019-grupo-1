@@ -24,3 +24,16 @@ class Registro(object):
 		cls.db.commit()
 
 		return True
+
+	@classmethod
+	def getRegistros(cls,idComedor):
+		sql = """ SELECT al_reg.registro_id,a.nombre,comedor.nombre,r_a.fecha,r_a.asistentes,r_a.observaciones,r_a.horario_comida
+				FROM registro_alimentacion AS r_a
+				INNER JOIN comedor ON (r_a.id_comedor = comedor.id)
+				INNER JOIN alimento_xreg as al_reg ON (al_reg.registro_id = r_a.id)
+				INNER JOIN alimento AS a ON (a.id = al_reg.alimento_id)
+				WHERE (comedor.id = """+ idComedor +""")"""
+		cursor = cls.db.cursor()
+		cursor.execute(sql)
+		
+		return cursor.fetchall()
