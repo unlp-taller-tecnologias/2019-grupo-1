@@ -28,7 +28,7 @@ def create():
     Necesidad.db = get_db()
     data = request.form
     Necesidad.create(data)
-    flash("Se creo la necesidad exitosamente!")   
+    flash(["Se creo la necesidad exitosamente!", 'green'])   
     return redirect(url_for('listado_necesidades'))
 
 def edite():
@@ -44,20 +44,20 @@ def editando():
     Necesidad.db = get_db()
     data = request.form
     Necesidad.edite(data)
-    flash("Se edito la necesidad exitosamente!")     
+    flash(["Se edito la necesidad exitosamente!", 'green'])     
     return redirect(url_for('listado_necesidades'))
 
     
 def cumplir():
     Necesidad.db = get_db()
     Necesidad.cumplir(request.args.get('id'))
-    flash("Se cumplio la necesidad exitosamente!")   
+    flash(["Se cumplio la necesidad exitosamente!", 'green'])   
     return jsonify(ok=True)
 
 def delete():
     Necesidad.db = get_db()
     Necesidad.delete(request.args.get('id'))
-    flash("Se elimino la necesidad exitosamente!")   
+    flash(["Se elimino la necesidad exitosamente!", 'green'])   
     return jsonify(ok=True)
 
  

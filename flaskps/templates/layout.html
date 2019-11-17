@@ -181,14 +181,19 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
   <script src="https://kit.fontawesome.com/0d1e8a0e70.js" crossorigin="anonymous"></script>	
 
+ 
+{% endblock %}
+
+
+{% block verificarAlerta %}
   {% with messages = get_flashed_messages() %}
   {% if messages %}
       {% for message in messages %}
         <script>
           $.alert({
             title: 'Mensaje informativo',
-            content:  ('{{ message }}') ,
-            type: ('green'),
+            content:  ('{{ message[0] }}') ,
+            type: ('{{ message[1] }}'),
           });
         </script>           
 

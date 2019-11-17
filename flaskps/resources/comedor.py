@@ -22,9 +22,9 @@ def create():
         Comedor.create(data)
         User.createRef(data)
         Comedor_usuario.create(Comedor.last_comedor()['id'], User.last_user()['id'])
-        flash("El comedor fue creado, pero  debe ser confirmado por el Admin")
+        flash(["El comedor fue creado, pero  debe ser confirmado por el Admin", 'green'])
         return redirect(url_for('altaComedor', comedor=Comedor.last_comedor()['id'] ,user=User.last_user()['id'] ))
-    flash("Ya existe un usuario con ese nombre, elija otro!")   
+    flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
     return redirect(url_for('altaComedor'))
 
 def listadoComedorP():
@@ -70,10 +70,19 @@ def editando():
     User.db = get_db()
     Comedor_usuario.db = get_db()
     data = request.form
-    Comedor.edite(data)
-    User.editeRef(data)
-    flash("La informacion se actualizo correctamente")   
-    return redirect(url_for('comedor_profile', idComedor= data['idComedor']))
+    exist = User.find_user(data['user'])
+    ok= False
+    if not exist:
+        ok= True    
+    elif str(exist['id']) == str(data['idRef']):
+        ok= True
+    if ok:
+        Comedor.edite(data)
+        User.editeRef(data)
+        flash(["La informacion se actualizo correctamente", 'green'])   
+        return redirect(url_for('comedor_profile', idComedor= data['idComedor']))    
+    flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
+    return redirect(url_for( 'comedor_profile' , idComedor=data['idComedor']))
 
 def delete():
     if not session:
@@ -81,7 +90,7 @@ def delete():
     if session['rol'] == "3":
         Comedor.db=get_db()
         Comedor.delete(request.args.get('idComedor'))
-        flash("El comedor se elimino exitosamente")
+        flash(["El comedor se elimino exitosamente", 'green'])
         return redirect(url_for('comedor_list'))
     else:
         return render_template('autorizacion.html')
@@ -94,9 +103,9 @@ def actualizarEstado():
         rol = request.args.get('rol')
         Comedor.updateRol(rol,request.args.get('idCom'))
         if rol == '1':    
-            flash("El comedor es parte del sistema")
+            flash(["El comedor es parte del sistema", 'green'])
         else:
-            flash("El comedor fue rechazado, no es parte del sistema")    
+            flash(["El comedor fue rechazado, no es parte del sistema", 'red'])    
         return redirect(url_for('comedor_list_p'))
     else:
         return render_template('autorizacion.html')

@@ -15,7 +15,7 @@ def authenticate():
     user = User.find_by_email_and_pass(params['username'], params['pass'])
 
     if not user:
-        flash('El nombre de usuario y/o contraseña son incorrectas.')
+        flash(['El nombre de usuario y/o contraseña son incorrectas.', 'red'])
         return redirect(url_for('auth_login'))
     session['username'] = user['user_name']
     session['id'] = user['id']

@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="btn btn-info" name="btnAddMore" value="Edit Profile"/>
+                        <input type="button" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_comedor' , idComedor='') }}{{ request.args.get('idComedor') }}'" name="btnAddMore" value="Editar"/>
                     </div>
                 </div>
                 <div class="row">
@@ -271,7 +271,9 @@
 
   </script>
   
-  
+{% block verificarAlerta %}
+    {{ super() }}
+{% endblock %}
   
 {% endblock %}
 

@@ -14,9 +14,9 @@ def create():
     exist = User.find_user(data['user'])
     if not exist:
         User.create(data)
-        flash("El usuario debe ser confirmado por el Admin para poder ser utilizado.")
+        flash(["El usuario debe ser confirmado por el Admin para poder ser utilizado.", 'green'])
         return redirect(url_for('altaUser'))
-    flash("Ya existe un usuario con ese nombre, elija otro!")   
+    flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
     return redirect(url_for('altaUser'))
 
 
@@ -82,13 +82,13 @@ def editando():
     ok= False
     if not exist:
         ok= True    
-    elif exist['id'] == data['idU']:
+    elif str(exist['id']) == str(data['idU']):
         ok= True
     if ok:
-        flash("La informacion se actualizo correctamente")
+        flash(["La informacion se actualizo correctamente", "green"])
         User.edite(data)
         session['name'] = data['user']
         return redirect(url_for( 'user_profile' , idUser=data['idU']))    
-    flash("Ya existe un usuario con ese nombre, elija otro!")   
+    flash(["Ya existe un usuario con ese nombre, elija otro!", "red"])   
     return redirect(url_for( 'user_profile' , idUser=data['idU']))
     

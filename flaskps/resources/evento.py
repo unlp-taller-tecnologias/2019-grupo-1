@@ -39,7 +39,7 @@ def create():
     Evento.db = get_db()
     data = request.form
     Evento.create(data,session['id'],datetime.now())
-    flash("El evento se ha creado con exito") 
+    flash(["El evento se ha creado con exito", 'green']) 
     return redirect(url_for('listado_eventos'))
 
 
@@ -65,5 +65,5 @@ def editando():
     Evento.db = get_db()
     data = request.form
     Evento.edite(data,datetime.now())
-    flash("Se edito  exitosamente!")     
+    flash(["Se edito  exitosamente!", 'green'])     
     return redirect(url_for('listado_eventos'))

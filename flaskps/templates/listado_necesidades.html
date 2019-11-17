@@ -4,6 +4,10 @@
 
 {% block cuerpo %}
 
+{% if session['rol'] == '3' or session['idComedor'] %}
+  <button style="padding:3px;height:40px;"  class="btn btn-info" onclick="window.location.href='{{ url_for( 'new_necesidad') }}';">Crear Necesidad</button>
+{% endif %}
+<hr>
 <div class="container">
         <br>
         <div class="table-responsive">
@@ -43,6 +47,10 @@
 
 {% block scripts %}
 {{ super() }}
+
+{% block verificarAlerta %}
+    {{ super() }}
+{% endblock %}
 
     
 {% endblock %}

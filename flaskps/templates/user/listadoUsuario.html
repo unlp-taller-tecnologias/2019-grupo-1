@@ -85,23 +85,12 @@
     };
   </script>    
 
-{{super()}} 
+{{super()}}
+{% block verificarAlerta %}
+  {{ super() }}
+{% endblock %} 
 {% endblock %}
-
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-          <script>
-            $.alert({
-              title: 'Mensaje informativo',
-              content:  ('{{ message }}') ,
-              type: ('green'),
-            });
-          </script>           
-
-        {% endfor %}
-    {% endif %}
-{% endwith %}    
+   
 
 
 

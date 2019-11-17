@@ -174,17 +174,10 @@
         })
       };
 </script>
-  {% if alertChangeCant %}
-       <script>
-        $.alert({
-            title: 'Cambiar Cantidad',
-            content: 'Se cambió la cantidad correctamente!',
-            type: 'green',
-        });
-       </script>   
 
-  {% else %}  
-  {% endif %}        
+{% block verificarAlerta %}
+  {{ super() }}
+{% endblock %}
 
 {% endblock %}
 

@@ -206,9 +206,10 @@
       }
       mymap.on('click', onMapClick);
   </script>
-  {% block verificarAlerta %}
-    {{ super() }}
-  {% endblock %}
+
+{% block verificarAlerta %}
+  {{ super() }}
+{% endblock %}
 
 {% endblock %}
 

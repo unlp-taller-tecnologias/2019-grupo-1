@@ -21,7 +21,7 @@ def create():
 	alimentos = request.form.getlist('multi')
 	data = request.form
 	Registro.create(data, alimentos)
-	flash("Se creo la necesidad exitosamente!")   
+	flash(["Se creo la necesidad exitosamente!", 'green'])   
 	return redirect(url_for('new_registro'))
 
 def listar():
@@ -35,6 +35,6 @@ def listar():
 def eliminar():
 	Registro.db = get_db()
 	Registro.delete(request.args.get('idReg'))
-	flash("El registro se elimino correctamente")
+	flash(["El registro se elimino correctamente" , 'red'])
 	#falta lo de redireccionar con el idComedor= en el link
 	return redirect(url_for('list_registro', idComedor=request.args.get('idComedor')))	

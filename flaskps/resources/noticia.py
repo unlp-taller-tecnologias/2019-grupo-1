@@ -36,7 +36,7 @@ def create():
     #exist = User.find_user(data['user'])
    # if not exist:
     Noticia.create(data,datetime.now())
-    flash("La noticia se ha creado con exito")
+    flash(["La noticia se ha creado con exito", 'green'])
     return redirect(url_for('listado_noticias'))
 
 def delete():
