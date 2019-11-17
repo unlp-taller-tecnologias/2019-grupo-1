@@ -4,7 +4,6 @@ from flaskps.models.comedor import Comedor
 from flaskps.models.comedor_usuario import Comedor_usuario
 from flaskps.models.sitio import Sitio
 from flaskps.models.necesidad import Necesidad
-from flaskps.helpers.auth import authenticated
 from flaskps.db import get_db
 import json
 

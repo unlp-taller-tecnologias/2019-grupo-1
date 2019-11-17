@@ -1,8 +1,7 @@
 from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
 from flaskps.models.sitio import Sitio
 from flaskps.models.tiposDeNecesidades import Tipo_necesidad  
-from flaskps.models.necesidad import Necesidad   
-from flaskps.helpers.auth import authenticated
+from flaskps.models.necesidad import Necesidad
 from flaskps.db import get_db
 
 def create():

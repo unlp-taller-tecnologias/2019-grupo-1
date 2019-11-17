@@ -1,6 +1,5 @@
 from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
-from flaskps.models.sitio import Sitio    
-#from flaskps.helpers.auth import authenticated
+from flaskps.models.sitio import Sitio
 from flaskps.db import get_db
 from flaskps.models.evento import Evento
 

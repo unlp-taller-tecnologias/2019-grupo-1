@@ -2,7 +2,6 @@ from flask import redirect, render_template, request, url_for, session, flash, a
 from flaskps.db import get_db
 from flaskps.models.sitio import Sitio
 from flaskps.models.comedor import Comedor
-from flaskps.helpers.auth import authenticated
 
 
 def hello():

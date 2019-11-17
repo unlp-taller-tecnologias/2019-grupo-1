@@ -4,8 +4,7 @@ from flaskps.models.necesidad import Necesidad
 from flaskps.models.tiposDeNecesidades import Tipo_necesidad
 from flaskps.models.comedor import Comedor
 from flaskps.models.registro import Registro
-from flaskps.models.tiposDeAlimentos import Alimento   
-from flaskps.helpers.auth import authenticated
+from flaskps.models.tiposDeAlimentos import Alimento 
 from flaskps.db import get_db
 
 def new():
