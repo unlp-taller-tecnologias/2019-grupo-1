@@ -1,0 +1,50 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Eventos'  %}
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+{% if session['rol'] == '3' or session['rol'] == '2' or session['rol'] == '1' or session['rol'] == '0' %}
+           <button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'mis_eventos' ) }}';">Mis Evento</button>
+          {% endif %}
+<div class="container">
+<section class="col-xs-12 col-sm-6 col-md-12">
+  {% for elem in eventos %}
+    <article class="search-result row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+       
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <ul class="meta-search">
+          <li><i class="glyphicon glyphicon-calendar"></i> <span>{{elem.fecha_evento}}</span></li>
+          <li><i class="glyphicon glyphicon-time"></i> <span>{{elem.horario}}</span></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+        <h3>{{elem.titulo}}</h3>
+        <p>{{elem.descripcion}}</p>            
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+      </div>
+      <span class="clearfix borda"></span>
+    </article>
+    {% endfor %}
+
+    </section>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+
+ 
+{{ super() }}
+     
+{% endblock %}
+
+
+
+
+

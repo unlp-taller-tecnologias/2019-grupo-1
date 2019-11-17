@@ -12,8 +12,8 @@
         <br>
         <div class="table-responsive">
         <select id="select">
-          <option>fecha</option>
-          <option>titulo</option>
+          <option>Fecha</option>
+          <option>Titulo</option>
         </select>
         {% if session['rol'] == '3' %}
            <button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'alta_noticia' ) }}';">Crear</button>
@@ -21,10 +21,10 @@
         <table id="example" class="table table-striped table-bordered table-sm dt-responsive" >
           <thead>
             <tr>
-                <th class="th-sm">fehca</th>
+                <th class="th-sm">Fehca</th>
                 <th class="th-sm">Titulo</th>
                 <th class="th-sm">Descripcion</th>
-                <th class="th-sm">foto</th>
+                <th class="th-sm">Foto</th>
                 {% if session['rol'] == '3' %}    
                 <th class="th-sm">Modificar</th>
                 <th class="th-sm">Eliminar</th>
@@ -33,14 +33,14 @@
           </thead>
           <tbody>
             {% for elem in noticias %}
-            <tr style="background-color: rgb(241, 157, 131);" >
+            <tr id="{{elem.id|upper}}" style="background-color: rgb(241, 157, 131);" >
                 <td>{{elem.fecha}}</td>
                 <td>{{elem.titulo}}</td>
                 <td>{{elem.descripcion}}</td>
                 <td>{{elem.foto}}</td>
                 {% if session['rol'] == '3' %}          
                   <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'edite_noticia' , idNoticia=elem.id) }}';">Modificar</button></td>
-                  <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_noticia' , idNoticia=elem.id) }}';">Eliminar</button></td>
+                  <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.titulo}}')">Eliminar</button></td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -54,8 +54,46 @@
 
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
-{{ super() }}
+
+ <script>
+       
+    function deleteA(id,nombre){
+      $.confirm({
+        type:'red',
+        title: 'Eliminar noticia',
+        content: 'Desea eliminar esta noticia: ' +nombre.toUpperCase() +'? ',
+        buttons: {
+            Confirmar: function () {
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('delete_noticia', id='' ) }}"+id, success: function(result){
+                if(result['ok']){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se elimino la noticia correctamente ' ,
+                  type: ('green'),
+                });
+                var elem = document.getElementById(id);
+                elem.parentNode.removeChild(elem);  
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Ha ocurrido un error al eliminar la noticia ' ,
+                  type: ('red'),
+                });
+              }}});              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
     
+  </script>    
+{{ super() }}
+     
 {% endblock %}
 
 

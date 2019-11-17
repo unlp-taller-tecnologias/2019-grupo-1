@@ -33,14 +33,14 @@
           </thead>
           <tbody>
             {% for elem in eventos %}
-            <tr style="background-color: rgb(241, 157, 131);" >
+            <tr id="{{elem.id|upper}}" style="background-color: rgb(241, 157, 131);" >
                 <td>{{elem.fecha}}</td>
                 <td>{{elem.titulo}}</td>
                 <td>{{elem.descripcion}}</td>
                 <td>{{elem.fecha_evento}}</td>
                 <td>{{elem.horario}}</td>        
                   <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'edite_evento' , idEvento=elem.id) }}';">Modificar</button></td>
-                  <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_evento' , idEvento=elem.id) }}';">Eliminar</button></td>
+                  <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.titulo}}')">Eliminar</button></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -54,7 +54,43 @@
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
 {{ super() }}
+    <script>
+       
+    function deleteA(id,nombre){
+      $.confirm({
+        type:'red',
+        title: 'Eliminar noticia',
+        content: 'Desea eliminar este evento: ' +nombre.toUpperCase() +'? ',
+        buttons: {
+            Confirmar: function () {
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('delete_evento', id='' ) }}"+id, success: function(result){
+                if(result['ok']){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se elimino el evento correctamente ' ,
+                  type: ('green'),
+                });
+                var elem = document.getElementById(id);
+                elem.parentNode.removeChild(elem);  
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Ha ocurrido un error al eliminar el evento ' ,
+                  type: ('red'),
+                });
+              }}});              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
     
+  </script> 
 {% endblock %}
 
 

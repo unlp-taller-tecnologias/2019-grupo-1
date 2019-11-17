@@ -1,0 +1,79 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Noticias'  %}
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+<div class="container">
+<section class="col-xs-12 col-sm-6 col-md-12">
+  {% for elem in noticias %}
+    <article class="search-result row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" />
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <span>{{elem.fecha}}</span>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+        <h3>{{elem.titulo}}</h3>
+        <p>{{elem.descripcion}}</p>
+      </div>
+      <span class="clearfix borda"></span>
+    </article>
+    {% endfor %}
+
+    </section>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+
+ <script>
+       
+    function deleteA(id,nombre){
+      $.confirm({
+        type:'red',
+        title: 'Eliminar noticia',
+        content: 'Desea eliminar esta noticia: ' +nombre.toUpperCase() +'? ',
+        buttons: {
+            Confirmar: function () {
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('delete_noticia', id='' ) }}"+id, success: function(result){
+                if(result['ok']){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se elimino la noticia correctamente ' ,
+                  type: ('green'),
+                });
+                var elem = document.getElementById(id);
+                elem.parentNode.removeChild(elem);  
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Ha ocurrido un error al eliminar la noticia ' ,
+                  type: ('red'),
+                });
+              }}});              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
+    
+  </script>    
+{{ super() }}
+     
+{% endblock %}
+
+
+
+
+

@@ -16,12 +16,12 @@ class Evento(object):
         return True
 
     @classmethod
-    def allEventos(cls):
+    def allEventos(cls, hoy):
         sql = """
-            SELECT id,usuario_id,fecha,titulo,descripcion,fecha_evento,horario FROM evento WHERE estado_e=0
+            SELECT id,usuario_id,fecha,titulo,descripcion,fecha_evento,horario FROM evento WHERE estado_e=0 AND fecha_evento > %s
             """
         cursor = cls.db.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, hoy)
         return cursor.fetchall()
 
 
@@ -54,3 +54,5 @@ class Evento(object):
         cursor.execute(sql, (hoy,data['titulo'],data['descripcion'],data['fecha_evento'],data['horario'],data['idEvento']))
         cls.db.commit()
         return True
+
+    

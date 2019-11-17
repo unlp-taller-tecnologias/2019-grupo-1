@@ -1,6 +1,5 @@
 from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
 from flaskps.models.sitio import Sitio    
-
 #from flaskps.helpers.auth import authenticated
 from flaskps.db import get_db
 from flaskps.models.evento import Evento
@@ -16,9 +15,14 @@ def listado_eventos():
     Sitio.db=get_db()
     Evento.db=get_db()
     cantPag=Sitio.cantPaginado()
-    eventos=Evento.allEventos()
-    # Falta mostrar solo los eventos futuros
-    return render_template('listado_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
+    eventos=Evento.allEventos(datetime.now())
+    if not session:
+        return render_template('listado_eventos_usuarios.html',eventos=eventos)
+    if session['rol'] == "3":
+        return render_template('listado_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
+    else:
+        return render_template('listado_eventos_usuarios.html',eventos=eventos)
+    
 
 def mis_eventos():
     if not session:
@@ -27,7 +31,6 @@ def mis_eventos():
     Evento.db=get_db()
     cantPag=Sitio.cantPaginado()
     eventos=Evento.find_evento_by_user(session['id'])
-    # Falta mostrar solo los eventos futuros
     return render_template('listado_mis_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
 
 
@@ -35,12 +38,8 @@ def create():
     Sitio.db=get_db()
     Evento.db = get_db()
     data = request.form
-    #exist = User.find_user(data['user'])
-   # if not exist:
     Evento.create(data,session['id'],datetime.now())
-    flash("El evento se ha creado con exito")
-        #return redirect(url_for('altaUser'))
-    #flash("Ya existe un usuario con ese nombre, elija otro!")   
+    flash("El evento se ha creado con exito") 
     return redirect(url_for('listado_eventos'))
 
 
@@ -49,10 +48,9 @@ def delete():
         return render_template('autorizacion.html')
     else:
         Evento.db=get_db()
-        Evento.delete(request.args.get('idEvento'))
-        flash("El evento se elimino exitosamente")
-        return redirect(url_for('listado_eventos'))
-
+        Evento.delete(request.args.get('id'))
+        return jsonify(ok=True)
+       
 
 def edite():
     if not session:
