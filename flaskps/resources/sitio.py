@@ -12,7 +12,7 @@ def hello():
 def habSitio():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == 3:
+    if session['rol'] == '3':
         Sitio.db = get_db()
         Sitio.updateStateSitioHabilitar()
         return renderPanelAdmin()
@@ -22,7 +22,7 @@ def habSitio():
 def deshSitio():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == 3:
+    if session['rol'] == '3':
         Sitio.db = get_db()
         Sitio.updateStateSitioDeshabilitar()
         return renderPanelAdmin()

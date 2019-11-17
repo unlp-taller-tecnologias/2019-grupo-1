@@ -63,7 +63,7 @@ def listadoUsuarioP():
 def actualizarEstado():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == 3:
+    if session['rol'] == '3':
         User.db=get_db()
         User.updateRol(request.args.get('rol'),request.args.get('idUser'))
         return jsonify(True)

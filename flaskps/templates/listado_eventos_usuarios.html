@@ -7,9 +7,6 @@
 {% endblock %}
 
 {% block cuerpo %}
-{% if session['rol'] == '3' or session['rol'] == '2' or session['rol'] == '1' or session['rol'] == '0' %}
-           <button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'mis_eventos' ) }}';">Mis Evento</button>
-          {% endif %}
 <div class="container">
 <section class="col-xs-12 col-sm-6 col-md-12">
   {% for elem in eventos %}
@@ -30,6 +27,7 @@
       </div>
       <span class="clearfix borda"></span>
     </article>
+    <hr>
     {% endfor %}
 
     </section>

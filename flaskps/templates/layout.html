@@ -63,10 +63,14 @@
                   {% if session['idComedor'] %}
                   <a class="dropdown-item" href="{{ url_for('comedor_profile' , idComedor='') }}{{ session['idComedor']|string }}">Mi Comedor</a>
                   <a class="dropdown-item" href="{{ url_for('new_registro') }}">Alta registro</a>
+                  <a class="dropdown-item" href="{{ url_for('new_necesidad') }}">Alta Necesidad</a>
                   {% else %}
                   <a class="dropdown-item" href="{{ url_for('user_profile' , idUser='') }}{{ session['id']|string }}">Mi perfil</a>
                   {% endif %}
+                  <a class="dropdown-item" href="{{ url_for( 'mis_eventos' ) }}">Mis eventos</a>
                   <a class="dropdown-item" href="{{ url_for('auth_logout') }}">Cerrar sesion</a>
+                  
+                  
                 </div>
                 </li>
               {% else %}
@@ -85,7 +89,7 @@
               {% endif %}
               {% if session['rol'] == '3' %}
               <li class="nav-item mx-0 mx-lg-1">
-                  <a class="nav-link px-lg-2 rounded js-scroll-trigger" href="{{ url_for('panelAdmin') }}">Admin</a>
+                  <a class="nav-link px-lg-2 rounded js-scroll-trigger" href="{{ url_for('panelAdmin') }}">Configuracion</a>
               </li>                     
               {% endif %}
               </ul>                    
