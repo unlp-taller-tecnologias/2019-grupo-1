@@ -35,9 +35,9 @@
               <td>{{elem.apellido}}</td>
               <td>{{elem.user_name}}</td>
               <td>{{elem.mail_u}}</td>
-              <td>aca puede ir si esta eliminado</td>
+              <td>{{elem.estado_u}}</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'user_profile' , idUser=elem.id) }}';">Ver</button></td>
-              <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_user' , idUser=elem.id) }}';">Eliminar</button></td>
+              <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{elem.nombre_u}}')">Eliminar</button></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -48,7 +48,45 @@
   <br>    
 {% endblock %}
 
-{% block scripts %} {{super()}} {% endblock %}
+{% block scripts %} 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+
+ <script>
+    function deleteA(idUser,nombre){
+      $.confirm({
+        type:'red',
+        title: 'Eliminar Usuario',
+        content: 'Desea eliminar este usuario: ' +nombre.toUpperCase() +'? ',
+        buttons: {
+            Confirmar: function () {
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('delete_user', idUser='' ) }}"+idUser, success: function(result){
+                if(result['ok']){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se elimino correctamente ' ,
+                  type: ('green'),
+                });
+               
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'El usuario tiene eventos pendientes y no puede ser eliminado ' ,
+                  type: ('red'),
+                });
+              }}});              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+  </script>    
+
+{{super()}} 
+{% endblock %}
 
 {% with messages = get_flashed_messages() %}
     {% if messages %}

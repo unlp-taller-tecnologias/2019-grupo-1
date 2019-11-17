@@ -1,6 +1,7 @@
 from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
 from flaskps.models.user import User
 from flaskps.models.sitio import Sitio
+from flaskps.models.evento import Evento
 #from flaskps.helpers.auth import authenticated
 from flaskps.db import get_db
 
@@ -34,9 +35,13 @@ def delete():
         return render_template('autorizacion.html')
     if session['rol'] == "3":
         User.db=get_db()
-        User.delete(request.args.get('idUser'))
-        flash("El usuario se elimino exitosamente")
-        return redirect(url_for('user_list'))
+        Evento.db=get_db()
+        evento=Evento.find_evento_by_user(request.args.get('idUser'))
+        if len(evento)==0:
+            User.delete(request.args.get('idUser'))
+            return jsonify(ok=True)
+        else:
+            return jsonify(ok=False)
     else:
         return render_template('autorizacion.html')
     
@@ -58,15 +63,10 @@ def listadoUsuarioP():
 def actualizarEstado():
     if not session:
         return render_template('autorizacion.html')
-    if session['rol'] == '3':
-        User.db = get_db()
-        rol = request.args.get('rol')
-        User.updateRol(rol,request.args.get('idUser'))
-        if rol == '1':
-            flash("El usuario es parte del sistema")
-        else:
-            flash("El usuario fue rechazado del sistema")
-        return redirect(url_for('usuario_list_p'))
+    if session['rol'] == 3:
+        User.db=get_db()
+        User.updateRol(request.args.get('rol'),request.args.get('idUser'))
+        return jsonify(True)
     else:
         return render_template('autorizacion.html')
 
