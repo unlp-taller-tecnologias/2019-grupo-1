@@ -141,5 +141,17 @@ class User(object):
         
         return True
 
+    @classmethod
+    def find_user_by_idComedor(cls, idComedor):
+        sql = """
+            SELECT * FROM usuario AS u
+            INNER JOIN comedor_usuario AS ca ON (ca.comedor_id = u.id)
+            WHERE ca.comedor_id = %s """
+
+        cursor = cls.db.cursor()
+        cursor.execute(sql, idComedor)
+
+        return cursor.fetchone()
+
     
     

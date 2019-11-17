@@ -38,12 +38,15 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos del referente</a>
-                                </li>  
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="desc-tab" data-toggle="tab" href="#desc" role="tab" aria-controls="desc" aria-selected="false">Descripcion del comedor</a>
+                                </li>    
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <input type="submit" class="btn btn-info" name="btnAddMore" value="Edit Profile"/>
                     </div>
                 </div>
                 <div class="row">
@@ -54,7 +57,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Nombre del Comedor</label>
+                                                <label>Nombre del Comedor:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.nombre}}</p>
@@ -62,7 +65,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Direccion</label>
+                                                <label>Direccion:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.direccion}}</p>
@@ -70,24 +73,26 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Apellido</label>
+                                                <label>Organizacion:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.organizacion}}</p>
                                             </div>
                                         </div>
+                                        {% if comedor.red_social != '' %}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Email</label>
+                                                <label>Red Social:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{comedor.foto}}</p>
+                                                <p>{{comedor.red_social}}</p>
                                             </div>
                                         </div>
+                                        {% endif %}
                                         {% if comedor.telefono != '' %}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Telefono</label>
+                                                <label>Telefono:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.telefono}}</p>
@@ -96,15 +101,50 @@
                                         {%endif%}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Contraseña</label>
+                                                <label>Dias de atencion:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p style="-webkit-text-security: disc;">{{comedor.id}}</p>
+                                                <p>{{comedor.dia_yhorario}}</p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <p>{{necesidades}}</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Nombre:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{referente.nombre_u}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Apellido:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{referente.apellido}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Mail:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{referente.mail_u}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Nombre de usuario:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{referente.user_name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="desc" role="tabpanel" aria-labelledby="desc-tab">
+                                <label>Descripcion:</label>
+                                <p>{{comedor.descripcion}}</p>
                             </div>
                         </div>
                     </div>
@@ -172,7 +212,19 @@
                   null,
                   null,
                   { "orderable": false },
-                ]
+                ],
+                "language": {
+            "zeroRecords": "No hay elementos disponibles",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sSearch":         "Buscar:",
+            "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+        }
             })})
     </script>
     <script>

@@ -62,7 +62,18 @@
     <script>
       $(document).ready(function() {
         var table = $('#example').DataTable({     
-        "bLengthChange":false,
+          "language": {
+            "zeroRecords": "No hay elementos disponibles",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sSearch":         "Buscar:",
+            "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                }},
+          "bLengthChange":false,
         //aca va el valor del paginado
         "lengthMenu": [["{{cant}}"], ["{{cant}}"]],
           "columns": [

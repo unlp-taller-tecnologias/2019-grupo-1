@@ -49,11 +49,12 @@ def profile():
     Sitio.db=get_db()
     cantPag=Sitio.cantPaginado()
     Comedor.db=get_db()
+    User.db = get_db()
     Necesidad.db=get_db()
     necesidades = Necesidad.find_tipo_necesidad_by_comedorid(request.args.get('idComedor'))
     comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
-    
-    return render_template('comedor/comedorProfile.html', comedor=comedor, necesidades= necesidades,cant=cantPag[0]['cant_paginado'])
+    referente = User.find_user_by_idComedor(request.args.get('idComedor'))
+    return render_template('comedor/comedorProfile.html', comedor=comedor, necesidades= necesidades,referente= referente,cant=cantPag[0]['cant_paginado'])
 
 def edite():
     Comedor.db=get_db()
