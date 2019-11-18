@@ -59,6 +59,8 @@ app.add_url_rule("/habSitio" , "updateStateSitioHabilitar" , sitio.habSitio)
 app.add_url_rule("/deshSitio" , "updateStateSitioDeshabilitar" , sitio.deshSitio)
 app.add_url_rule("/cambiarCantidad" , "cambiarCantidad" , sitio.cambiarCantidad, methods=['POST'])
 app.add_url_rule("/autorizacion" , "autorizacion" , sitio.autorizacion)
+app.add_url_rule("/actualizarNosotros" , "actualizar_nosotros" , sitio.actualizarNosotros)
+app.add_url_rule("/actualizarRedes" , "actualizar_redes" , sitio.actualizarRedes)
 
 # Tipos de Alimentos
 app.add_url_rule("/altaAlimento" , "create_alimento" , tiposDeAlimentos.create, methods=['GET'])

@@ -1,7 +1,13 @@
-{% extends "tablaLayout.html" %}
+{% extends "layout.html" %}
 
 {% set encabezado = 'Necesidades'  %}
 
+{% block styles %}
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+ {{super()}}
+{% endblock %}
 {% block cuerpo %}
 
 {% if session['rol'] == '3' or session['idComedor'] %}
@@ -48,6 +54,42 @@
 {% block scripts %}
 {{ super() }}
 
+<script src="static/js/jquery.dataTables.js"></script> 
+<script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    
+<script>
+$(document).ready(function() {
+var table = $('#example').DataTable({     
+  "language": {
+    "zeroRecords": "No hay elementos disponibles",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sSearch":         "Buscar:",
+    "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+        }},        
+  "bLengthChange":false,
+  "lengthMenu": [["{{cant}}"], ["{{cant}}"]],
+})
+
+
+$('.dataTables_filter input').unbind().bind('keyup click', function() {
+var colIndex = document.querySelector('#select').selectedIndex;
+table.column( colIndex).search( this.value ).draw();
+});
+$('#select').focus(function() {
+document.getElementById('myInput').value = '';
+var colIndex = document.querySelector('#select').selectedIndex;
+table.column( colIndex).search( document.getElementById('myInput').value ).draw();
+});
+
+})
+</script>
 {% block verificarAlerta %}
     {{ super() }}
 {% endblock %}

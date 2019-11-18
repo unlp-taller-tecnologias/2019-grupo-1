@@ -15,13 +15,14 @@ def new_necesidad():
 
 def listado_necesidades():
     Necesidad.db=get_db()
+    Sitio.db = get_db()
     Tipo_necesidad.db=get_db()
     Comedor.db=get_db()
     necesidades = Necesidad.all()
     tipo_necesidades = Tipo_necesidad.all()
     comedores = Comedor.all()
-    
-    return render_template('listado_necesidades.html', necesidades= necesidades, tipo_necesidades= tipo_necesidades, comedores= comedores)
+    cantPag = Sitio.cantPaginado()
+    return render_template('listado_necesidades.html', necesidades= necesidades, tipo_necesidades= tipo_necesidades, comedores= comedores, cant=cantPag[0]['cant_paginado'])
 
 def create():
     Necesidad.db = get_db()

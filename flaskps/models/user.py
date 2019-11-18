@@ -85,8 +85,8 @@ class User(object):
 
     @classmethod
     def allUsers(cls):
-        sql = """SELECT u.id,u.nombre_u,u.mail_u,u.apellido,u.estado_u,u.user_name FROM usuario AS u
-                WHERE u.rol <> 1"""
+        sql = """SELECT u.id,u.nombre_u,u.mail_u,u.apellido,u.estado_u,u.user_name FROM usuario AS u 
+                WHERE u.rol <> 1 AND u.estado_u <> 3"""
         cursor = cls.db.cursor()
         cursor.execute(sql)
 

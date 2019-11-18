@@ -5,6 +5,7 @@
   {{super()}}
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.1/dist/multiple-select.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <style type="text/css">
     .ms-choice{
       border: #fff!important;
@@ -91,7 +92,7 @@
         </div>
       </div>
 
-    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+  
 
       
 
@@ -99,7 +100,10 @@
 
 {% block scripts %}
   {{super()}}
-  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+  {% block verificarAlerta %}
+    {{ super() }}
+  {% endblock %}
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -118,10 +122,10 @@
   });
   </script>
 
-<script>
-  $(function() {
-    $("#multi").multipleSelect()
-  })
-</script>
-{% endblock %}        
+  <script>
+    $(function() {
+      $("#multi").multipleSelect()
+    })
+  </script>
+{% endblock %} 
 

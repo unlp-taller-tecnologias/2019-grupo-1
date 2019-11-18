@@ -64,21 +64,35 @@
         </div>
         </div>
         <div class="card">
-        <div class="card-body text-center border">
-          {% if state == 1 %}
-          <div class="alert alert-success" role="alert">
-            El sitio se encuentra habilitado  
-          </div>              
-          <h3>Para deshabilitar el sitio presione Deshabilitar Sitio</h3>
-          <button class="btn btn-danger btn-lg" role="button" onclick="confirmarDeshabilitar()">Deshabilitar Sitio</button>
-          {% else %}
-          <div class="alert alert-danger" role="alert">
-           El sitio se encuentra deshabilitado
+          <div class="card-body text-center border">
+            <h2>Cambiar redes sociales</h2>
+            <form id='formRedes' action="" method="post">
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label for="name">Twiter: </label>
+                  <input class="form-control" type="text" name="dia" value="" /> 
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="name">Instagram: </label>
+                  <input class="form-control" type="text" name="dia" value="" /> 
+                </div>
+                <div class="col-md-4 form-group">
+                  <label for="name">Fecebook: </label>
+                  <input class="form-control" type="text" name="dia" value="" /> 
+                </div>
+              </div>
+            </form>
+            <button type="submit" class="btn btn-primary">Cambiar</button>
           </div>
-          <h2>Para que esté de nuevo en funcionamiento presione Habilitar Sitio</h2>
-          <button class="btn btn-success btn-lg" role="button" onclick="confirmarHabilitar()">Habilitar Sitio</button>
-          {% endif %}
         </div>
+        <div class="card">
+          <div class="card-body text-center border">
+            <h2>Cambiar el texto "Nosotros"</h2>
+            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="2" placeholder="Nosotros"></textarea>
+            <br>
+            <button type="submit" class="btn btn-primary">Cambiar</button>
+          </div>
+        </div>  
       </div>
     </div>
     <div id="menu1" class="container tab-pane fade"><br>

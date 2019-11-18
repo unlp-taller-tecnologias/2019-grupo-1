@@ -65,8 +65,13 @@ def actualizarEstado():
         return render_template('autorizacion.html')
     if session['rol'] == '3':
         User.db=get_db()
+        Sitio.db=get_db()
         User.updateRol(request.args.get('rol'),request.args.get('idUser'))
-        return jsonify(True)
+        if request.args.get('rol') == '1':
+            flash(['El usuario fue aceptado en el sistema', 'green'])
+        else:
+            flash(['El usuario fue rechazado', 'red'])
+        return redirect(url_for('usuario_list_p'))
     else:
         return render_template('autorizacion.html')
 
