@@ -6,7 +6,7 @@ from flaskps.models.sitio import Sitio
 def habilitedAcces():
     Sitio.db = get_db()
     estado = Sitio.stateSitio()
-    if estado[0]['estado'] == 1 or (session and session['rol'] == 3) :
+    if estado[0]['estado'] == 1 or (session and session['rol'] == '3') :
         return 'true'
     else:
         return 'mantenimiento.html'
@@ -21,14 +21,14 @@ def habilitedAccesLogin():
 
 def habilitedAccesComedor():
     estado= habilitedAccesLogin()
-    if  (estado == 'true' and  session['rol'] == 1) or ( session and session['rol'] == 3 ) :
+    if  (estado == 'true' and  session['rol'] == '1') or ( session and session['rol'] == '3' ) :
         return 'true'        
     return estado  
 
 #verifica que sea admin
 def habilitedAccesAdmin():
     estado= habilitedAccesLogin()
-    if  estado != 'autorizacion.html' and session and session['rol'] == 3 :
+    if session and session['rol'] == '3' :
         return 'true'
     elif estado == 'true':
         return  'autorizacion.html'         
@@ -36,7 +36,7 @@ def habilitedAccesAdmin():
 
 def habilitedAccesEdit(id):
     estado= habilitedAccesLogin()
-    if  (estado == 'true' and  session['id'] == id ) or ( session and session['rol'] == 3 ) :
+    if  (estado == 'true' and  session['id'] == id ) or ( session and session['rol'] == '3' ) :
         return 'true'        
     return estado  
   

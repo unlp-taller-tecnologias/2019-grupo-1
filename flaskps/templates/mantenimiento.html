@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Mantenimiento' %}
+
+{% block navbar%}
+    
+{% endblock %}
+
+
+{% block cuerpo%}
+<div  >
+    <h4 style="text-align: center;">El sitio se encuentra deshabilitado temporalmente</h4>
+
+    <button type="button" style="display: block; margin: 0 auto;" class="btn btn-info" onclick="window.location.href='{{url_for('auth_login')}}'">Administrador</button>
+    
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+  {{ super()}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+ 
+{% endblock %}

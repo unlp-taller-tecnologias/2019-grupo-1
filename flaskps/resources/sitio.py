@@ -2,49 +2,46 @@ from flask import redirect, render_template, request, url_for, session, flash, a
 from flaskps.db import get_db
 from flaskps.models.sitio import Sitio
 from flaskps.models.comedor import Comedor
+from flaskps.helpers.auth import *
 
 
 
 def hello():
-    Comedor.db = get_db()
-    comedores = Comedor.all()
-    return render_template('home.html',comedores=comedores)
+    Permiso = habilitedAcces()
+    if Permiso == 'true':
+        Comedor.db = get_db()
+        comedores = Comedor.all()
+        return render_template('home.html',comedores=comedores)
+    return renderPanelAdmin(Permiso)    
 
 def habSitio():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
         Sitio.db = get_db()
         Sitio.updateStateSitioHabilitar()
         return renderPanelAdmin()
-    else:
-        return render_template('autorizacion.html')
+    return renderPanelAdmin(Permiso)    
 
 def deshSitio():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
         Sitio.db = get_db()
         Sitio.updateStateSitioDeshabilitar()
         return renderPanelAdmin()
-    else:
-        return render_template('autorizacion.html')
+    return renderPanelAdmin(Permiso)
 
 def renderPanelAdmin():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
         Sitio.db=get_db()
         stateSitio=Sitio.stateSitio()
         cantP=Sitio.cantPaginado()
         return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'])
-    else:
-        return render_template('autorizacion.html')
+    return renderPanelAdmin(Permiso)
 
 def cambiarCantidad():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
         Sitio.db = get_db()
         data = request.form
         Sitio.cambiarCantidad(data['select'])
@@ -52,8 +49,7 @@ def cambiarCantidad():
         cantP=Sitio.cantPaginado()
         flash(['La cantidad se cambio correctamente', 'green'])
         return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'])
-    else:
-        return render_template('autorizacion.html')
-
+    return renderPanelAdmin(Permiso)
+    
 def autorizacion():
     return render_template('autorizacion.html')

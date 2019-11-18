@@ -3,22 +3,19 @@ from flaskps.models.sitio import Sitio
 from flaskps.models.tiposDeNecesidades import Tipo_necesidad  
 from flaskps.models.necesidad import Necesidad
 from flaskps.db import get_db
+from flaskps.helpers.auth import habilitedAccesAdmin
 
 def create():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true': 
         Tipo_necesidad.db=get_db()
-
         Tipo_necesidad.create(request.args.get('nombre'))
         return jsonify(True)
-    else:
-        return render_template('autorizacion.html')
+    return render_template(Permiso)
 
 def listadoTipos():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true': 
         Tipo_necesidad.db=get_db()
         Necesidad.db=get_db()
         Sitio.db=get_db()
@@ -26,13 +23,11 @@ def listadoTipos():
         tipos=Tipo_necesidad.all()
         id_necesidades=Necesidad.find_tipo_necesidades()
         return render_template('admin/listadoDeTiposDeNecesidad.html',cant=cantPag[0]['cant_paginado'],ids=id_necesidades,alimentos=tipos,tam=len(tipos))
-    else:
-        return render_template('autorizacion.html')
+    return render_template(Permiso)
 
 def delete():
-    if not session:
-        return render_template('autorizacion.html')
-    if session['rol'] == '3':
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true': 
         Tipo_necesidad.db=get_db()
         try:
             Tipo_necesidad.delete(request.args.get('id'))
@@ -40,6 +35,4 @@ def delete():
             return jsonify(ok=False)
         
         return jsonify(ok=True)
-    else:
-        return render_template('autorizacion.html')
- 
+    return render_template(Permiso)

@@ -6,34 +6,53 @@ from flaskps.models.comedor import Comedor
 from flaskps.models.registro import Registro
 from flaskps.models.tiposDeAlimentos import Alimento 
 from flaskps.db import get_db
+from flaskps.helpers.auth import *
 
 def new():
-	Alimento.db = get_db()
-	Comedor.db = get_db()
-	tiposAli = Alimento.all()
-	comedores = Comedor.allActives()
-	return render_template('alta_registro_alimentacion.html',alimentos=tiposAli, comedores=comedores)
+	Permiso = habilitedAccesComedor()
+	if Permiso == 'true': 
+		Alimento.db = get_db()
+		Comedor.db = get_db()
+		tiposAli = Alimento.all()
+		comedores = Comedor.allActives()
+		return render_template('alta_registro_alimentacion.html',alimentos=tiposAli, comedores=comedores)
+	return render_template(Permiso)
+	
 
 def create():
-	Alimento.db = get_db()
-	Registro.db =get_db()
-	alimentos = request.form.getlist('multi')
-	data = request.form
-	Registro.create(data, alimentos)
-	flash(["Se creo la necesidad exitosamente!", 'green'])   
-	return redirect(url_for('new_registro'))
+	Permiso = habilitedAccesComedor()
+	if Permiso == 'true': 
+		Alimento.db = get_db()
+		Registro.db =get_db()
+		alimentos = request.form.getlist('multi')
+		data = request.form
+		Registro.create(data, alimentos)
+		flash(["Se creo la necesidad exitosamente!", 'green'])
+		return redirect(url_for('new_registro'))
+	return render_template(Permiso)
+	   
+	
 
 def listar():
-	registrosCom = []
-	Registro.db = get_db()
-	Sitio.db = get_db()
-	cantPag=Sitio.cantPaginado()
-	registrosCom = Registro.getRegistros(request.args.get('idComedor'))
-	return render_template('listadoRegistroComedor.html', regis = registrosCom, cant=cantPag[0]['cant_paginado'])
+	Permiso = habilitedAccesLogin()
+	if Permiso == 'true': 
+		registrosCom = []
+		Registro.db = get_db()
+		Sitio.db = get_db()
+		cantPag=Sitio.cantPaginado()
+		registrosCom = Registro.getRegistros(request.args.get('idComedor'))
+		return render_template('listadoRegistroComedor.html', regis = registrosCom, cant=cantPag[0]['cant_paginado'])
+	return render_template(Permiso)
+	
 
 def eliminar():
-	Registro.db = get_db()
-	Registro.delete(request.args.get('idReg'))
-	flash(["El registro se elimino correctamente" , 'red'])
-	#falta lo de redireccionar con el idComedor= en el link
-	return redirect(url_for('list_registro', idComedor=request.args.get('idComedor')))	
+	Permiso = habilitedAccesComedor()
+	if Permiso == 'true': 
+		Registro.db = get_db()
+		Registro.delete(request.args.get('idReg'))
+		flash(["El registro se elimino correctamente" , 'red'])
+		#falta lo de redireccionar con el idComedor= en el link
+		return redirect(url_for('list_registro', idComedor=request.args.get('idComedor')))
+	return render_template(Permiso)
+
+	
