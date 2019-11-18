@@ -5,6 +5,7 @@ from flaskps.models.comedor_usuario import Comedor_usuario
 from flaskps.models.sitio import Sitio
 from flaskps.models.necesidad import Necesidad
 from flaskps.db import get_db
+from flaskps.helpers.mail import enviar
 import json
 
 def new():  
@@ -22,6 +23,7 @@ def create():
         User.createRef(data)
         Comedor_usuario.create(Comedor.last_comedor()['id'], User.last_user()['id'])
         flash(["El comedor fue creado, pero  debe ser confirmado por el Admin", 'green'])
+        enviar('Nuevo comedor','Un nuevo comedor se ha registrado y requiere de validacion del administrador.')
         return redirect(url_for('altaComedor', comedor=Comedor.last_comedor()['id'] ,user=User.last_user()['id'] ))
     flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
     return redirect(url_for('altaComedor'))
@@ -100,11 +102,15 @@ def actualizarEstado():
     if session['rol'] == '3':
         Comedor.db=get_db()
         rol = request.args.get('rol')
-        Comedor.updateRol(rol,request.args.get('idCom'))
+        Comedor.updateRol(rol,request.args.get('idCom'))        
+        data = Comedor_usuario.find_user_by_comedorid(request.args.get('idCom'))
+        user = User.find_user_by_id(data['referente_id'])
         if rol == '1':    
             flash(["El comedor es parte del sistema", 'green'])
+            enviar('Comedor Aceptado','El usuario ha sido aceptado y ahora posee acceso al sistema.',user['mail_u'])
         else:
             flash(["El comedor fue rechazado, no es parte del sistema", 'red'])    
+            enviar('Comedor Rechazado','El usuario ha sido rechazado.',user['mail_u']) 
         return redirect(url_for('comedor_list_p'))
     else:
         return render_template('autorizacion.html')

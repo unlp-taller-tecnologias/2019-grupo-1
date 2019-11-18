@@ -32,4 +32,11 @@ def habilitedAccesAdmin():
         return 'true'
     elif estado == 'true':
         return  'autorizacion.html'         
-    return estado    
+    return estado  
+
+def habilitedAccesEdit(id):
+    estado= habilitedAccesLogin()
+    if  (estado == 'true' and  session['id'] == id ) or ( session and session['rol'] == 3 ) :
+        return 'true'        
+    return estado  
+  

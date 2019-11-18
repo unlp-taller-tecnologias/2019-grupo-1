@@ -4,6 +4,7 @@ from flaskps.models.sitio import Sitio
 from flaskps.models.comedor import Comedor
 
 
+
 def hello():
     Comedor.db = get_db()
     comedores = Comedor.all()
