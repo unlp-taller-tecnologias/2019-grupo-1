@@ -3,7 +3,7 @@ from flaskps.models.sitio import Sitio
 from flaskps.db import get_db
 from flaskps.models.noticia import Noticia
 from flaskps.helpers.auth import *
-
+from flaskps.helpers.files import upload_file
 from datetime import datetime, date, time, timedelta
 import calendar
 
@@ -34,9 +34,10 @@ def create():
         Sitio.db=get_db()
         Noticia.db = get_db()
         data = request.form
-        #exist = User.find_user(data['user'])
-    # if not exist:
-        Noticia.create(data,datetime.now())
+        file = request.files['file']
+        Noticia.create(data,datetime.now(),file.filename)
+        filename =Noticia.last_noticia()
+        upload_file('noticia',str(filename['id']),file)
         flash(["La noticia se ha creado con exito", 'green'])
         return redirect(url_for('listado_noticias'))
     return  render_template(Permiso)    

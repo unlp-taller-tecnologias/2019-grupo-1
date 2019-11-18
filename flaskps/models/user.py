@@ -13,14 +13,14 @@ class User(object):
         return cursor.fetchall()
 
     @classmethod
-    def create(cls, data):
+    def create(cls, data,foto):
         sql = """
             INSERT INTO usuario (nombre_u, apellido, mail_u, password,user_name,descripcion,foto,telefono,estado_u,privado,rol)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0 , 0 , 0)
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombre'], data['apellido'], data['mail'], data['pass'], data['user'],data['desc'], data['foto'], data['tel']))
+        cursor.execute(sql, (data['nombre'], data['apellido'], data['mail'], data['pass'], data['user'],data['desc'],foto, data['tel']))
         cls.db.commit()
 
         return True

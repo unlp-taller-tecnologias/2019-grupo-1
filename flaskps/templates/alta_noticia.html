@@ -14,7 +14,7 @@
             <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                 <div class="row">
                   <div class="col-md-12 mb-4 order-2">
-                     <form id='formNoticia' action="{{ url_for('create_noticia') }}" method="post">
+                     <form id='formNoticia' action="{{ url_for('create_noticia') }}" method="post" enctype="multipart/form-data">
                           <div class="row">
                               <div class="col-md-12 form-group">
                                 <label for="titulo">Titulo</label>
@@ -29,8 +29,8 @@
                         </div>
                          <div class="row">
                               <div class="col-md-12 form-group">
-                                <label for="foto">Fto</label>
-                                <input type="text" id="foto" name="foto" class="form-control " maxlength="24">
+                                <label for="foto">Foto</label>
+                                <input type="file" id="foto" name="file" class="form-control " maxlength="24">
                               </div>
                             </div>              
                                           

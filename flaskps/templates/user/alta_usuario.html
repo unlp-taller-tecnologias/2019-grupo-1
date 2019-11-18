@@ -15,7 +15,7 @@
               <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                   <div class="row">
                     <div class="col-md-12 mb-4 order-2">
-                      <form id='formUser' action="{{ url_for('user_create') }}" onsubmit="return validateForm()" method="post">
+                      <form id='formUser' action="{{ url_for('user_create') }}" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
                           <div class="row">
                               <div class="col-md-6 form-group">
                                 <label for="name">Nombre</label>
@@ -49,11 +49,11 @@
                         <div class="row">
                           <div class="col-md-6 form-group">
                             <label for="name">Telefono</label>
-                            <input type="number" name="tel" id="pass" class="form-control " placeholder="Opcional" maxlength="24">
+                            <input type="number" name="tel" id="tel" class="form-control " placeholder="Opcional" maxlength="24">
                           </div>
                           <div class="col-md-6 form-group">
                             <label for="phone">Foto</label>
-                            <input type="file" name="foto" id="pass1" class="form-control-file form-control " placeholder="Opcional">
+                            <input type="file" name="file" id="foto" class="form-control-file form-control " placeholder="Opcional">
                           </div>
                         </div>
                         <div class="row">

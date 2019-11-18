@@ -5,6 +5,7 @@ from flaskps.models.evento import Evento
 from flaskps.helpers.mail import enviar
 from flaskps.db import get_db
 from flaskps.helpers.auth import *
+from flaskps.helpers.files import upload_file
 
 def new():
     Permiso = habilitedAcces()
@@ -19,7 +20,10 @@ def create():
         data = request.form
         exist = User.find_user(data['user'])
         if not exist:
-            User.create(data)
+            file = request.files['file']
+            User.create(data,file.filename)
+            filename =User.last_user()
+            upload_file('usuario',str(filename['id']),file)
             flash(["El usuario debe ser confirmado por el Admin para poder ser utilizado.", 'green'])
             enviar('Nuevo usuario','Un nuereturn render_template(Permiso)vo usuario se ha registrado y requiere de validacion del administrador.')
             return redirect(url_for('altaUser'))

@@ -7,6 +7,7 @@ from flaskps.models.necesidad import Necesidad
 from flaskps.db import get_db
 from flaskps.helpers.mail import enviar
 from flaskps.helpers.auth import *
+from flaskps.helpers.files import upload_file
 import json
 
 def new():
@@ -23,9 +24,13 @@ def create():
         data = request.form
         exist =  User.find_user(data['user'])
         if not exist:
-            Comedor.create(data)
+            file = request.files['file']
+            
+            Comedor.create(data,file.filename)
             User.createRef(data)
             Comedor_usuario.create(Comedor.last_comedor()['id'], User.last_user()['id'])
+            filename =Comedor.last_comedor()
+            upload_file('comedor',str(filename['id']),file)
             flash(["El comedor fue creado, pero  debe ser confirmado por el Admin", 'green'])
             enviar('Nuevo comedor','Un nuevo comedor se ha registrado y requiere de validacion del administrador.')
             return redirect(url_for('altaComedor', comedor=Comedor.last_comedor()['id'] ,user=User.last_user()['id'] ))

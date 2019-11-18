@@ -21,14 +21,14 @@ class Comedor(object):
         return cursor.fetchall()
 
     @classmethod
-    def create(cls, data):
+    def create(cls, data,foto):
         sql = """
             INSERT INTO comedor (nombre, direccion, descripcion, organizacion,foto,estado,telefono,red_social,latitud,longitud,dia_yhorario)
             VALUES (%s, %s, %s, %s, %s, 0, %s, %s, %s, %s, %s)
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['nombreC'], data['dir'], data['desc'], data['org'], data['foto'], data['telC'], data['red'],data['lat'], data['lng'], data['dias']))
+        cursor.execute(sql, (data['nombreC'], data['dir'], data['desc'], data['org'], foto, data['telC'], data['red'],data['lat'], data['lng'], data['dias']))
         cls.db.commit()
         
         return True

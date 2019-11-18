@@ -1,5 +1,7 @@
 from os import path
-from flask import Flask, render_template, g, session
+import os
+
+from flask import Flask, render_template, g, session,send_from_directory
 from flask_cors import CORS
 from flaskps.resources import user
 from flaskps.resources import auth
@@ -14,6 +16,7 @@ from flaskps.resources import registro
 from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
+from werkzeug.utils import secure_filename
 
 # Configuracion inicial de la app
 app = Flask(__name__)
@@ -104,7 +107,8 @@ app.add_url_rule("/editandoEvento" , "editando_evento" , evento.editando,methods
 #Noticias
 app.add_url_rule("/altaNoticia", 'alta_noticia', noticia.new , methods=['GET'])
 app.add_url_rule("/listadoNoticias" , "listado_noticias" , noticia.listado_noticias)
-app.add_url_rule("/git aaltaNoticia/creado" , "create_noticia" , noticia.create, methods=['POST'])
+app.add_url_rule("/altaNoticia/creado" , "create_noticia" , noticia.create, methods=['POST'])
 app.add_url_rule("/deleteNoticia" , "delete_noticia" , noticia.delete)
 app.add_url_rule("/editeNoticia" , "edite_noticia" , noticia.edite,methods=['POST','GET'])
 app.add_url_rule("/editandoNoticia" , "editando_noticia" , noticia.editando,methods=['POST'])
+
