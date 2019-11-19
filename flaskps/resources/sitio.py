@@ -1,8 +1,9 @@
-from flask import redirect, render_template, request, url_for, session, flash, abort
+from flask import redirect, render_template, request, url_for, session, flash, abort, jsonify
 from flaskps.db import get_db
 from flaskps.models.sitio import Sitio
 from flaskps.models.comedor import Comedor
 from flaskps.helpers.auth import *
+import json
 
 
 
@@ -12,7 +13,7 @@ def hello():
         Comedor.db = get_db()
         comedores = Comedor.all()
         return render_template('home.html',comedores=comedores)
-    return renderPanelAdmin(Permiso)    
+    return render_template(Permiso)    
 
 def habSitio():
     Permiso = habilitedAccesAdmin()
@@ -20,7 +21,7 @@ def habSitio():
         Sitio.db = get_db()
         Sitio.updateStateSitioHabilitar()
         return renderPanelAdmin()
-    return renderPanelAdmin(Permiso)    
+    return render_template(Permiso)    
 
 def deshSitio():
     Permiso = habilitedAccesAdmin()
@@ -28,7 +29,7 @@ def deshSitio():
         Sitio.db = get_db()
         Sitio.updateStateSitioDeshabilitar()
         return renderPanelAdmin()
-    return renderPanelAdmin(Permiso)
+    return render_template(Permiso)
 
 def renderPanelAdmin():
     Permiso = habilitedAccesAdmin()
@@ -36,8 +37,12 @@ def renderPanelAdmin():
         Sitio.db=get_db()
         stateSitio=Sitio.stateSitio()
         cantP=Sitio.cantPaginado()
-        return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'])
-    return renderPanelAdmin(Permiso)
+        a = Sitio.getRedes()
+        f= a[0]['facebook']
+        i= a[0]['instagram']
+        t= a[0]['twitter']
+        return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'],face=f[0],twi=t[0],ins=i[0])
+    return render_template(Permiso)
 
 def cambiarCantidad():
     Permiso = habilitedAccesAdmin()
@@ -49,7 +54,43 @@ def cambiarCantidad():
         cantP=Sitio.cantPaginado()
         flash(['La cantidad se cambio correctamente', 'green'])
         return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'])
-    return renderPanelAdmin(Permiso)
+    return render_template(Permiso)
     
 def autorizacion():
     return render_template('autorizacion.html')
+
+def actualizarNosotros():
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
+        Sitio.db = get_db()
+        noso = request.form
+        Sitio.cambiarNosotros(noso['nos'])
+        flash(['El campo "nosotros" se cambio correctamente', 'green'])
+        return redirect(url_for('panelAdmin'))
+    else:
+        return render_template(Permiso)
+
+def actualizarRedes():
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
+        Sitio.db = get_db()
+        redes = request.form
+        Sitio.cambiarRedes(redes['t'],redes['f'],redes['i'])
+        flash(['Las redes sociales se cambiaron correctamente', 'green'])
+        return redirect(url_for('panelAdmin'))
+    else:
+        return render_template(Permiso)
+
+def nosotros():
+    Permiso = habilitedAccesAdmin()
+    if Permiso == 'true':
+        Sitio.db = get_db()
+        nosotros = Sitio.getNosotros()
+        return render_template('nosotros.html', noso = nosotros[0]['nosotros'])
+    else:
+        return render_template(Permiso)
+
+def getRedes():
+    Sitio.db=get_db()
+    redes = Sitio.getRedes()
+    return jsonify(redes = redes)

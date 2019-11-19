@@ -62,8 +62,9 @@ app.add_url_rule("/habSitio" , "updateStateSitioHabilitar" , sitio.habSitio)
 app.add_url_rule("/deshSitio" , "updateStateSitioDeshabilitar" , sitio.deshSitio)
 app.add_url_rule("/cambiarCantidad" , "cambiarCantidad" , sitio.cambiarCantidad, methods=['POST'])
 app.add_url_rule("/autorizacion" , "autorizacion" , sitio.autorizacion)
-# app.add_url_rule("/actualizarNosotros" , "actualizar_nosotros" , sitio.actualizarNosotros)
-# app.add_url_rule("/actualizarRedes" , "actualizar_redes" , sitio.actualizarRedes)
+app.add_url_rule("/nosotros" , "nosotros" , sitio.nosotros)
+app.add_url_rule("/actualizarNosotros" , "actualizar_nosotros" , sitio.actualizarNosotros,methods=['POST'])
+app.add_url_rule("/actualizarRedes" , "actualizar_redes" , sitio.actualizarRedes,methods=['POST'])
 
 # Tipos de Alimentos
 app.add_url_rule("/altaAlimento" , "create_alimento" , tiposDeAlimentos.create, methods=['GET'])
@@ -94,6 +95,7 @@ app.add_url_rule("/eliminarRegistro" , "delete_registro" , registro.eliminar,met
 #API
 app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])
 app.add_url_rule("/mapInfoAll" , "mapInfoAll" , comedor.mapInfoAll, methods=['GET'])
+app.add_url_rule("/getRedes" , "getRedes" , sitio.getRedes, methods=['GET'])
 
 #Eventos
 app.add_url_rule("/altaEvento", 'alta_evento', evento.new , methods=['GET'])

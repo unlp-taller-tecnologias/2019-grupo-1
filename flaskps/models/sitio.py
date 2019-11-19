@@ -25,7 +25,15 @@ class Sitio(object):
         cursor = cls.db.cursor()
         cursor.execute(sql)
 
-        return cursor.fetchall()   
+        return cursor.fetchall()
+
+    @classmethod
+    def getRedes(cls):
+        sql = 'SELECT facebook,twitter,instagram FROM sitio'
+        cursor = cls.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
 
     @classmethod
     def cantPaginado(cls):
@@ -42,3 +50,27 @@ class Sitio(object):
         cursor.execute(sql,(cant))
         cls.db.commit()
         return True
+
+    @classmethod
+    def cambiarNosotros(cls,nos):
+        sql = "UPDATE sitio SET nosotros = %s "
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(nos))
+        cls.db.commit()
+        return True
+
+    @classmethod
+    def cambiarRedes(cls,t,f,i):
+        sql = "UPDATE sitio SET twitter = %s , facebook = %s , instagram = %s "
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(t,f,i))
+        cls.db.commit()
+        return True
+
+    @classmethod
+    def getNosotros(cls):
+        sql = "SELECT nosotros FROM sitio"
+        cursor=cls.db.cursor()
+        cursor.execute(sql)
+
+        return cursor.fetchall()
