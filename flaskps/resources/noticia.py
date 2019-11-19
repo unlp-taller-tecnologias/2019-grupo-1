@@ -68,7 +68,12 @@ def editando():
     if Permiso == 'true':    
         Noticia.db = get_db()
         data = request.form
-        Noticia.edite(data)
+        exist = Noticia.find_noticia_by_id(str(data['idNoticia']))
+        file = request.files['file']
+        if not upload_file('noticia',str(data['idNoticia']),file):
+            Noticia.edite(data,exist['foto'])
+        else:
+            Noticia.edite(data,file.filename)
         flash(["La noticia se ha editado con exito", 'green'])  
         return redirect(url_for('listado_noticias'))
     return render_template(Permiso)    

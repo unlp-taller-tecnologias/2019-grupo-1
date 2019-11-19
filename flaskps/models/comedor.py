@@ -34,11 +34,11 @@ class Comedor(object):
         return True
 
     @classmethod
-    def edite(cls, data):
+    def edite(cls, data,foto):
         sql = """UPDATE comedor SET nombre = %s, direccion=%s, descripcion=%s, organizacion=%s,foto=%s,telefono=%s,red_social=%s,latitud=%s,longitud=%s,dia_yhorario=%s
                 WHERE id=%s"""
         cursor = cls.db.cursor()
-        cursor.execute(sql,(data['nombreC'],data['dir'],data['desc'],data['org'],data['foto'],data['telC'],data['red'],data['lat'], data['lng'], data['dias'],data['idComedor']))
+        cursor.execute(sql,(data['nombreC'],data['dir'],data['desc'],data['org'],foto,data['telC'],data['red'],data['lat'], data['lng'], data['dias'],data['idComedor']))
         cls.db.commit()
         
         return True

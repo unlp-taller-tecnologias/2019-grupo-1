@@ -15,5 +15,5 @@ def upload_file(folder,name,file):
         return False
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join('flaskps/images/'+folder ,name+ filename))
+        file.save(os.path.join('flaskps/static/images/'+folder ,name+ filename))
         return True      

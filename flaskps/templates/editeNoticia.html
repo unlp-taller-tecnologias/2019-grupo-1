@@ -18,7 +18,7 @@
 
                 <div class="row">
                   <div class="col-md-12 mb-4 order-2">
-                    <form id='formNoticia' action="{{ url_for('editando_noticia') }}" method="post">
+                    <form id='formNoticia' action="{{ url_for('editando_noticia') }}" method="post" enctype="multipart/form-data">
                           <div class="row">
                               <div class="col-md-6 form-group">
                                 <label for="titulo">Titulo</label>
@@ -38,7 +38,14 @@
                          <div class="row">
                               <div class="col-md-12 form-group">
                                 <label for="foto">Foto</label>
-                                <img src={{ noticia.foto }} />
+                                <br>
+                                {% if noticia.foto != '' %}
+                                  <img style="height: 350px;width:80%;padding-bottom:20px;" src= "{{ url_for('static', filename='images/noticia/') }}{{noticia.id}}{{noticia.foto}}" />
+                                {% else %}
+                                  <img style="height: 350px;width:80%;padding-bottom:20px;" src= "{{ url_for('static', filename='images/noFoto.jpg') }}" />    
+                                {% endif %}
+                                
+                                
                                 <input type="file" id="foto"  name="file" class="form-control " maxlength="24">
                               </div>
                             </div>              
@@ -49,7 +56,6 @@
                           </div>
                           <div class="col-md-6 form-group">
                              <input type="submit" value="Editar noticia" class="btn btn-info px-3 py-2">
-                            <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-2">
                           </div>
                           <div class="col-md-3">
                          

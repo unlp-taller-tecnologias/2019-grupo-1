@@ -15,13 +15,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div  class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
+                            {% if user.foto != '' %}
+                                <img style="width: 100%;height:200px;" src= "{{ url_for('static', filename='images/usuario/') }}{{user.id}}{{user.foto}}" />
+                            {% else %}
+                                <img style="width: 100%;height:200px;"  src= "{{ url_for('static', filename='images/noFoto.jpg') }}" />    
+                            {% endif %}
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
@@ -30,7 +31,12 @@
                                     <h6>
                                         Usuario de Confianza
                                     </h6>
-									<br>
+                                    {% if session and (session['rol'] == '3' or session['id'] == user.id) %}
+                                    <div class="col-md-2">
+                                        <input type="button" class="btn btn-primary px-3 py-2" onclick="window.location.href='{{ url_for( 'editar_user' , id='') }}{{ request.args.get('idUser') }}'" name="btnAddMore" value="Editar usuario"/>
+                                    </div>
+                                    {% endif %}
+                                    <br>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Acerca</a>
@@ -41,10 +47,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="button" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_user' , id='') }}{{ request.args.get('idUser') }}'" name="btnAddMore" value="Editar"/>
-                    </div>
+
                 </div>
+
                 <div class="row">
                     <div class="col-md-4">
                     </div>

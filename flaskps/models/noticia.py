@@ -42,11 +42,11 @@ class Noticia(object):
 
 
     @classmethod
-    def edite(cls, data):
+    def edite(cls, data,foto):
         sql = """  UPDATE noticia  SET fecha=%s,titulo=%s, descripcion=%s, foto=%s WHERE id =%s """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, ( data['fecha'],data['titulo'],data['descripcion'],data['file'],data['idNoticia']))
+        cursor.execute(sql, ( data['fecha'],data['titulo'],data['descripcion'],foto,data['idNoticia']))
         cls.db.commit()
 
         return True

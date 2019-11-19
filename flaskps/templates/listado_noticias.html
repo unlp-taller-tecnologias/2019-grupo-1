@@ -41,7 +41,13 @@
                 <td>{{elem.fecha}}</td>
                 <td>{{elem.titulo}}</td>
                 <td>{{elem.descripcion}}</td>
-                <td><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></td>
+                <td>
+                {% if elem.foto != '' %}
+                  <img style="width: 100%;" src= "{{ url_for('static', filename='images/noticia/') }}{{elem.id}}{{elem.foto}}" />
+                {% else %}
+                  <img style="width: 100%;"  src= "{{ url_for('static', filename='images/noFoto.jpg') }}" />    
+                {% endif %}
+              </td>
                 {% if session['rol'] == '3' %}          
                   <td align="center"><button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'edite_noticia' , idNoticia=elem.id) }}';">Modificar</button></td>
                   <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.titulo}}')">Eliminar</button></td>

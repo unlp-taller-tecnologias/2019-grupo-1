@@ -100,14 +100,19 @@ def editando():
         Comedor_usuario.db = get_db()
         data = request.form
         exist = User.find_user(data['user'])
+        com = Comedor.find_comedor_by_id(int(data['idComedor']))
         ok= False
         if not exist:
             ok= True    
         elif str(exist['id']) == str(data['idRef']):
             ok= True
         if ok:
-            Comedor.edite(data)
-            User.editeRef(data)
+            file = request.files['file']
+            if not upload_file('comedor',str(data['idComedor']),file):
+                Comedor.edite(data,com['foto'])
+            else:
+                Comedor.edite(data,file.filename)
+            User.editeRef(data)            
             flash(["La informacion se actualizo correctamente", 'green'])   
             return redirect(url_for('comedor_profile', idComedor= data['idComedor']))    
         flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   

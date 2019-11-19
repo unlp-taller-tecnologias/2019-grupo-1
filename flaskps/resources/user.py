@@ -115,8 +115,12 @@ def editando():
         elif str(exist['id']) == str(data['idU']):
             ok= True
         if ok:
+            file = request.files['file']            
             flash(["La informacion se actualizo correctamente", "green"])
-            User.edite(data)
+            if  not upload_file('usuario',str(data['idU']),file):
+                User.edite(data,exist['foto'])
+            else:
+                User.edite(data,file.filename)    
             session['name'] = data['user']
             return redirect(url_for( 'user_profile' , idUser=data['idU']))    
         flash(["Ya existe un usuario con ese nombre, elija otro!", "red"])   
