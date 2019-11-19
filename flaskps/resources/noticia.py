@@ -69,6 +69,6 @@ def editando():
         Noticia.db = get_db()
         data = request.form
         Noticia.edite(data)
-        #flash("Se edito la noticia exitosamente!")  
+        flash(["La noticia se ha editado con exito", 'green'])  
         return redirect(url_for('listado_noticias'))
     return render_template(Permiso)    

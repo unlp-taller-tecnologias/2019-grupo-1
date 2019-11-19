@@ -68,7 +68,7 @@
                   content:  'Se elimino correctamente ' ,
                   type: ('green'),
                 });
-               
+                location.reload()
                 }else{
                 $.alert({
                   title: 'Error al eliminar',
@@ -86,9 +86,11 @@
   </script>    
 
 {{super()}}
+
 {% block verificarAlerta %}
   {{ super() }}
 {% endblock %} 
+
 {% endblock %}
    
 

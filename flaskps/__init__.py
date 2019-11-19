@@ -100,6 +100,7 @@ app.add_url_rule("/getRedes" , "getRedes" , sitio.getRedes, methods=['GET'])
 #Eventos
 app.add_url_rule("/altaEvento", 'alta_evento', evento.new , methods=['GET'])
 app.add_url_rule("/listadoEventos" , "listado_eventos" , evento.listado_eventos)
+app.add_url_rule("/listadoMisEventos" , "mis_eventos" , evento.mis_eventos)
 app.add_url_rule("/altaEvento/creado" , "create_evento" , evento.create, methods=['POST'])
 app.add_url_rule("/misEventos" , "mis_eventos" , evento.mis_eventos)
 app.add_url_rule("/deleteEvento" , "delete_evento" , evento.delete)

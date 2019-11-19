@@ -32,13 +32,14 @@
                              <div class="row">
                           <div class="col-md-12 form-group">
                             <label for="descripcion">Descripcion</label>
-                            <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ noticia.descripcion }}" rows="3" required></textarea>
+                            <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required>{{ noticia.descripcion }}</textarea>
                           </div>   
                         </div>
                          <div class="row">
                               <div class="col-md-12 form-group">
                                 <label for="foto">Foto</label>
-                                <input type="text" value="{{ noticia.foto }}" id="foto" name="foto" class="form-control " maxlength="24">
+                                <img src={{ noticia.foto }} />
+                                <input type="file" id="foto"  name="file" class="form-control " maxlength="24">
                               </div>
                             </div>              
                                           

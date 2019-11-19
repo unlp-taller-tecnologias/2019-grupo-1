@@ -7,6 +7,9 @@ from flaskps.db import get_db
 from flaskps.helpers.auth import *
 from flaskps.helpers.files import upload_file
 
+from datetime import datetime, date, time, timedelta
+import calendar
+
 def new():
     Permiso = habilitedAcces()
     if Permiso == 'true':
@@ -47,12 +50,16 @@ def delete():
     if Permiso == 'true':
         User.db=get_db()
         Evento.db=get_db()
-        evento=Evento.find_evento_by_user(request.args.get('idUser'))
-        if len(evento)==0:
-            User.delete(request.args.get('idUser'))
-            return jsonify(ok=True)
+        evento=Evento.find_evento_by_user(request.args.get('idUser'),datetime.now())
+        if User.find_user_by_id(request.args.get('idUser'))['rol'] == '3':
+            flash(["No se puede eliminar un administrador", 'red'])
+            return redirect(url_for('user_list'))
         else:
-            return jsonify(ok=False)
+            if len(evento)==0:
+                User.delete(request.args.get('idUser'))
+                return jsonify(ok=True)
+            else:
+                return jsonify(ok=False)
     return render_template(Permiso)  
 
 def profile():

@@ -3,12 +3,16 @@ from flaskps.models.user import User
 from flaskps.models.comedor import Comedor
 from flaskps.models.comedor_usuario import Comedor_usuario
 from flaskps.models.sitio import Sitio
+from flaskps.models.evento import Evento
 from flaskps.models.necesidad import Necesidad
 from flaskps.db import get_db
 from flaskps.helpers.mail import enviar
 from flaskps.helpers.auth import *
 from flaskps.helpers.files import upload_file
 import json
+
+from datetime import datetime, date, time, timedelta
+import calendar
 
 def new():
     Permiso = habilitedAcces()
@@ -110,9 +114,22 @@ def delete():
     Permiso = habilitedAccesAdmin()
     if Permiso == 'true':
         Comedor.db=get_db()
-        Comedor.delete(request.args.get('idComedor'))
-        flash(["El comedor se elimino exitosamente", 'green'])
-        return redirect(url_for('comedor_list'))
+        Comedor_usuario.db = get_db()
+        Evento.db=get_db()
+        Necesidad.db=get_db()
+        User.db=get_db()
+        usuario=Comedor_usuario.find_user_by_comedorid(request.args.get('idComedor'))
+        evento=Evento.find_evento_by_user(usuario['referente_id'],datetime.now())
+        necesidad=Necesidad.find_tipo_necesidad_by_comedorid(request.args.get('idComedor'))
+        if len(evento)==0 and len(necesidad)==0:
+            Comedor_usuario.delete(request.args.get('idComedor'),usuario['referente_id'])
+            Comedor.delete(request.args.get('idComedor'))
+            User.delete(usuario['referente_id'])
+            flash(["El comedor se elimino exitosamente", 'green'])
+            return redirect(url_for('comedor_list'))
+        else:
+            flash(["El comedor no puede eliminarse, tiene eventos o necesidades pendientes", 'green'])
+            return redirect(url_for('comedor_list'))
     return render_template(Permiso)
 
 def actualizarEstado():

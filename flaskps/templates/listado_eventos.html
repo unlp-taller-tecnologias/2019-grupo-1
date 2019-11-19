@@ -21,12 +21,12 @@
         <table id="example" class="table table-striped table-bordered table-sm dt-responsive" >
           <thead>
             <tr>
-                <th class="th-sm">usuario_id</th>
-                <th class="th-sm">fehca</th>
+                <th class="th-sm">Usuario</th>
+                <th class="th-sm">Fecha</th>
                 <th class="th-sm">Titulo</th>
                 <th class="th-sm">Descripcion</th>
-                <th class="th-sm">fecha_evento</th>
-                <th class="th-sm">horario</th>
+                <th class="th-sm">Fecha del evento</th>
+                <th class="th-sm">Horario</th>
                 {% if session['rol'] == '3' %}    
                 <th class="th-sm">Modificar</th>
                 <th class="th-sm">Eliminar</th>
@@ -65,7 +65,7 @@
     function deleteA(id,nombre){
       $.confirm({
         type:'red',
-        title: 'Eliminar noticia',
+        title: 'Eliminar evento',
         content: 'Desea eliminar este evento: ' +nombre.toUpperCase() +'? ',
         buttons: {
             Confirmar: function () {
@@ -94,10 +94,12 @@
         }
     })             
     };
+ </script>    
+    
+ {% block verificarAlerta %}
+  {{ super() }}
+{% endblock %} 
 
-    
-  </script>    
-    
 {% endblock %}
 
 

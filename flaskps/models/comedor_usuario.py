@@ -39,5 +39,12 @@ class Comedor_usuario(object):
         sql = """ SELECT * FROM comedor_usuario WHERE comedor_id = %s """
         cursor = cls.db.cursor()
         cursor.execute(sql, cm)
-
         return cursor.fetchone()
+
+    @classmethod
+    def delete(cls,comId, refId):
+        sql="""DELETE FROM comedor_usuario WHERE comedor_id=%s and referente_id=%s"""
+        cursor=cls.db.cursor()
+        cursor.execute(sql,(comId,refId))
+        cls.db.commit()
+        return True

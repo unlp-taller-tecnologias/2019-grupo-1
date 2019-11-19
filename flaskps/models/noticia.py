@@ -17,7 +17,7 @@ class Noticia(object):
     @classmethod
     def allNoticias(cls):
         sql = """
-            SELECT id,fecha,titulo,descripcion,foto FROM noticia WHERE estado_n=0
+            SELECT id,fecha,titulo,descripcion,foto FROM noticia WHERE estado_n=0 ORDER BY fecha
             """
         cursor = cls.db.cursor()
         cursor.execute(sql)

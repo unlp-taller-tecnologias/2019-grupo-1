@@ -18,7 +18,7 @@ class Evento(object):
     @classmethod
     def allEventos(cls, hoy):
         sql = """
-            SELECT id,usuario_id,fecha,titulo,descripcion,fecha_evento,horario FROM evento WHERE estado_e=0 AND fecha_evento > %s
+            SELECT id,usuario_id,fecha,titulo,descripcion,fecha_evento,horario FROM evento WHERE estado_e=0 AND fecha_evento > %s ORDER BY fecha_evento
             """
         cursor = cls.db.cursor()
         cursor.execute(sql, hoy)
@@ -26,10 +26,10 @@ class Evento(object):
 
 
     @classmethod
-    def find_evento_by_user(cls, idUser):
-        sql = """   SELECT * FROM evento WHERE usuario_id = %s AND estado_e=0"""
+    def find_evento_by_user(cls, idUser, hoy):
+        sql = """   SELECT * FROM evento WHERE usuario_id = %s AND fecha_evento > %s AND estado_e=0"""
         cursor = cls.db.cursor()
-        cursor.execute(sql, idUser)
+        cursor.execute(sql,(idUser,hoy))
         return cursor.fetchall()
 
     @classmethod
@@ -41,10 +41,10 @@ class Evento(object):
         return True
 
     @classmethod
-    def find_evento_by_id(cls, idEvento):
-        sql = """   SELECT * FROM evento WHERE id = %s """
+    def find_evento_by_id(cls, idEvento, hoy):
+        sql = """   SELECT * FROM evento WHERE id = %s AND fecha_evento > %s"""
         cursor = cls.db.cursor()
-        cursor.execute(sql, idEvento)
+        cursor.execute(sql, (idEvento, hoy))
         return cursor.fetchone()
 
     @classmethod

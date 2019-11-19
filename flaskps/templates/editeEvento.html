@@ -28,13 +28,14 @@
                              <div class="row">
                           <div class="col-md-12 form-group">
                             <label for="descripcion">Descripcion</label>
-                            <input type="text" value="{{ evento.descripcion }}" class="form-control" name="descripcion" id="descripcion" rows="3" required>
+                            <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required>{{ evento.descripcion }}</textarea>
+
                           </div>   
                         </div>
                         <div class="row">
                           <div class="col-md-6 form-group">
                             <label for="fecha_evento">Fecha del evento</label>
-                            <input value="{{ evento.fecha_evento }}" type="date" name="fecha_evento" id="fecha_evento" class="form-control ">
+                            <input value="{{ evento.fecha_evento }}" type="date" name="fecha_evento" id="fecha_evento" class="form-control " required>
                           </div>
                          <div class="col-md-6 form-group">
                                 <label for="horario">Hora</label>
@@ -47,7 +48,7 @@
                             <input type="hidden" value="{{ evento.id }}" name="idEvento" id="idEvento">
                           </div>
                           <div class="col-md-6 form-group">
-                            <input type="submit" value="Registrar" class="btn btn-primary px-3 py-2">
+                            <input type="submit" value="Editar" class="btn btn-primary px-3 py-2">
                             <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-2">
                           </div>
                           <div class="col-md-3">

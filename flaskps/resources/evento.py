@@ -36,7 +36,7 @@ def mis_eventos():
         Sitio.db=get_db()
         Evento.db=get_db()
         cantPag=Sitio.cantPaginado()
-        eventos=Evento.find_evento_by_user(session['id'])
+        eventos=Evento.find_evento_by_user(session['id'],datetime.now())
         return render_template('listado_mis_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
     return render_template(Permiso)
 
@@ -44,11 +44,11 @@ def create():
     Permiso = habilitedAccesLogin()
     if Permiso == 'true':
         Sitio.db=get_db()
-        Evento.db = get_db()
+        Evento.db = get_db() 
         data = request.form
         Evento.create(data,session['id'],datetime.now())
         flash(["El evento se ha creado con exito", 'green']) 
-        return redirect(url_for('listado_eventos'))
+        return redirect(url_for('mis_eventos'))
     return render_template(Permiso)
 
 def delete():
@@ -69,7 +69,7 @@ def edite():
             return render_template('autorizacion.html')
         else:
             Evento.db = get_db()
-            evento = Evento.find_evento_by_id(request.args.get('idEvento'))
+            evento = Evento.find_evento_by_id(request.args.get('idEvento'),datetime.now())
             return render_template('editeEvento.html', evento = evento)
     return render_template(Permiso)
 
@@ -80,5 +80,5 @@ def editando():
         data = request.form
         Evento.edite(data,datetime.now())
         flash(["Se edito  exitosamente!", 'green'])     
-        return redirect(url_for('listado_eventos'))
+        return redirect(url_for('mis_eventos'))
     return render_template(Permiso)    
