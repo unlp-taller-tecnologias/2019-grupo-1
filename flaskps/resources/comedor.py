@@ -5,6 +5,8 @@ from flaskps.models.comedor_usuario import Comedor_usuario
 from flaskps.models.sitio import Sitio
 from flaskps.models.evento import Evento
 from flaskps.models.necesidad import Necesidad
+from flaskps.models.registro import Registro
+
 from flaskps.db import get_db
 from flaskps.helpers.mail import enviar
 from flaskps.helpers.auth import *
@@ -69,11 +71,13 @@ def profile():
         cantPag=Sitio.cantPaginado()
         Comedor.db=get_db()
         User.db = get_db()
+        Registro.db = get_db()
         Necesidad.db=get_db()
+        registrosCom = Registro.getRegistros(request.args.get('idComedor'))
         necesidades = Necesidad.find_tipo_necesidad_by_comedorid(request.args.get('idComedor'))
         comedor = Comedor.find_comedor_by_id(request.args.get('idComedor'))
         referente = User.find_user_by_idComedor(request.args.get('idComedor'))
-        return render_template('comedor/comedorProfile.html', comedor=comedor, necesidades= necesidades,referente= referente,cant=cantPag[0]['cant_paginado'])
+        return render_template('comedor/comedorProfile.html', comedor=comedor, necesidades= necesidades,referente= referente,registros=registrosCom,cant=cantPag[0]['cant_paginado'])
     return render_template(Permiso)
 
 def edite():

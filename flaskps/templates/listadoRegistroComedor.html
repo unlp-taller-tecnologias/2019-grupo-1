@@ -1,11 +1,13 @@
 {% extends "Layout.html" %}
 {% if regis %}
-    {% set encabezado = 'Listado de Registros del comedor: "'+regis[0].nombre+'""'  %}
+    {% set encabezado = 'Listado de Registros de alimentacion de todos los comedores'  %}
 {% else %}
-    {%set encabezado = 'El comedor no posee registros de alimentacion'%}
+    {%set encabezado = 'No hay registros cargados'%}
 {% endif %}
 {% block styles %}
-    
+  <style>
+
+  </style>
  
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -27,6 +29,7 @@
               <th class="th-sm">Horario de Comida</th>
               <th class="th-sm">Alimentos</th>
               <th class="th-sm">Descripcion</th>
+              <th class="th-sm">Comedor</th>
               <th class="th-sm">Modificar</th>
               <th class="th-sm">Eliminar</th>
             </tr>
@@ -39,6 +42,7 @@
               <td>{{elem.horario_comida}}</td>
               <td>{{', '.join(elem.comidas)}}</td>
               <td>{{elem.observaciones}}</td>
+              <td align="center"><button  type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem['comedor.id']) }}';">{{elem.nombre}}</button></td>
               <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">(tengomallink)</button></td>
               <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">Eliminar</button></td>
             </tr>
@@ -82,7 +86,8 @@
             null,
             null,
             null,
-            null,
+            { "orderable": false },
+            { "orderable": false },
             { "orderable": false },
           ]
       })})

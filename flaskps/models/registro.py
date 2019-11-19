@@ -58,4 +58,28 @@ class Registro(object):
 		cursor.execute(sql)
 
 		cls.db.commit()
+	
+	@classmethod
+	def getAllRegistros(cls):
+		sql = """ SELECT r_a.*, comedor.nombre, comedor.id
+		FROM registro_alimentacion AS r_a
+		INNER JOIN comedor ON (r_a.id_comedor = comedor.id)
+		"""
+		cursor = cls.db.cursor()
+		cursor.execute(sql)
+		regis = cursor.fetchall()
+		for elem in regis:
+			elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
+			sql2= """ SELECT a.nombre 
+					FROM alimento_xreg AS ax 
+					INNER JOIN alimento AS a ON (ax.alimento_id = a.id)
+					WHERE (ax.registro_id ="""+ str(elem['id']) +""")
+			"""
+			cursor = cls.db.cursor()
+			cursor.execute(sql2)
+			comidas = cursor.fetchall()
+			elem['comidas'] = []
+			for c in comidas:
+				elem['comidas'].append(c['nombre'])
+		return regis
 

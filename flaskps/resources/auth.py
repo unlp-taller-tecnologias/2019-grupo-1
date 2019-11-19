@@ -17,6 +17,9 @@ def authenticate():
     if not user:
         flash(['El nombre de usuario y/o contraseña son incorrectas.', 'red'])
         return redirect(url_for('auth_login'))
+    if user['estado_u'] == '2':
+        flash(['El usuario no existe o fue rechazado del sistema.', 'red'])
+        return redirect(url_for('auth_login'))
     session['username'] = user['user_name']
     session['id'] = user['id']
     session['rol'] = str(user['rol'])

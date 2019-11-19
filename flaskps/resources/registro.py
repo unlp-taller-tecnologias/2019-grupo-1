@@ -40,7 +40,7 @@ def listar():
 		Registro.db = get_db()
 		Sitio.db = get_db()
 		cantPag=Sitio.cantPaginado()
-		registrosCom = Registro.getRegistros(request.args.get('idComedor'))
+		registrosCom = Registro.getAllRegistros()
 		return render_template('listadoRegistroComedor.html', regis = registrosCom, cant=cantPag[0]['cant_paginado'])
 	return render_template(Permiso)
 	
