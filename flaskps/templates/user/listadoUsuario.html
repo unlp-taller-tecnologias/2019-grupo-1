@@ -59,12 +59,18 @@
         content: 'Desea eliminar este usuario: ' +nombre.toUpperCase() +'? ',
         buttons: {
             Confirmar: function () {
-              var ok=true;
+              if (idUser == 1){
+                $.alert({
+                  title: 'Error',
+                  content:  'No puede eliminar al admin ' ,
+                  type: ('red'),
+                });
+              }else{
               $.ajax({
                 url: "{{ url_for('delete_user', idUser='' ) }}"+idUser, success: function(result){
                 if(result['ok']){
                 $.alert({
-                  title: 'Mensaje informativo',
+                  title: 'Usuario eliminado',
                   content:  'Se elimino correctamente ' ,
                   type: ('green'),
                 });
@@ -76,7 +82,7 @@
                   type: ('red'),
                 });
               }}});              
-            },
+            }},
             Cancelar: function () {
                 null
             },

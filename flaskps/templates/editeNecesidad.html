@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="name">Comedor: </label>
-                                <select name="comedor" required>
+                                <select class="form-control" name="comedor" required>
                                   {% set com = False %}
                                   {% if session['idComedor'] %}
                                     {% set com = True %}
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="name">Tipo de necesidad: </label>
-                                <select name="tipo">
+                                <select class="form-control" name="tipo">
                                   {% for elem in tipo_necesidades %}
                                   <option value="{{ elem.id}}" {% if elem.id == necesidad.tipo_necesidad_id %} selected {% endif %}>{{elem.nombre}}</option>
                                   {% endfor %}

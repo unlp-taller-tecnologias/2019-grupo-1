@@ -29,7 +29,7 @@ def listado_necesidades():
         comedores = Comedor.all()
         cantPag = Sitio.cantPaginado()
         return render_template('listado_necesidades.html', necesidades= necesidades, tipo_necesidades= tipo_necesidades, comedores= comedores, cant=cantPag[0]['cant_paginado'])
-    return render_template(PErmiso)
+    return render_template(Permiso)
 
 def create():
     Permiso = habilitedAccesComedor()

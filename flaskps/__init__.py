@@ -91,6 +91,8 @@ app.add_url_rule("/altaRegistroAlimentacion" , "new_registro" , registro.new,met
 app.add_url_rule("/newRegister" , "create_registro" , registro.create,methods=['POST'])
 app.add_url_rule("/listadoRegistroComedor" , "list_registro" , registro.listar,methods=['GET'])
 app.add_url_rule("/eliminarRegistro" , "delete_registro" , registro.eliminar,methods=['GET'])
+app.add_url_rule("/editeRegistro" , "edite_registro" , registro.edite,methods=['GET'])
+app.add_url_rule("/editandoregistro" , "editando_registro" , registro.editando,methods=['POST'])
 
 #API
 app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])

@@ -30,8 +30,37 @@ def create():
 		flash(["Se creo la necesidad exitosamente!", 'green'])
 		return redirect(url_for('new_registro'))
 	return render_template(Permiso)
+
+def edite():
+	Permiso = habilitedAccesComedor()
+	if Permiso == 'true':
+		Registro.db = get_db()
+		Alimento.db = get_db()
+		Comedor.db = get_db()
+		tiposAli = Alimento.all()
+		comedores = Comedor.allActives()
+		registro= Registro.getRegistro(request.args.get('idReg'))
+		alimentosAnteriores=[] 
+		for el in registro[0]['comidas']:
+			alimentosAnteriores.append(el[0])
+		return render_template('edite_registro.html',alimentos=tiposAli, comedores=comedores, registro=registro[0],alimentosAnteriores=alimentosAnteriores)
+	return render_template(Permiso)	
 	   
-	
+def editando():
+	Permiso = habilitedAccesComedor()
+	if Permiso == 'true': 
+		Alimento.db = get_db()
+		Registro.db =get_db()
+		alimentos = request.form.getlist('multi')
+		data = request.form
+		alimentosAnteriores =[]
+		registro= Registro.getRegistro(request.args.get('idReg'))
+		for el in registro[0]['comidas']:
+			alimentosAnteriores.append(str(el[1]))
+		Registro.edite(data, alimentos,alimentosAnteriores,request.args.get('idReg'))
+		flash(["Se edito el registro exitosamente!", 'green'])
+		return redirect(url_for('list_registro'))
+	return render_template(Permiso)	
 
 def listar():
 	Permiso = habilitedAccesLogin()

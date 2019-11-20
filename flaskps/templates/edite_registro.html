@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Editar Registro de Alimentacion'  %}
+{% block styles %}
+  {{super()}}
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.1/dist/multiple-select.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <style type="text/css">
+    .ms-choice{
+      border: #fff!important;
+      outline:0 !important;
+    }
+  </style>
+{% endblock %}
+{% block cuerpo %}
+    <!-- Contact Section -->
+    <div class="container">
+    
+        <!-- Contact Section Form -->
+        <div class="row">
+            
+          <div class="col-lg-9 mx-auto">
+            <div class="card">
+            <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+                <div class="row">
+                  <div class="col-md-12 mb-4 order-2">
+                    <form id='formReg' action="{{ url_for('editando_registro', idReg= registro.id )}}" method="post">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="name">Tipo de comida: </label>
+                                <select class="form-control" name="tipoComida" required>
+                                  {% set tiempo = ['Desayuno','Almuerzo','Merienda','Cena'] %}
+                                  {% for elem in tiempo %}
+                                    <option value="{{ elem}}" {% if registro.horario_comida == elem  %} selected {% endif %}  >{{elem}}</option>
+                                  {% endfor %}
+                                </select>             
+                            </div>
+                            <div class="col-md-6 form-group">
+                               <label for="name">Fecha: </label>
+                                <input class="form-control" type="text" name="dia" value="" />                
+                             </div>
+                        </div>
+                      <div class="row">
+                          <div class="col-md-6 form-group">
+                              <label for="name">Tipo de alimento: </label>
+                                <select id="multi" name="multi" class="form-control multiple-select" multiple="multiple"  name="tipo" multiple required>
+                                  {% for elem in alimentos %}
+                                  <option value="{{ elem.id}}"  {% if elem.nombre in alimentosAnteriores %}  selected  {% endif %}>{{elem.nombre}}</option>
+                                  {% endfor %}
+                                </select>
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <label for="name">Cantidad de asistentes: </label>
+                            <input type="number" name="cant" class="form-control" value="{{ registro.asistentes }}" required>   
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                         <div class="col-md-12 form-group">
+                          <label for="desc">Descripcion:</label>
+                            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="2" placeholder="Descripcion. Es opcional">{{ registro.observaciones}}</textarea>
+                        </div>
+                      </div>
+                      {% if (session['rol'] == '3') %}
+                      <div class="row">
+                        <div class="col-md-12 form-group">
+                          <label for="desc">Id Comedor:</label>
+                            <select id="idCome" name="idCome" class="form-control" name="idc" required>
+                              {% for elem in comedores %}
+                              <option value="{{ elem.id}}"  selected>{{elem.nombre}}</option>
+                              {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+                    {% else %}
+                      <input type="hidden" id="idCome" name="idCome" value="{{session['idComedor']}}">
+                    {% endif %}
+                      <div class="row">
+                        <div class="col-md-5"> 
+                        </div>
+                        <div class="col-md-1">
+                          <input type="submit" value="Editar registro" class="btn btn-primary">
+                        </div>                       
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+
+      
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+  {% block verificarAlerta %}
+    {{ super() }}
+  {% endblock %}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="https://unpkg.com/multiple-select@1.5.1/dist/multiple-select.min.js"></script>
+  <script>
+
+  $(function() {
+    date= '{{ registro.fecha }}'
+    console.log(date)
+    $('input[name="dia"]').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      locale: {
+            format: 'DD/MM/YYYY'
+        },
+      startDate: date,
+
+    }, );
+  });
+  </script>
+
+  <script>
+    $(function() {
+      $("#multi").multipleSelect()
+    })
+  </script>
+{% endblock %} 
+

@@ -43,7 +43,7 @@
               <td>{{', '.join(elem.comidas)}}</td>
               <td>{{elem.observaciones}}</td>
               <td align="center"><button  type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem['comedor.id']) }}';">{{elem.nombre}}</button></td>
-              <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">(tengomallink)</button></td>
+              <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'edite_registro' , idReg=elem.id) }}';">Modificar</button></td>
               <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">Eliminar</button></td>
             </tr>
             {% endfor %}

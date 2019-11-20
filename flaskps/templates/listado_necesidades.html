@@ -35,7 +35,7 @@
           <tbody>
             {% for elem in necesidades %}
             <tr style="background-color: rgb(241, 157, 131);" >
-                <td>{{elem.nombre}}</td>
+                <td>{{elem.nombre|upper}}</td>
                 <td>{{elem.descripcion}}</td>
                 <td align="center"><button style="width:90px;padding:1px;" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.idC) }}';">{{elem.nombreC}}</button></td>
                 {% if session['rol'] == '3' %}
