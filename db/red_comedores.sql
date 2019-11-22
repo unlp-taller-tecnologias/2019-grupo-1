@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2019 a las 20:05:54
+-- Tiempo de generación: 22-11-2019 a las 21:56:17
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.10
 
@@ -60,7 +60,33 @@ CREATE TABLE `alimento_xreg` (
 
 INSERT INTO `alimento_xreg` (`id`, `registro_id`, `alimento_id`) VALUES
 (11, 8, 1),
-(12, 8, 2);
+(12, 8, 2),
+(13, 9, 1),
+(14, 9, 2),
+(15, 10, 3),
+(16, 11, 1),
+(17, 11, 3),
+(18, 12, 2),
+(19, 12, 3),
+(20, 13, 1),
+(21, 13, 2),
+(22, 13, 3),
+(23, 14, 1),
+(24, 14, 2),
+(25, 14, 3),
+(26, 15, 1),
+(27, 15, 2),
+(28, 15, 3),
+(29, 16, 2),
+(30, 16, 3),
+(31, 17, 1),
+(32, 17, 2),
+(33, 17, 3),
+(34, 18, 1),
+(35, 18, 2),
+(36, 18, 3),
+(40, 20, 1),
+(41, 20, 2);
 
 -- --------------------------------------------------------
 
@@ -198,10 +224,10 @@ CREATE TABLE `noticia` (
 --
 
 INSERT INTO `noticia` (`id`, `fecha`, `titulo`, `descripcion`, `foto`, `estado_n`) VALUES
-(1, '2019-11-13', 'SOS', 'eso.... nada', '12', 0),
-(2, '2019-11-13', 'bla bla', 'aaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhhhh', 'bla', 0),
-(3, '2019-11-13', 'borrame!', 'no te borro nada', '223', 0),
-(4, '2019-11-13', 'Nuevamnete', 'escribi mal todo :o', 's', 0),
+(1, '2019-11-13', 'SOS', 'eso.... nada', '12', 1),
+(2, '2019-11-13', 'bla bla', 'aaaaaaaaaaaaaaaaahhhhhhhhhhhhhhhhhhhhhhhhhhh', 'bla', 1),
+(3, '2019-11-13', 'borrame!', 'no te borro nada', '223', 1),
+(4, '2019-11-13', 'Nuevamnete', 'escribi mal todo :o', 's', 1),
 (5, '2019-11-13', 'qwe', 'qwe', '', 0);
 
 -- --------------------------------------------------------
@@ -225,7 +251,18 @@ CREATE TABLE `registro_alimentacion` (
 
 INSERT INTO `registro_alimentacion` (`id`, `fecha`, `asistentes`, `observaciones`, `horario_comida`, `id_comedor`) VALUES
 (4, '2019-11-27', '123', 'edsaa<ddasasdsasa', 'almuerzo', 2),
-(8, '2019-11-17', '51', '12', 'Desayuno', 9);
+(8, '2019-11-17', '51', '12', 'Desayuno', 9),
+(9, '2019-11-18', '12', '2121', 'Desayuno', 8),
+(10, '2019-11-30', '12', '1212', 'Merienda', 7),
+(11, '2019-11-20', '12', '21', 'Merienda', 9),
+(12, '2019-12-28', '1212', '1221', 'Almuerzo', 8),
+(13, '2019-11-14', '12', 'sda', 'Almuerzo', 8),
+(14, '2019-11-28', '12', '2121', 'Almuerzo', 8),
+(15, '2019-11-18', '21', 'dsa', 'Desayuno', 9),
+(16, '2019-11-27', '12', '2121', 'Cena', 7),
+(17, '2019-11-18', '122112', '2121', 'Desayuno', 9),
+(18, '2019-11-12', '2121', '2121', 'Desayuno', 9),
+(20, '2019-11-21', '1221', '122121', 'Cena', 7);
 
 -- --------------------------------------------------------
 
@@ -236,15 +273,19 @@ INSERT INTO `registro_alimentacion` (`id`, `fecha`, `asistentes`, `observaciones
 CREATE TABLE `sitio` (
   `id` int(11) NOT NULL,
   `cant_paginado` int(11) NOT NULL,
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL,
+  `facebook` varchar(255) NOT NULL,
+  `twitter` varchar(255) NOT NULL,
+  `instagram` varchar(255) NOT NULL,
+  `nosotros` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sitio`
 --
 
-INSERT INTO `sitio` (`id`, `cant_paginado`, `estado`) VALUES
-(1, 10, 0);
+INSERT INTO `sitio` (`id`, `cant_paginado`, `estado`, `facebook`, `twitter`, `instagram`, `nosotros`) VALUES
+(1, 10, 1, 'https://www.facebook.com', 'https://www.twitter.com', 'https://www.instagram.com', 'dsads');
 
 -- --------------------------------------------------------
 
@@ -299,7 +340,7 @@ INSERT INTO `usuario` (`id`, `nombre_u`, `apellido`, `mail_u`, `password`, `user
 (6, 'Ana', 'q', '1@gmail.com', '1', 'ana', 'asd', '', '1', '1', '0', '0'),
 (7, 'Candela', '1', '1@gmail.com', '1', 'cande', 'aa', '', '1', '2', '0', '0'),
 (9, 'admin', 'admin', 'admin', 'admin', 'admin', 'admin', '', '', '1', '', ''),
-(10, 'Hola', 'as', 'asd@asdf.com', '12345678', 'hola', 'as', 'none', '13123123', '1', '0', '1'),
+(10, 'Hola', 'as', 'asd@asdf.com', '1234', 'hola', 'as', 'none', '13123123', '1', '0', '1'),
 (11, 'hola', 'hla', 'hol@hola.com', '12345678', 'com2', '', 'none', '1234', '1', '0', '1'),
 (12, 'Comedor4', 'q', 'hol@hola.com', '12345678', 'com4', '', 'none', '12', '1', '0', '1'),
 (13, 'Comedor5', '1', 'hol@hola.com', '12345678', 'com5', '', 'none', '1', '3', '0', '1');
@@ -401,7 +442,7 @@ ALTER TABLE `alimento`
 -- AUTO_INCREMENT de la tabla `alimento_xreg`
 --
 ALTER TABLE `alimento_xreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `comedor`
@@ -437,7 +478,7 @@ ALTER TABLE `noticia`
 -- AUTO_INCREMENT de la tabla `registro_alimentacion`
 --
 ALTER TABLE `registro_alimentacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `sitio`
