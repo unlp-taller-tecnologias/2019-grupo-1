@@ -22,9 +22,10 @@
               <th class="th-sm">Apellido</th>
               <th class="th-sm">Nombre usuario</th>
               <th class="th-sm">Mail</th>
-              <th class="th-sm">Estado</th>
               <th class="th-sm">Ver perfil</th>
+              {% if session['rol'] == '3'%}
               <th class="th-sm">Eliminar</th>
+              {%endif%}
             </tr>
           </thead>
           <tbody>
@@ -35,9 +36,10 @@
               <td>{{elem.nombre_u}}</td>
               <td>{{elem.apellido}}</td>
               <td>{{elem.direccion}}</td>
-              <td>aca puede ir si esta eliminado</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.id) }}';">Ver</button></td>
+              {% if session['rol'] == '3'%}
               <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_com' , idComedor=elem.id) }}';">Eliminar</button></td>
+              {%endif%}
             </tr>
             {% endfor %}
           </tbody>

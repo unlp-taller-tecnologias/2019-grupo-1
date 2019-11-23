@@ -82,14 +82,11 @@ def actualizarRedes():
         return render_template(Permiso)
 
 def nosotros():
-    Permiso = habilitedAccesAdmin()
-    if Permiso == 'true':
-        Sitio.db = get_db()
-        nosotros = Sitio.getNosotros()
-        return render_template('nosotros.html', noso = nosotros[0]['nosotros'])
-    else:
-        return render_template(Permiso)
+    Sitio.db = get_db()
+    nosotros = Sitio.getNosotros()
+    return render_template('nosotros.html', noso = nosotros[0]['nosotros'])
 
+    
 def getRedes():
     Sitio.db=get_db()
     redes = Sitio.getRedes()
