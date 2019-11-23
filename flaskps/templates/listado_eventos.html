@@ -9,15 +9,16 @@
 {% block cuerpo %}
 
 <div class="container">
-        <br>
+      {% if session %}
+      <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'mis_eventos' ) }}';">Mis Eventos</button>
+      {% endif %}
+        <hr>
         <div class="table-responsive">
         <select id="select">
           <option>fecha_evento</option>
           <option>titulo</option>
         </select>
-          {% if session['rol'] == '3' or session['rol'] == '2' or session['rol'] == '1' or session['rol'] == '0' %}
-           <button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'mis_eventos' ) }}';">Mis Eventos</button>
-          {% endif %}
+         
         <table id="example" class="table table-striped table-bordered table-sm dt-responsive" >
           <thead>
             <tr>

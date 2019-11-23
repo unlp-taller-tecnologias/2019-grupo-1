@@ -79,6 +79,6 @@ def editando():
         Evento.db = get_db()
         data = request.form
         Evento.edite(data,datetime.now())
-        flash(["Se edito  exitosamente!", 'green'])     
+        flash(["Se edito el evento exitosamente!", 'green'])     
         return redirect(url_for('mis_eventos'))
     return render_template(Permiso)    

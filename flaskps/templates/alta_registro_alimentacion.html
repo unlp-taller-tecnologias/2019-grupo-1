@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="name">Tipo de comida: </label>
-                                <select class="form-control" name="tipoComida" required>
+                                <select class="form-control" name="tipoComida" id="tipo" required>
                                   <option>Desayuno</option>
                                   <option>Almuerzo</option>
                                   <option>Merienda</option>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                <label for="name">Fecha: </label>
-                                <input class="form-control" type="text" name="dia" value="" />                
+                                <input class="form-control" type="text" name="dia" value="" id="fecha"/>                
                              </div>
                         </div>
                       <div class="row">
@@ -51,14 +51,14 @@
                           </div>
                           <div class="col-md-6 form-group">
                             <label for="name">Cantidad de asistentes: </label>
-                            <input type="number" name="cant" class="form-control" value="" required>   
+                            <input type="number" id='cant' name="cant" class="form-control" value="" required>   
                           </div>
                       </div>
                       <br>
                       <div class="row">
                          <div class="col-md-12 form-group">
                           <label for="desc">Descripcion:</label>
-                            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="2" placeholder="Descripcion. Es opcional"></textarea>
+                            <textarea class="form-control" name="desc" id="desc" rows="2" placeholder="Descripcion. Es opcional"></textarea>
                         </div>
                       </div>
                       {% if (session['rol'] == '3') %}
@@ -66,6 +66,7 @@
                           <div class="col-md-12 form-group">
                             <label for="desc">Id Comedor:</label>
                               <select id="idCome" name="idCome" class="form-control" name="idc" required>
+                                <option value="">Seleccione un comedor</option>
                                 {% for elem in comedores %}
                                 <option value="{{ elem.id}}"  selected>{{elem.nombre}}</option>
                                 {% endfor %}
@@ -79,7 +80,7 @@
                         <div class="col-md-5"> 
                         </div>
                         <div class="col-md-1">
-                          <input type="submit" value="Crear registro" class="btn btn-primary">
+                          <input type="button" onclick=" return validateForm()" value="Crear registro" class="btn btn-primary">
                         </div>                       
                       </div>
                     </form>
@@ -123,8 +124,40 @@
     $(function() {
       $("#multi").multipleSelect()
     })
+
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> 
+  <script>
+      function validateForm(){
+        ok=''
+        if(document.getElementById('cant').value == ''){ ok ='Debe ingresar la cantidad de asistentes' }
+        if(document.getElementById('fecha').value == ''){ ok = 'Debe ingresar una fecha ' }
+        if(document.getElementById('idCome').value == ''){ ok ='Debe ingresar un comedor' }
+        if(document.getElementById('multi').value == ''){ ok ='Debe ingresar al menos un alimento' }
+        $.confirm({
+          type:'green',
+          title: 'Crear registro',
+          content: 'Seguro desea crear un registro?' ,
+          buttons: {
+              Confirmar: function () {                
+                if (ok == ''){document.getElementById("formReg").submit();}
+                else{
+                  $.alert({
+                  title: 'Error',
+                  content: ok,
+                  type: 'red',
+                  });
+                }
+              },
+              Cancelar: function () {
+                null
+              },
+          }
+      })     
+      return false
+    }
+
+  </script>
 {% block verificarAlerta %}
   {{ super() }}
 {% endblock %}

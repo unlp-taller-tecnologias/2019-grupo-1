@@ -22,7 +22,8 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="name">Comedor: </label>
-                                <select class="form-control" name="comedor" required>
+                                <select class="form-control" name="comedor" id="comedor" required>
+                                    <option value="" selected>Seleccione un comedor</option>
                                   {% set com = False %}
                                   {% if session['idComedor'] %}
                                     {% set com = True %}
@@ -40,7 +41,8 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="name">Tipo de necesidad: </label>
-                                <select class="form-control" name="tipo">
+                                <select class="form-control" name="tipo" id="nec">
+                                    <option value="" selected>Seleccione una necesidad</option>
                                   {% for elem in tipo_necesidades %}
                                   <option value="{{ elem.id}}" {% if elem.id == necesidad.tipo_necesidad_id %} selected {% endif %}>{{elem.nombre}}</option>
                                   {% endfor %}
@@ -49,7 +51,7 @@
                           </div>
                       <div class="row">
                          <div class="col-md-12 form-group">
-                            <textarea class="form-control"  value='{{ necesidad.descripcion}}' name="desc" id="exampleFormControlTextarea1" rows="2" placeholder="Contanos acerca de la necesidad del comedor." required>{{ necesidad.descripcion}}</textarea  >
+                            <textarea class="form-control"  value='{{ necesidad.descripcion}}' name="desc" id="desc" rows="2" placeholder="Contanos acerca de la necesidad del comedor." required>{{ necesidad.descripcion}}</textarea  >
                         </div>
                         <input type="hidden" value="{{necesidad.id}}" name="idU" id="idU">
                         
@@ -61,7 +63,7 @@
                           
                         </div>
                         <div class="col-md-6 form-group">
-                          <input type="submit" value="Editar necesidad" class="btn btn-info px-3 py-2">
+                          <input type="button" onclick="return validateForm()" value="Editar necesidad" class="btn btn-info px-3 py-2">
                           
                         </div>
                         <div class="col-md-6 form-group">
@@ -89,7 +91,7 @@
 
 {% block scripts %}
     {{super()}}    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> 
     <script>
     function deleteN(id){
         $.confirm({
@@ -130,6 +132,34 @@
         }
     })             
     };
+
+    function validateForm(){
+      ok=''
+      if(document.getElementById('comedor').value == ''){ ok ='Debe ingresar un comedor' }          
+      if(document.getElementById('nec').value == ''){ ok ='Debe ingresar una necesidad' }
+      if(document.getElementById('desc').value == ''){ ok ='Debe ingresar una descripcion' }
+      $.confirm({
+        type:'green',
+        title: 'Guardar cambios',
+        content: 'Seguro desea guardar los cambios realizados?' ,
+        buttons: {
+            Confirmar: function () {                
+              if (ok == ''){document.getElementById("form").submit();}
+              else{
+                $.alert({
+                title: 'Error',
+                content: ok,
+                type: 'red',
+                });
+              }
+            },
+            Cancelar: function () {
+              null
+            },
+        }
+    })     
+    return false
+  }
 
     </script>
     

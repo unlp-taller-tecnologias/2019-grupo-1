@@ -15,7 +15,7 @@
               <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                   <div class="row">
                     <div class="col-md-12 mb-4 order-2">
-                      <form id='formUser' action="{{ url_for('editando_user') }}" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
+                      <form id='formUser' action="{{ url_for('editando_user') }}"  method="post" enctype="multipart/form-data">
                           <div class="row">
                               <div class="col-md-6 form-group">
                                 <label for="name">Nombre</label>
@@ -69,7 +69,7 @@
                             <input type="hidden" name='idU' value="{{ user.id }}">
                           </div>
                           <div class="col-md-6 form-group">
-                            <input type="submit" value="Guardar Cambios" class="btn btn-primary px-3 py-2">
+                            <input type="button" onclick="return validateForm()" value="Guardar Cambios" class="btn btn-primary px-3 py-2">
                           </div>
                           <div class="col-md-3">
                             
@@ -104,7 +104,23 @@
           type: 'red',
          });
         return false}
-      return true
+      
+        var ok=false
+        $.confirm({
+          type:'green',
+          title: 'Guardar cambios',
+          content: 'Seguro desea guardar los cambios realizados?' ,
+          buttons: {
+              Confirmar: function () {                
+                document.getElementById("formUser").submit();
+              },
+              Cancelar: function () {
+                null
+              },
+          }
+      })     
+      return ok
+
       }
   </script>
 

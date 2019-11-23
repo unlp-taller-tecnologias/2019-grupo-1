@@ -221,7 +221,7 @@
                       <td>{{', '.join(elem.comidas)}}</td>
                       <td>{{elem.observaciones}}</td>
                       {% if (session['rol'] == '3') or ((session['rol'] == '1') and (comedor.id == session['idComedor']) ) %}
-                      <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">(tengomallink)</button></td>
+                      <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'edite_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">Modificar</button></td>
                       <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">Eliminar</button></td>
                       {% endif %}
                     </tr>

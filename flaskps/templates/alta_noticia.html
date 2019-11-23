@@ -39,8 +39,7 @@
                             
                           </div>
                           <div class="col-md-6 form-group">
-                            <input type="submit" value="Registrar" class="btn btn-primary px-3 py-2">
-                            <input type="reset" value="Cancelar" class="btn btn-primary px-3 py-2">
+                            <input type="button" onclick="return validateForm()" value="Registrar" class="btn btn-primary px-3 py-2">
                           </div>
                           <div class="col-md-3">
                             
@@ -65,7 +64,39 @@
 {% endblock %}
 
 {% block scripts %}
-    {{super()}} 
+    {{super()}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+
+      
+    function validateForm(){
+      ok= true
+      if(document.getElementById('titulo').value == ''){ ok =false }
+      if(document.getElementById('descripcion').value == ''){ ok =false }
+      $.confirm({
+        type:'green',
+        title: 'Guardar cambios',
+        content: 'Seguro desea guardar los cambios realizados?' ,
+        buttons: {
+            Confirmar: function () {                
+              if (ok){document.getElementById("formNoticia").submit();}
+              else{
+                $.alert({
+                  title: 'Error',
+                  content: 'Debe ingresar un titulo y descripcion!',
+                  type: 'red',
+                 });
+              }
+            },
+            Cancelar: function () {
+              null
+            },
+        }
+    })     
+    return false
+  }
+
+    </script>
 {% endblock %}        
 
 
