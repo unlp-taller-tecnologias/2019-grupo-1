@@ -6,7 +6,9 @@
 {% endif %}
 {% block styles %}
   <style>
-
+  .btn-info { 
+    width: 100%;
+}
   </style>
  
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
@@ -30,8 +32,10 @@
               <th class="th-sm">Alimentos</th>
               <th class="th-sm">Descripcion</th>
               <th class="th-sm">Comedor</th>
+              {% if session['rol'] == '3' %}
               <th class="th-sm">Modificar</th>
               <th class="th-sm">Eliminar</th>
+              {%endif%}
             </tr>
           </thead>
           <tbody>
@@ -43,8 +47,10 @@
               <td>{{', '.join(elem.comidas)}}</td>
               <td>{{elem.observaciones}}</td>
               <td align="center"><button  type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem['comedor.id']) }}';">{{elem.nombre}}</button></td>
+              {% if session['rol'] == '3' %}
               <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'edite_registro' , idReg=elem.id) }}';">Modificar</button></td>
               <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">Eliminar</button></td>
+              {%endif%}
             </tr>
             {% endfor %}
           </tbody>
@@ -80,16 +86,6 @@
           "bLengthChange":false,
         //aca va el valor del paginado
         "lengthMenu": [["{{cant}}"], ["{{cant}}"]],
-          "columns": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            { "orderable": false },
-            { "orderable": false },
-            { "orderable": false },
-          ]
       })})
 
 

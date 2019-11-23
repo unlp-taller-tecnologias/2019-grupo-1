@@ -11,7 +11,18 @@
 {% endblock %}
 
   {% block cuerpo %}
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Quienes somos</h2> 
+    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
+    <p style=" text-align:center; font-size: 35px;">
+        Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque libero proin mattis, imperdiet neque interdum penatibus netus natoque at integer tellus vivamus faucibus laoreet, per sollicitudin donec lectus pretium nunc justo curabitur urna vestibulu.
+    </p>
+    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
+    <br>
+    <br>
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mapa</h2>
+    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
     <div id="map" style="height:500px"></div>
+    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
   {% endblock %} 
 
 {% block scripts %}
@@ -42,7 +53,6 @@
           comedor = comedores[i]
           var latlng = L.latLng([comedor['latitud'], comedor['longitud']]);
           linkNombre="<a href='{{ url_for('comedor_profile' , idComedor='' ) }}"+comedor['id'] +"'>"+comedor['nombre'].toUpperCase()  +"</a>";
-          console.log(linkNombre)
           L.marker(latlng,{title: comedor['nombre']})
             .addTo(mymap)
             .bindPopup(linkNombre)
