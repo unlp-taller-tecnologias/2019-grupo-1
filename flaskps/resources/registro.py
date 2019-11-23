@@ -27,7 +27,7 @@ def create():
 		alimentos = request.form.getlist('multi')
 		data = request.form
 		Registro.create(data, alimentos)
-		flash(["Se creo la necesidad exitosamente!", 'green'])
+		flash(["Se creo el registro exitosamente!", 'green'])
 		return redirect(url_for('new_registro'))
 	return render_template(Permiso)
 

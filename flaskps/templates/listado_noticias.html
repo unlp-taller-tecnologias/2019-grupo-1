@@ -14,23 +14,25 @@
 
 <div class="container">
         <br>
+        {% if session['rol'] == '3' %}
+           <button   type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'alta_noticia' ) }}';">Crear noticia</button>
+        {% endif %}
+        <hr>
         <div class="table-responsive">
         <select id="select">
           <option>Fecha</option>
           <option>Titulo</option>
         </select>
-        {% if session['rol'] == '3' %}
-           <button   type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'alta_noticia' ) }}';">Crear</button>
-        {% endif %}
+        
         <table id="example" class="table table-striped table-bordered table-sm dt-responsive" >
           <thead>
             <tr>
-                <th class="th-sm">Fecha</th>
+                <th class="th-sm" width="5%">Fecha </th>
                 <th class="th-sm">Titulo</th>
                 <th class="th-sm">Descripcion</th>
-                <th class="th-sm">Foto</th>
+                <th class="th-sm" width="30%">Foto</th>
                 {% if session['rol'] == '3' %}    
-                <th class="th-sm">Modificar</th>
+                <th class="th-sm" >Modificar</th>
                 <th class="th-sm">Eliminar</th>
                 {% endif %}
             </tr>
@@ -43,9 +45,9 @@
                 <td>{{elem.descripcion}}</td>
                 <td>
                 {% if elem.foto != '' %}
-                  <img style="width: 100%;" src= "{{ url_for('static', filename='images/noticia/') }}{{elem.id}}{{elem.foto}}" />
+                  <img style="width:90%;height:90%;margin-left:5%;" src= "{{ url_for('static', filename='images/noticia/') }}{{elem.id}}{{elem.foto}}" />
                 {% else %}
-                  <img style="width: 100%;"  src= "{{ url_for('static', filename='images/noFoto.jpg') }}" />    
+                  <img style="width:90%;height:90%;margin-left:5%;"  src= "{{ url_for('static', filename='images/noFoto.jpg') }}" />    
                 {% endif %}
               </td>
                 {% if session['rol'] == '3' %}          

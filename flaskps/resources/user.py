@@ -89,7 +89,7 @@ def actualizarEstado():
         user = User.find_user_by_id(request.args.get('idUser'))
         if request.args.get('rol') == '1':
             flash(['El usuario fue aceptado en el sistema', 'green'])
-            enviar('Usuarro Aceptado','El usuario ha sido aceptado y ahora posee acceso al sistema.',user['mail_u'])
+            enviar('Usuario Aceptado','El usuario ha sido aceptado y ahora posee acceso al sistema.',user['mail_u'])
         else:
             flash(['El usuario fue rechazado', 'red'])
             enviar('Usuario Rechazado','El usuario ha sido rechazado.',user['mail_u'])  
