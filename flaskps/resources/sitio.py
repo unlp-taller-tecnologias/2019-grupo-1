@@ -11,8 +11,10 @@ def hello():
     Permiso = habilitedAcces()
     if Permiso == 'true':
         Comedor.db = get_db()
+        Sitio.db=get_db()
         comedores = Comedor.all()
-        return render_template('home.html',comedores=comedores)
+        nosotros = Sitio.getNosotros()
+        return render_template('home.html',comedores=comedores,nosotros=nosotros)
     return render_template(Permiso)    
 
 def habSitio():
