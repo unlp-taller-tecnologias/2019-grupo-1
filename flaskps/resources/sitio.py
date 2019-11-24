@@ -39,11 +39,12 @@ def renderPanelAdmin():
         Sitio.db=get_db()
         stateSitio=Sitio.stateSitio()
         cantP=Sitio.cantPaginado()
+        noso=Sitio.getNosotros()
         a = Sitio.getRedes()
         f= a[0]['facebook']
         i= a[0]['instagram']
         t= a[0]['twitter']
-        return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'],face=f[0],twi=t[0],ins=i[0])
+        return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'],face=f,twi=t,ins=i,nosotros=noso)
     return render_template(Permiso)
 
 def cambiarCantidad():

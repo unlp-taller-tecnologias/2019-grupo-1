@@ -38,7 +38,7 @@
               <td>{{elem.mail_u}}</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'user_profile' , idUser=elem.id) }}';">Ver</button></td>
               <td align="center"><button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for('usuario_actualizar_estado', rol=1 ,idUser=elem.id)}}';">Aceptar</button></td>
-              <td align="center"><button style="width:85px" type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for('usuario_actualizar_estado', rol=3 ,idUser=elem.id)}}';">Rechazar</button></td>
+              <td align="center"><button style="width:85px" type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for('usuario_actualizar_estado', rol=2 ,idUser=elem.id)}}';">Rechazar</button></td>
             </tr>
             {% endfor %}
           </tbody>

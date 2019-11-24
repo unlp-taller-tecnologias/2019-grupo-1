@@ -48,9 +48,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos del referente</a>
                                 </li>
+                                {% if comedor.descripcion != '' %}
                                 <li class="nav-item">
                                     <a class="nav-link" id="desc-tab" data-toggle="tab" href="#desc" role="tab" aria-controls="desc" aria-selected="false">Descripcion del comedor</a>
                                 </li>    
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -149,10 +151,11 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if comedor.descripcion != '' %}
                             <div class="tab-pane fade" id="desc" role="tabpanel" aria-labelledby="desc-tab">
-                                <label>Descripcion:</label>
                                 <p>{{comedor.descripcion}}</p>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

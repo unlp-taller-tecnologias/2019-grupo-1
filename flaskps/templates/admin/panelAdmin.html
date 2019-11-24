@@ -150,15 +150,15 @@
             <div class="row">
               <div class="col-md-4 form-group">
                 <label for="name">Twitter: </label>
-                <input class="form-control" type="text" name="t" value="{{twi.twitter}}" /> 
+                <input class="form-control" type="text" name="t" value="{{twi}}" /> 
               </div>
               <div class="col-md-4 form-group">
                 <label for="name">Instagram: </label>
-                <input class="form-control" type="text" name="f" value="{{ins.instagram}}" /> 
+                <input class="form-control" type="text" name="f" value="{{ins}}" /> 
               </div>
               <div class="col-md-4 form-group">
                 <label for="name">Fecebook: </label>
-                <input class="form-control" type="text" name="i" value="{{face.facebook}}" /> 
+                <input class="form-control" type="text" name="i" value="{{face}}" /> 
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Cambiar</button>
@@ -170,7 +170,7 @@
           <h2>Cambiar el texto "Nosotros"</h2>
           <br>
           <form id='formNosotros' action="{{url_for('actualizar_nosotros')}}" method="post">
-            <textarea class="form-control" name="nos" id="exampleFormControlTextarea1" rows="2" placeholder="Nosotros"></textarea>
+            <textarea class="form-control" name="nos" id="exampleFormControlTextarea1" rows="2" placeholder="{{nosotros[0]['nosotros']}}"></textarea>
             <br>
             <button type="submit" class="btn btn-primary">Cambiar</button>
           </form>

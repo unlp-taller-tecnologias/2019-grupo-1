@@ -28,9 +28,15 @@
                                     <h5>
                                         {{user.nombre_u}}
                                     </h5>
+                                    {% if user.estado_u == '1' %}
                                     <h6>
                                         Usuario de Confianza
                                     </h6>
+                                    {% else %}
+                                    <h6>
+                                        Usuario pendiente
+                                    </h6>
+                                    {% endif %}
                                     {% if session and (session['rol'] == '3' or session['id'] == user.id) %}
                                     <div class="col-md-2">
                                         <input type="button" class="btn btn-primary px-3 py-2" onclick="window.location.href='{{ url_for( 'editar_user' , id='') }}{{ request.args.get('idUser') }}'" name="btnAddMore" value="Editar usuario"/>
@@ -41,9 +47,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Acerca</a>
                                 </li>
+                                {% if user.descripcion != '' %}
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Descripcion</a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -98,20 +106,14 @@
                                             </div>
                                         </div>
                                         {%endif%}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Contraseña</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p style="-webkit-text-security: disc;">{{user.password}}</p>
-                                            </div>
-                                        </div>
                             </div>
+                            {% if user.descripcion != '' %}
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
-                                        </div>
+                                <div class="row">
+                                    <p>{{user.descripcion}}</p>
+                                </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

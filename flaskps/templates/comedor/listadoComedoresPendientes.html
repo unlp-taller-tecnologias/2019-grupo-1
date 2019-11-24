@@ -38,7 +38,7 @@
               <td>{{elem.direccion}}</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.id) }}';">Ver</button></td>
               <td align="center"><button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for('comedor_actualizar_estado', rol=1 ,idCom=elem.id)}}';">Aceptar</button></td>
-              <td align="center"><button style="width:85px" type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for('comedor_actualizar_estado', rol=3 ,idCom=elem.id)}}';">Rechazar</button></td>
+              <td align="center"><button style="width:85px" type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for('comedor_actualizar_estado', rol=2 ,idCom=elem.id)}}';">Rechazar</button></td>
             </tr>
             {% endfor %}
           </tbody>
