@@ -39,12 +39,11 @@
               <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('index')}}">Inicio</a>
               </li>
-              <li class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('nosotros')}}">Nosotros</a>
-              </li>
-              <li class="nav-item mx-0 mx-lg-1">
+              {% if  'username' in session %}                   
+              <li class="nav-item mx-0 mx-lg-1">                
                 <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('comedor_list')}}">Comedores</a>
               </li>
+              {% endif %}
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">Publicaciones</a>
@@ -138,7 +137,7 @@
 
           <!-- Footer Location -->
           <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Comedores</h4>
+
           
           </div>
 

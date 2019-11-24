@@ -137,7 +137,7 @@ def delete():
             flash(["El comedor se elimino exitosamente", 'green'])
             return redirect(url_for('comedor_list'))
         else:
-            flash(["El comedor no puede eliminarse, tiene eventos o necesidades pendientes", 'green'])
+            flash(["El comedor no puede eliminarse, tiene eventos o necesidades pendientes", 'red'])
             return redirect(url_for('comedor_list'))
     return render_template(Permiso)
 

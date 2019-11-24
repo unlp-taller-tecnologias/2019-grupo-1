@@ -38,7 +38,7 @@
               <td>{{elem.direccion}}</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.id) }}';">Ver</button></td>
               {% if session['rol'] == '3'%}
-              <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_com' , idComedor=elem.id) }}';">Eliminar</button></td>
+              <td align="center"><button type="button" class="btn btn-danger" onclick="validateForm('{{ url_for( 'delete_com' , idComedor=elem.id) }}')">Eliminar</button></td>
               {%endif%}
             </tr>
             {% endfor %}
@@ -54,6 +54,26 @@
 
 {% block verificarAlerta %}
   {{ super() }}
+  <script>
+      function validateForm(path){
+        var ok=false
+          $.confirm({
+            type:'red',
+            title: 'Eliminar comedor',
+            content: 'Desea comedor el registro definitivamente?' ,
+            buttons: {
+                Confirmar: function () {                
+                  window.location.href=path
+                },
+                Cancelar: function () {
+                  null
+                },
+            }
+        })     
+        return ok
+        }
+  </script>
+ 
 {% endblock %}
 {% endblock %}   
 
