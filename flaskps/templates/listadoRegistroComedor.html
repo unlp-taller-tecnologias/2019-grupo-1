@@ -1,6 +1,6 @@
 {% extends "Layout.html" %}
 {% if regis %}
-    {% set encabezado = 'Listado de Registros de alimentacion de todos los comedores'  %}
+    {% set encabezado = 'Registros de alimentacion de todos los comedores'  %}
 {% else %}
     {%set encabezado = 'No hay registros cargados'%}
 {% endif %}
@@ -49,7 +49,7 @@
               <td align="center"><button  type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem['comedor.id']) }}';">{{elem.nombre}}</button></td>
               {% if session['rol'] == '3' %}
               <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'edite_registro' , idReg=elem.id) }}';">Modificar</button></td>
-              <td align="center"><button type="button" class="btn btn-danger" onclick="window.location.href='{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}';">Eliminar</button></td>
+              <td align="center"><button type="button" class="btn btn-danger" onclick="validateForm('{{ url_for( 'delete_registro' , idReg=elem.id, idCom=request.args.get(idComedor)) }}')">Eliminar</button></td>
               {%endif%}
             </tr>
             {% endfor %}
@@ -88,6 +88,23 @@
         "lengthMenu": [["{{cant}}"], ["{{cant}}"]],
       })})
 
+      function validateForm(path){
+      var ok=false
+        $.confirm({
+          type:'red',
+          title: 'Eliminar registro',
+          content: 'Desea eliminar el registro definitivamente?' ,
+          buttons: {
+              Confirmar: function () {                
+                window.location.href=path
+              },
+              Cancelar: function () {
+                null
+              },
+          }
+      })     
+      return ok
+      }
 
     </script>
 

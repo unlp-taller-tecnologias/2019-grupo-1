@@ -28,7 +28,7 @@ def create():
             filename =User.last_user()
             upload_file('usuario',str(filename['id']),file)
             flash(["El usuario debe ser confirmado por el Admin para poder ser utilizado.", 'green'])
-            enviar('Nuevo usuario','Un nuereturn render_template(Permiso)vo usuario se ha registrado y requiere de validacion del administrador.')
+            enviar('Nuevo usuario','Un nuevo usuario se ha registrado y requiere de validacion del administrador.')
             return redirect(url_for('altaUser'))
         flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
         return redirect(url_for('altaUser'))

@@ -23,7 +23,7 @@
               <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                   <div class="row">
                     <div class="col-md-12 mb-4 order-2">
-                      <form id='formUser' action="{{ url_for('editando_comedor' , idComedor='{{ comedor.id }}' ) }}" method="post" enctype="multipart/form-data">
+                      <form id='formUser' action="{{ url_for('editando_comedor' , idComedor='{{ comedor.id }}' ) }}" onsubmit="return validateForm()"  method="post" enctype="multipart/form-data">
                           
                         <h4>Acerca del comedor</h4>
                         <div class="row">
@@ -121,7 +121,7 @@
                             
                           </div>
                           <div class="col-md-6 form-group">
-                            <input type="button"  onclick="return validateForm()" value="Guardar cambios" class="btn btn-primary px-3 py-2">
+                            <input type="submit"value="Guardar cambios" class="btn btn-primary px-3 py-2">
 
                           </div>
                           <div class="col-md-3">

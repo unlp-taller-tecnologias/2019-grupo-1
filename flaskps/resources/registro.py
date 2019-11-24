@@ -79,7 +79,7 @@ def eliminar():
 	if Permiso == 'true': 
 		Registro.db = get_db()
 		Registro.delete(request.args.get('idReg'))
-		flash(["El registro se elimino correctamente" , 'red'])
+		flash(["El registro se elimino exitosamente" , 'green'])
 		#falta lo de redireccionar con el idComedor= en el link
 		return redirect(url_for('list_registro', idComedor=request.args.get('idComedor')))
 	return render_template(Permiso)
