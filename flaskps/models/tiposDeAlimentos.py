@@ -43,7 +43,14 @@ class Alimento(object):
         cls.db.commit()
         return True
 
+    @classmethod
+    def exist_alimento(cls, id):
+        sql = """   SELECT * FROM alimento_xreg WHERE alimento_id=%s """
 
+        cursor = cls.db.cursor()
+        cursor.execute(sql, id)
+
+        return cursor.fetchone()
 
 
 

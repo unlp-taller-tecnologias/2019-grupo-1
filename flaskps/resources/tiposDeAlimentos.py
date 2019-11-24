@@ -1,11 +1,12 @@
 from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
 from flaskps.models.sitio import Sitio
 from flaskps.models.tiposDeAlimentos import Alimento
+from flaskps.models.tiposDeAlimentos import Alimento
 from flaskps.db import get_db
 from flaskps.helpers.auth import habilitedAccesAdmin
 
 def create():
-    Permiso = habilitedAccesAdmin()
+    Permiso = habilitedAccesAdmin() 
     if Permiso == 'true': 
         Alimento.db=get_db()
         Alimento.create(request.args.get('nombre'))
@@ -26,10 +27,10 @@ def delete():
     Permiso = habilitedAccesAdmin()
     if Permiso == 'true': 
         Alimento.db=get_db()
-        try:
+        exist = Alimento.exist_alimento(request.args.get('idAlm'))
+        if not exist:
             Alimento.delete(request.args.get('idAlm'))
-        except:
-            return jsonify(ok=False)
-        return jsonify(ok=True)
+            return jsonify(ok=True)
+        return jsonify(ok=False)
     return render_template(Permiso)
  
