@@ -14,7 +14,7 @@
   
       <!-- Contact Section -->
         <div class="container">
-    
+            
           <!-- Contact Section Form -->
           <div class="row">
             <div class="col-lg-9 mx-auto">
@@ -114,8 +114,8 @@
                     <h4> Ubicacion</h4>
                     <p>Presione en el mapa,  la ubicacion del comedor lo mas preciso posible!</p>
                     <div id="map" style="height:400px;margin-bottom:15px;"></div>                    
-                    <input id="lat" name="lat" type="hidden" value="0">
-                    <input id="lng" name="lng" type="hidden" value="0">                                         
+                    <input id="lat" name="lat" type="hidden" value="{{ comedor.latitud }}">
+                    <input id="lng" name="lng" type="hidden" value="{{ comedor.longitud }}">                                         
                     <div class="row">
                           <div class="col-md-3">
                             
@@ -153,6 +153,8 @@
      
   <script>
 
+
+
     function validateForm() {
       var pass = document.getElementById('pass').value;
       var pass1 = document.getElementById('pass1').value;
@@ -160,14 +162,6 @@
         $.alert({
           title: 'Error al validar comedor',
           content: 'Las contraseñas introducidas no coinciden!',
-          type: 'red',
-         });
-        return false}
-
-      if(document.getElementById('lat').value == 0){
-        $.alert({
-          title: 'Error al validar comedor',
-          content: 'Debe elegir una ubicacion en el mapa!',
           type: 'red',
          });
         return false}
@@ -191,8 +185,9 @@
   </script>
   
   <script>
+      var latlng = L.latLng(['{{ comedor.latitud }}', '{{ comedor.longitud }}']);
       var mymap = L.map('map',{
-        center: [-34.92035241690136, -57.954786306945614],
+        center: latlng,
         zoom: 13,
         maxZoom: 18,
         minZoom: 8
@@ -208,7 +203,7 @@
 
       var popup = L.popup();
       popup
-          .setLatLng([-34.92035241690136, -57.954786306945614])
+          .setLatLng(latlng)
           .setContent("<b>Aca se ubicaria el comedor!</b>")
           .openOn(mymap);
       
@@ -221,6 +216,7 @@
           .openOn(mymap);
       }
       mymap.on('click', onMapClick);
+      
   </script>
   {% block verificarAlerta %}
     {{ super() }}

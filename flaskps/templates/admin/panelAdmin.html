@@ -133,12 +133,54 @@
       </div>
     </div>
     <div id="menu3" class="container tab-pane fade"><br>
-      <button class="btn btn-info btn-lg" role="button" onclick="window.location.href='{{ url_for( 'alimentos_list') }}'">Historial de Necesidades</button>
-      <button class="btn btn-info btn-lg" role="button" onclick="window.location.href='{{ url_for( 'tipo_necesidad_list') }}'">Tipos de Necesidades</button>
+      <h3>Menu de necesidades</h3>
+      <div class="card">
+      <div class="card-body text-center border">
+        <h2>Para ver los listado de necesidades y crear tipos de necesidades</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+          </div>                      
+          <div class="col-sm-3">    
+            <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for('listado_necesidades') }}'">Historial de Necesidades</button>
+          </div>
+          <div class="col-sm-3">    
+            <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for( 'tipo_necesidad_list') }}'">Tipos de Necesidades</button>        
+          </div>
+          <div class="col-md-3 text-left">
+          </div>
+        </div>
+      </div>
+      <hr class="border">
+      </div>
+      </div>
+      
+      
     </div>
-    <div id="menu4" class="container tab-pane fade"><br>      
-      <button class="btn btn-info btn-lg" role="button" onclick="window.location.href='{{ url_for( 'alimentos_list') }}'">Historial de Comidas</button>
-      <button class="btn btn-info btn-lg" role="button" onclick="window.location.href='{{ url_for( 'alimentos_list') }}'">Tipos de Alimentos</button>
+    <div id="menu4" class="container tab-pane fade"><br>
+      <h3>Menu de alimentacion</h3>
+      <div class="card">
+      <div class="card-body text-center border">
+        <h2>Para ver los listado de registros y crear alimentos</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+          </div>                      
+          <div class="col-sm-3">    
+            <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for('list_registro') }}'">Historial de Comidas</button>
+          </div>
+          <div class="col-sm-3">    
+            <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for( 'alimentos_list') }}'">Tipos de Alimentos</button>
+          </div>
+          <div class="col-md-3 text-left">
+          </div>
+        </div>
+      </div>
+      <hr class="border">
+      </div>
+      </div>      
+     
+      
     </div>
     <div id="menu5" class="container tab-pane fade"><br>
       <div class="card">
@@ -170,7 +212,7 @@
           <h2>Cambiar el texto "Nosotros"</h2>
           <br>
           <form id='formNosotros' action="{{url_for('actualizar_nosotros')}}" method="post">
-            <textarea class="form-control" name="nos" id="exampleFormControlTextarea1" rows="2" placeholder="{{nosotros[0]['nosotros']}}"></textarea>
+            <textarea class="form-control" name="nos" id="exampleFormControlTextarea1" rows="5" value="{{nosotros[0]['nosotros']}}">{{nosotros[0]['nosotros']}}</textarea>
             <br>
             <button type="submit" class="btn btn-primary">Cambiar</button>
           </form>

@@ -12,7 +12,6 @@
           <option>Nombre</option>
           <option>Apellido</option>
           <option>DNI</option>
-          <option>Estado</option>
         </select>
         <table id="example" class="table table-striped table-bordered table-sm dt-responsive" >
           <thead>
@@ -22,7 +21,6 @@
               <th class="th-sm">Apellido</th>
               <th class="th-sm">Nombre usuario</th>
               <th class="th-sm">Mail</th>
-              <th class="th-sm">Estado</th>
               <th class="th-sm">Ver perfil</th>
               <th class="th-sm">Eliminar</th>
             </tr>
@@ -35,7 +33,6 @@
               <td>{{elem.apellido}}</td>
               <td>{{elem.user_name}}</td>
               <td>{{elem.mail_u}}</td>
-              <td>{{elem.estado_u}}</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'user_profile' , idUser=elem.id) }}';">Ver</button></td>
               <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{elem.nombre_u}}')">Eliminar</button></td>
             </tr>

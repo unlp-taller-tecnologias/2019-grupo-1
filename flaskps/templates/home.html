@@ -11,18 +11,18 @@
 {% endblock %}
 
   {% block cuerpo %}
-    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Nosotros</h2> 
-    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
-    <p style=" text-align:center; font-size: 35px;">
+    <h2 class=" text-center text-uppercase text-secondary mb-0">Mapa de comedores</h2>
+    <br>
+    <div id="map" style="height:500px;border-style: groove;"></div>
+    <br>
+    <hr style="  border: 1px solid #2c3e50 ">
+    <h2 class=" text-center text-uppercase text-secondary mb-0">Nosotros</h2> 
+    <br>
+    <p style=" text-align:center; font-size: 1.5rem;">
       {{nosotros[0]['nosotros']}}
     </p>
-    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
-    <br>
-    <br>
-    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mapa de comedores</h2>
-    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
-    <div id="map" style="height:500px"></div>
-    <hr style="  border: 3px solid #2c3e50 ; border-radius: 5px;">
+
+    
   {% endblock %} 
 
 {% block scripts %}

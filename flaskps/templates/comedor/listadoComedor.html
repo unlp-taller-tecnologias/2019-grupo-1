@@ -19,9 +19,8 @@
             <tr>
               <th class="th-sm">ID</th>
               <th class="th-sm">Nombre</th>
-              <th class="th-sm">Apellido</th>
               <th class="th-sm">Nombre usuario</th>
-              <th class="th-sm">Mail</th>
+              <th class="th-sm">Direccion</th>
               <th class="th-sm">Ver perfil</th>
               {% if session['rol'] == '3'%}
               <th class="th-sm">Eliminar</th>
@@ -33,8 +32,7 @@
             <tr>
               <td>{{elem.id}}</td>
               <td>{{elem.nombre}}</td>
-              <td>{{elem.nombre_u}}</td>
-              <td>{{elem.apellido}}</td>
+              <td>{{elem.user_name}}</td>
               <td>{{elem.direccion}}</td>
               <td align="center"><button style="width:85px" type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'comedor_profile' , idComedor=elem.id) }}';">Ver</button></td>
               {% if session['rol'] == '3'%}
