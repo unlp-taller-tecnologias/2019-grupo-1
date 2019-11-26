@@ -20,6 +20,9 @@ def listado_eventos():
         Evento.db=get_db()
         cantPag=Sitio.cantPaginado()
         eventos=Evento.allEventos(datetime.now())
+        for elem in eventos:
+            elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
+            elem['fecha_evento'] = elem['fecha_evento'].strftime("%d/%m/%Y")
         if not session:
             return render_template('listado_eventos_usuarios.html',eventos=eventos)
         if session['rol'] == "3":
@@ -37,6 +40,9 @@ def mis_eventos():
         Evento.db=get_db()
         cantPag=Sitio.cantPaginado()
         eventos=Evento.find_evento_by_user(session['id'],datetime.now())
+        for elem in eventos:
+            elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
+            elem['fecha_evento'] = elem['fecha_evento'].strftime("%d/%m/%Y")
         return render_template('listado_mis_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
     return render_template(Permiso)
 

@@ -6,6 +6,7 @@ from flaskps.helpers.auth import *
 from flaskps.helpers.files import upload_file
 from datetime import datetime, date, time, timedelta
 import calendar
+import datetime
 
 def new():
     Permiso = habilitedAccesAdmin()
@@ -21,6 +22,8 @@ def listado_noticias():
         Noticia.db=get_db()
         cantPag=Sitio.cantPaginado()
         noticias=Noticia.allNoticias()
+        for elem in noticias:
+            elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
         if session and session['rol'] == "3":
             return render_template('listado_noticias.html',cant=cantPag[0]['cant_paginado'],noticias=noticias,tam=len(noticias))
         else:
