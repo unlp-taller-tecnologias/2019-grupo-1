@@ -6,7 +6,6 @@ from flaskps.helpers.auth import *
 from flaskps.helpers.files import upload_file
 from datetime import datetime, date, time, timedelta
 import calendar
-import datetime
 
 def new():
     Permiso = habilitedAccesAdmin()

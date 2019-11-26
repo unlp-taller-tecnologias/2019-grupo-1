@@ -9,8 +9,10 @@ class Evento(object):
             INSERT INTO evento (usuario_id,fecha,titulo,descripcion,fecha_evento,horario)
             VALUES (%s,%s,%s,%s,%s,%s)
         """
+        x = data['fecha_evento'].split('/')
+        x = x[2]+'-'+x[1]+'-'+x[0]
         cursor = cls.db.cursor()
-        cursor.execute(sql,(idUser,hoy,data['titulo'],data['descripcion'],data['fecha_evento'],data['horario']))
+        cursor.execute(sql,(idUser,hoy,data['titulo'],data['descripcion'],x,data['horario']))
         cls.db.commit()
 
         return True

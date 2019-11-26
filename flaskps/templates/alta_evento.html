@@ -36,7 +36,7 @@
                         <div class="row">
                           <div class="col-md-6 form-group">
                             <label for="fecha_evento">Fecha del evento</label>
-                            <input class="form-control" type="text" name="dia" value="" id="fecha"/>  
+                            <input class="form-control" type="text" name="fecha_evento" value="" id="fecha"/>  
                           </div>
                          <div class="col-md-6 form-group">
                                 <label for="horario">Hora</label>
@@ -76,44 +76,45 @@
 {% block scripts %}
     {{super()}}
         
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-        function validateForm(){
-          ok=''
-          if(document.getElementById('titulo').value == ''){ ok ='Debe ingresar un titulo' }
-          if(document.getElementById('descripcion').value == ''){ ok ='Debe ingresar una descripcion' }
-          if(document.getElementById('fecha_evento').value == 0000-00-00){ ok = 'Debe ingresar una fecha valida' }
-          if(document.getElementById('horario').value == ''){ ok ='Debe ingresar un horario' }
-          $.confirm({
-            type:'green',
-            title: 'Crear evento',
-            content: 'Seguro desea crear un evento?' ,
-            buttons: {
-                Confirmar: function () {                
-                  if (ok == ''){document.getElementById("formEvento").submit();}
-                  else{
-                    $.alert({
-                    title: 'Error',
-                    content: ok,
-                    type: 'red',
-                    });
-                  }
-                },
-                Cancelar: function () {
-                  null
-                },
-            }
-        })     
-        return false
-      }
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> 
+ <script>
+      function validateForm(){
+        ok=''
+        if(document.getElementById('titulo').value == ''){ ok ='Debe ingresar un titulo' }
+        if(document.getElementById('descripcion').value == ''){ ok ='Debe ingresar una descripcion' }
+        if(document.getElementById('fecha').value == 0000-00-00){ ok = 'Debe ingresar una fecha valida' }
+        if(document.getElementById('horario').value == ''){ ok ='Debe ingresar un horario' }
+        $.confirm({
+          type:'green',
+          title: 'Crear evento',
+          content: 'Seguro desea crear un evento?' ,
+          buttons: {
+              Confirmar: function () {                
+                if (ok == ''){document.getElementById("formEvento").submit();}
+                else{
+                  $.alert({
+                  title: 'Error',
+                  content: ok,
+                  type: 'red',
+                  });
+                }
+              },
+              Cancelar: function () {
+                null
+              },
+          }
+      })     
+      return false
+    }
 
-    </script>
+  </script>
 <script>
   $(function() {
-    $('input[name="dia"]').daterangepicker({
+    $('input[name="fecha_evento"]').daterangepicker({
       singleDatePicker: true,
       showDropdowns: true,
       minDate: moment(),
