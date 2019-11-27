@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% if regis %}
-    {% set encabezado = 'Registros de alimentacion de todos los comedores'  %}
+    {% set encabezado = 'Registros de alimentación de todos los comedores'  %}
 {% else %}
     {%set encabezado = 'No hay registros cargados'%}
 {% endif %}
@@ -30,7 +30,7 @@
               <th class="th-sm">Asistentes</th>
               <th class="th-sm">Horario de Comida</th>
               <th class="th-sm">Alimentos</th>
-              <th class="th-sm">Descripcion</th>
+              <th class="th-sm">Descripción</th>
               <th class="th-sm">Comedor</th>
               {% if session['rol'] == '3' %}
               <th class="th-sm">Modificar</th>

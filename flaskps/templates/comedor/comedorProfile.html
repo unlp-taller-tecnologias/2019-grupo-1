@@ -50,7 +50,7 @@
                                 </li>
                                 {% if comedor.descripcion != '' %}
                                 <li class="nav-item">
-                                    <a class="nav-link" id="desc-tab" data-toggle="tab" href="#desc" role="tab" aria-controls="desc" aria-selected="false">Descripcion del comedor</a>
+                                    <a class="nav-link" id="desc-tab" data-toggle="tab" href="#desc" role="tab" aria-controls="desc" aria-selected="false">Descripción del comedor</a>
                                 </li>    
                                 {% endif %}
                             </ul>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Direccion:</label>
+                                                <label>Dirección:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.direccion}}</p>
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Organizacion:</label>
+                                                <label>Organización:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.organizacion}}</p>
@@ -101,7 +101,7 @@
                                         {% if comedor.telefono != '' %}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Telefono:</label>
+                                                <label>Teléfono:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.telefono}}</p>
@@ -110,7 +110,7 @@
                                         {%endif%}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Dias y horarios de funcionamiento:</label>
+                                                <label>Días y horarios de funcionamiento:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{comedor.dia_yhorario}}</p>
@@ -160,7 +160,7 @@
                     </div>
                 </div>
             <hr>
-            <h1>Ubicacion del comedor</h1>
+            <h1>Ubicación del comedor</h1>
             <br>
             <div id="map" style="height:300px"></div>
             <hr>
@@ -172,7 +172,7 @@
                       <thead>
                         <tr>
                             <th class="th-sm">Tipo</th>
-                            <th class="th-sm">Descripcion</th>
+                            <th class="th-sm">Descripción</th>
                             <th class="th-sm">Estado</th>
                             {% if (session['rol'] == '3') or ((session['rol'] == '1') and (comedor.id == session['idComedor']) ) %}
                             <th class="th-sm">Modificar</th>
@@ -208,7 +208,7 @@
                       <th class="th-sm">Asistentes</th>
                       <th class="th-sm">Horario de Comida</th>
                       <th class="th-sm">Alimentos</th>
-                      <th class="th-sm">Descripcion</th>
+                      <th class="th-sm">Descripción</th>
                       {% if (session['rol'] == '3') or ((session['rol'] == '1') and (comedor.id == session['idComedor']) ) %}
                       <th class="th-sm">Modificar</th>
                       <th class="th-sm">Eliminar</th>

@@ -39,11 +39,11 @@
                             </div> 
                         <div class="row">
                            <div class="col-md-6 form-group">
-                            <label for="name">Organizacion a cargo (Opcional)</label>
+                            <label for="name">Organización a cargo (Opcional)</label>
                             <input type="text"  name="org" class="form-control " maxlength="30" >
                           </div>
                           <div class="col-md-6 form-group">
-                              <label for="phone">Direccion</label>
+                              <label for="phone">Dirección</label>
                               <input type="text" name="dir" id="phon" class="form-control " required maxlength="50">
                             </div>  
                         </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="row">
                           <div class="col-md-6 form-group">
-                            <label for="name">Telefono(Opcional)</label>
+                            <label for="name">Teléfono(Opcional)</label>
                             <input type="number" name="telC" id="telC" class="form-control " maxlength="30">
                           </div>
                           <div class="col-md-6 form-group">
@@ -75,13 +75,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <label for="phone">Dias y horarios de funcionamiento</label>
+                                <label for="phone">Días y horarios de funcionamiento</label>
                                 <input type="text" name="dias" id="dias" class="form-control-file form-control " required maxlength="60" placeholder="Martes 18:00hs - Jueves 12:00hs">
                             </div>
                         </div>
                         <div class="row">
                           <div class="col-md-12 form-group">
-                            <label for="name">Descripcion</label>
+                            <label for="name">Descripción</label>
                             <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea required placeholder="Contanos sobre el comedor y sus objetivos.">
                           </div> 
                         </div>
@@ -105,14 +105,14 @@
                         <input type="email"  name="mail" class="form-control " required>
                       </div>
                       <div class="col-md-6 form-group">
-                          <label for="name">Telefono</label>
+                          <label for="name">Teléfono</label>
                           <input type="number"  name="tel" class="form-control " required>
                         </div>
                     </div>
                     
                     <hr>
-                    <h4> Ubicacion</h4>
-                    <p>Presione en el mapa,  la ubicacion del comedor lo mas preciso posible!</p>
+                    <h4> Ubicación</h4>
+                    <p>Presione en el mapa,  la ubicación del comedor lo mas preciso posible.</p>
                     <div id="map" style="height:400px;margin-bottom:15px;"></div>                    
                     <input id="lat" name="lat" type="hidden" value="0">
                     <input id="lng" name="lng" type="hidden" value="0">                                         
@@ -166,7 +166,7 @@
       if(document.getElementById('lat').value == 0){
         $.alert({
           title: 'Error al validar comedor',
-          content: 'Debe elegir una ubicacion en el mapa!',
+          content: 'Debe elegir una ubicación en el mapa!',
           type: 'red',
          });
         return false}

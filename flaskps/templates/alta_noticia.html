@@ -17,13 +17,13 @@
                      <form id='formNoticia' action="{{ url_for('create_noticia') }}" method="post" enctype="multipart/form-data">
                           <div class="row">
                               <div class="col-md-12 form-group">
-                                <label for="titulo">Titulo</label>
+                                <label for="titulo">Título</label>
                                 <input type="text" id="titulo" name="titulo" class="form-control " required maxlength="24">
                               </div>
                             </div>
                              <div class="row">
                           <div class="col-md-12 form-group">
-                            <label for="descripcion">Descripcion</label>
+                            <label for="descripcion">Descripción</label>
                             <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
                           </div>   
                         </div>
@@ -76,14 +76,14 @@
       $.confirm({
         type:'green',
         title: 'Guardar cambios',
-        content: 'Seguro desea guardar los cambios realizados?' ,
+        content: '¿Desea guardar los cambios realizados?' ,
         buttons: {
             Confirmar: function () {                
               if (ok){document.getElementById("formNoticia").submit();}
               else{
                 $.alert({
                   title: 'Error',
-                  content: 'Debe ingresar un titulo y descripcion!',
+                  content: 'Debe ingresar un título y descripción',
                   type: 'red',
                  });
               }

@@ -21,7 +21,7 @@
                     <form id='formNoticia' action="{{ url_for('editando_noticia') }}" method="post" enctype="multipart/form-data">
                           <div class="row">
                               <div class="col-md-6 form-group">
-                                <label for="titulo">Titulo</label>
+                                <label for="titulo">Título</label>
                                 <input value="{{ noticia.titulo }}" type="text" id="titulo" name="titulo" class="form-control " required maxlength="24">
                               </div>
                               <div class="col-md-6 form-group">
@@ -31,7 +31,7 @@
                             </div>
                              <div class="row">
                           <div class="col-md-12 form-group">
-                            <label for="descripcion">Descripcion</label>
+                            <label for="descripcion">Descripción</label>
                             <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required>{{ noticia.descripcion }}</textarea>
                           </div>   
                         </div>
@@ -112,13 +112,13 @@
 
     function validateForm(){
       ok= ''
-      if(document.getElementById('titulo').value == ''){ ok ='Debe ingresar un titulo' }
-      if(document.getElementById('descripcion').value == ''){ ok ='Debe ingresar una descripcion' }
+      if(document.getElementById('titulo').value == ''){ ok ='Debe ingresar un título' }
+      if(document.getElementById('descripcion').value == ''){ ok ='Debe ingresar una descripción' }
       if(document.getElementById('fecha').value == 0000-00-00){ ok = 'Debe ingresar una fecha valida' }
       $.confirm({
         type:'green',
         title: 'Guardar cambios',
-        content: 'Seguro desea guardar los cambios realizados?' ,
+        content: '¿Desea guardar los cambios realizados?' ,
         buttons: {
             Confirmar: function () {                
               if (ok == ''){document.getElementById("formNoticia").submit();}
