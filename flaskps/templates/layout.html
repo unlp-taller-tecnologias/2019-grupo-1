@@ -68,6 +68,7 @@
                   <a class="dropdown-item" href="{{ url_for('new_necesidad') }}">Alta Necesidad</a>
                   {% elif session['rol'] == '3' %}
                   <a class="dropdown-item" href="{{ url_for('new_registro') }}">Alta registro</a>
+                  <a class="dropdown-item" href="{{ url_for('new_necesidad') }}">Alta Necesidad</a>
                   {% else %}
                   <a class="dropdown-item" href="{{ url_for('user_profile' , idUser='') }}{{ session['id']|string }}">Mi perfil</a>
                   {% endif %}

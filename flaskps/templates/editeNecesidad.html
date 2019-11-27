@@ -21,25 +21,20 @@
                     <form id='form' action="{{ url_for('editando_necesidad')}}" method="post">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="name">Comedor: </label>
-                                <select class="form-control" name="comedor" id="comedor" required>
-                                    <option value="" selected>Seleccione un comedor</option>
-                                  {% set com = False %}
-                                  {% if session['idComedor'] %}
-                                    {% set com = True %}
-                                  {% endif %}  
-                                  {% for elem in comedores %}
-                                    {% if ( com == False) %}
-                                      <option value={{ elem.id}}  {% if elem.id == necesidad.comedor_id %} selected {% endif %}>{{elem.nombre|upper}}</option>
-                                    {% endif %}
-                                    {% if (com) and (session['idComedor'] == elem.id) %}
-                                      <option value={{ session['idComedor']}}  {% if elem.id == necesidad.comedor_id %} selected {% endif %}>{{elem.nombre|upper}}</option>
-                                    {% endif %}
-                                  {% endfor %}
-                                  
-                                </select>             
+                                {% if (session['rol'] == '3') %}
+                                <label for="desc">Comedor:</label>
+                                  <select id="comedor" name="comedor" class="form-control" name="idc" required>
+                                    <option value="">Seleccione un comedor</option>
+                                    {% for elem in comedores %}
+                                    <option value="{{ elem.id}}"  selected>{{elem.nombre}}</option>
+                                    {% endfor %}
+                                  </select>
+                          
+                          {% else %}
+                            <input type="hidden" id="comedor" name="comedor" value="{{session['idComedor']}}">
+                          {% endif %} 
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-{% if (session['rol'] == '3') %}6 {% else %}12 {% endif%} form-group">
                                 <label for="name">Tipo de necesidad: </label>
                                 <select class="form-control" name="tipo" id="nec">
                                     <option value="" selected>Seleccione una necesidad</option>
