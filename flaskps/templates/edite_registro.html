@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% set encabezado = 'Editar Registro de Alimentacion'  %}
+{% set encabezado = 'Editar Registro de Alimentación'  %}
 {% block styles %}
   {{super()}}
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -58,7 +58,7 @@
                       <br>
                       <div class="row">
                          <div class="col-md-12 form-group">
-                          <label for="desc">Descripción:</label>
+                          <label for="desc">Descripción (opcional):</label>
                             <textarea class="form-control" name="desc" id="desc" rows="2" placeholder="Descripcion. Es opcional">{{ registro.observaciones}}</textarea>
                         </div>
                       </div>
@@ -143,7 +143,7 @@
         $.confirm({
           type:'green',
           title: 'Guardar cambios',
-          content: 'Seguro desea guardar los cambios realizados?' ,
+          content: 'Seguro que desea guardar los cambios realizados?' ,
           buttons: {
               Confirmar: function () {                
                 if (ok == ''){document.getElementById("formReg").submit();}

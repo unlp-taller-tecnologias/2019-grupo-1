@@ -59,17 +59,17 @@
                         </div>
                         <div class="row">
                           <div class="col-md-6 form-group">
-                            <label for="name">Teléfono(Opcional)</label>
+                            <label for="name">Teléfono (Opcional)</label>
                             <input type="number" value="{{ comedor.telefono}}" name="telC" id="telC" class="form-control " maxlength="30">
                           </div>
                           <div class="col-md-6 form-group">
-                            <label for="phone">Foto(Opcional)</label>
+                            <label for="phone">Foto (Opcional)</label>
                             <input type="file" value="{{ comedor.foto}}" name="file" id="fotoC" class="form-control-file form-control " >
                           </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
-                              <label for="name">Red Social(Opcional)</label>
+                              <label for="name">Red Social (Opcional)</label>
                               <input type="text" value="{{ comedor.red_social}}" name="red" id="RedS" class="form-control " maxlength="50">
                             </div>                           
                         </div>
@@ -112,7 +112,7 @@
                     <input id="idRef" name="idRef" type="hidden" value="{{ref.id}}">
                     <hr>
                     <h4> Ubicación</h4>
-                    <p>Presione en el mapa,  la ubicación del comedor lo mas preciso posible!</p>
+                    <p>Presione en el mapa la ubicación del comedor lo mas preciso posible!</p>
                     <div id="map" style="height:400px;margin-bottom:15px;"></div>                    
                     <input id="lat" name="lat" type="hidden" value="{{ comedor.latitud }}">
                     <input id="lng" name="lng" type="hidden" value="{{ comedor.longitud }}">                                         
@@ -204,7 +204,7 @@
       var popup = L.popup();
       popup
           .setLatLng(latlng)
-          .setContent("<b>Aca se ubicaria el comedor!</b>")
+          .setContent("<b>Acá se ubicaría el comedor!</b>")
           .openOn(mymap);
       
       function onMapClick(e) {
@@ -212,7 +212,7 @@
         document.getElementById('lng').value = e.latlng['lng']
         popup
           .setLatLng(e.latlng)
-          .setContent("<b>Aca se ubicaria el comedor!</b>")
+          .setContent("<b>Acá se ubicaría el comedor!</b>")
           .openOn(mymap);
       }
       mymap.on('click', onMapClick);

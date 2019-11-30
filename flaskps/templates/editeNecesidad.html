@@ -1,6 +1,6 @@
 {% extends "tablaLayout.html" %}
 
-{% set encabezado = 'Editar necesidad'  %} 
+{% set encabezado = 'Editar Necesidad'  %} 
 
 {% block styles %}
     {{ super() }}
@@ -136,7 +136,7 @@
       $.confirm({
         type:'green',
         title: 'Guardar cambios',
-        content: 'Seguro desea guardar los cambios realizados?' ,
+        content: 'Seguro que desea guardar los cambios realizados?' ,
         buttons: {
             Confirmar: function () {                
               if (ok == ''){document.getElementById("form").submit();}

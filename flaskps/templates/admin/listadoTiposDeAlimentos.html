@@ -79,7 +79,7 @@
               $.ajax({url: "{{ url_for('create_alimento', nombre='' ) }}"+alimento, success: function(result){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se creo el alimento correctamente ' ,
+                  content:  'Se creó el alimento correctamente ' ,
                   type: ('green'),
                 });
                 location.reload()               
@@ -104,7 +104,7 @@
                 if(result['ok']){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se elimino el alimento correctamente ' ,
+                  content:  'Se eliminó el alimento correctamente ' ,
                   type: ('green'),
                 });
                 var elem = document.getElementById(nombre);

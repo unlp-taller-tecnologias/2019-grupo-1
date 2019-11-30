@@ -33,23 +33,23 @@
         <a class="nav-link" data-toggle="tab" href="#menu3">Necesidades</a>
       </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu4">Alimentacion</a>
+      <a class="nav-link" data-toggle="tab" href="#menu4">Alimentación</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu5">Cambiar informacion</a>
+      <a class="nav-link" data-toggle="tab" href="#menu5">Cambiar información</a>
     </li>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
-      <h3>Configuracion del sitio</h3>
+      <h3>Configuración del sitio</h3>
         <div class="card">
         <div class="card-body text-center border">
           <h2>La cantidad actual de paginado es:</h2>
          <h2>{{cantPaginado}}</h2>
           <hr class="border">
-          <h2>Cambiar cantidad por página</h2>
+          <h2>Cambiar cantidad por páginas</h2>
           <div class="container">
             <div class="row">
               <div class="col-md-4">
@@ -87,10 +87,10 @@
       
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
-      <h3>Menu de usuarios</h3>
+      <h3>Menú de usuarios</h3>
       <div class="card">
       <div class="card-body text-center border">
-        <h2>Para ver los listado de Usuarios</h2>
+        <h2>Para ver los listados de Usuarios</h2>
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -110,10 +110,10 @@
       </div>
     </div>
     <div id="menu2" class="container tab-pane fade"><br>
-      <h3>Menu de comedores</h3>
+      <h3>Menú de comedores</h3>
       <div class="card">
       <div class="card-body text-center border">
-        <h2>Para ver los listado de comedores</h2>
+        <h2>Para ver los listados de comedores</h2>
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -133,10 +133,10 @@
       </div>
     </div>
     <div id="menu3" class="container tab-pane fade"><br>
-      <h3>Menu de necesidades</h3>
+      <h3>Menú de necesidades</h3>
       <div class="card">
       <div class="card-body text-center border">
-        <h2>Para ver los listado de necesidades y crear tipos de necesidades</h2>
+        <h2>Para ver los listados de necesidades y crear tipos de necesidades</h2>
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -158,16 +158,16 @@
       
     </div>
     <div id="menu4" class="container tab-pane fade"><br>
-      <h3>Menu de alimentacion</h3>
+      <h3>Menú de alimentación</h3>
       <div class="card">
       <div class="card-body text-center border">
-        <h2>Para ver los listado de registros y crear alimentos</h2>
+        <h2>Para ver los listados de registros y crear alimentos</h2>
       <div class="container">
         <div class="row">
           <div class="col-md-3">
           </div>                      
           <div class="col-sm-3">    
-            <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for('list_registro') }}'">Registro de alimentacion</button>
+            <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for('list_registro') }}'">Registro de alimentación</button>
           </div>
           <div class="col-sm-3">    
             <button class="btn btn-success" role="button" onclick="window.location.href='{{ url_for( 'alimentos_list') }}'">Tipos de Alimentos</button>
@@ -234,7 +234,7 @@
         $.confirm({
             type:'red',
             title: 'Deshabilitar Sitio',
-            content: 'Seguro que desea deshabilitar el sitio?',
+            content: '¿Seguro que desea deshabilitar el sitio?',
             buttons: {
                 Confirmar: function () {
                     window.location.href='{{ url_for( 'updateStateSitioDeshabilitar') }}';
@@ -249,7 +249,7 @@
         $.confirm({
             type:'green',
             title: 'Habilitar Sitio',
-            content: 'Seguro que desea habilitar el sitio?',
+            content: '¿Seguro que desea habilitar el sitio?',
             buttons: {
                 Confirmar: function () {
                     window.location.href='{{ url_for( 'updateStateSitioHabilitar') }}';

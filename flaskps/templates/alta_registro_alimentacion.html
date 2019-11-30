@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% set encabezado = 'Crear Registro de Alimentacion'  %}
+{% set encabezado = 'Crear Registro de Alimentación'  %}
 {% block styles %}
   {{super()}}
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -57,7 +57,7 @@
                       <br>
                       <div class="row">
                          <div class="col-md-12 form-group">
-                          <label for="desc">Descripción:</label>
+                          <label for="desc">Descripción (opcional):</label>
                             <textarea class="form-control" name="desc" id="desc" rows="2" placeholder="Descripcion. Es opcional"></textarea>
                         </div>
                       </div>
@@ -137,7 +137,7 @@
         $.confirm({
           type:'green',
           title: 'Crear registro',
-          content: 'Seguro desea crear un registro?' ,
+          content: 'Seguro que desea crear un registro?' ,
           buttons: {
               Confirmar: function () {                
                 if (ok == ''){document.getElementById("formReg").submit();}

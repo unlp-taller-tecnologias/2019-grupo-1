@@ -59,7 +59,7 @@
       if(tipo === ""){
         $.alert({
           title: 'Error al cargar',
-          content:  'Debe ingresar el nombre tipo de necesidad' ,
+          content:  'Debe ingresar el nombre del tipo de necesidad' ,
           type: ('red'),
         });  
       }else if(idBuscado != null){
@@ -79,7 +79,7 @@
               $.ajax({url: "{{ url_for('create_tipo_necesidad', nombre='' ) }}"+tipo, success: function(result){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se creo el tipo de necesidad correctamente ' ,
+                  content:  'Se creó el tipo de necesidad correctamente ' ,
                   type: ('green'),
                 });
                 location.reload()               
@@ -105,7 +105,7 @@
                 if(result['ok']){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se elimino el tipo de necesidad correctamente ' ,
+                  content:  'Se eliminó el tipo de necesidad correctamente ' ,
                   type: ('green'),
                 });
                 var elem = document.getElementById(nombre);

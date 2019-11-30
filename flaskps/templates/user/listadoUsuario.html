@@ -1,6 +1,6 @@
 {% extends "tablaLayout.html" %}
 
-{% set encabezado = 'Listado de usuarios'  %}
+{% set encabezado = 'Listado de Usuarios'  %}
 
 {% block cuerpo %}
 
@@ -68,7 +68,7 @@
                 if(result['ok']){
                 $.alert({
                   title: 'Usuario eliminado',
-                  content:  'Se elimino correctamente ' ,
+                  content:  'Se eliminó correctamente ' ,
                   type: ('green'),
                 });
                 location.reload()

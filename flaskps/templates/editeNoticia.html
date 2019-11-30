@@ -1,6 +1,6 @@
 {% extends "tablaLayout.html" %}
 
-{% set encabezado = 'Editar noticia'  %} 
+{% set encabezado = 'Editar Noticia'  %} 
 
 {% block styles %}
     {{ super() }}
@@ -37,7 +37,7 @@
                         </div>
                          <div class="row">
                               <div class="col-md-12 form-group">
-                                <label for="foto">Foto</label>
+                                <label for="foto">Foto (opcional)</label>
                                 <br>
                                 {% if noticia.foto != '' %}
                                   <img style="height: 350px;width:80%;padding-bottom:20px;" src= "{{ url_for('static', filename='images/noticia/') }}{{noticia.id}}{{noticia.foto}}" />
@@ -95,7 +95,7 @@
                 if(result['ok']){
                 $.alert({
                   title: 'Mensaje informativo',
-                  content:  'Se elimino la noticia correctamente ' ,
+                  content:  'Se eliminó la noticia correctamente ' ,
                   type: ('green'),
                 });
                 }else{
@@ -114,7 +114,7 @@
       ok= ''
       if(document.getElementById('titulo').value == ''){ ok ='Debe ingresar un título' }
       if(document.getElementById('descripcion').value == ''){ ok ='Debe ingresar una descripción' }
-      if(document.getElementById('fecha').value == 0000-00-00){ ok = 'Debe ingresar una fecha valida' }
+      if(document.getElementById('fecha').value == 0000-00-00){ ok = 'Debe ingresar una fecha válida' }
       $.confirm({
         type:'green',
         title: 'Guardar cambios',

@@ -59,17 +59,17 @@
                         </div>
                         <div class="row">
                           <div class="col-md-6 form-group">
-                            <label for="name">Teléfono(Opcional)</label>
+                            <label for="name">Teléfono (Opcional)</label>
                             <input type="number" name="telC" id="telC" class="form-control " maxlength="30">
                           </div>
                           <div class="col-md-6 form-group">
-                            <label for="phone">Foto(Opcional)</label>
+                            <label for="phone">Foto (Opcional)</label>
                             <input type="file" name="file" id="fotoC" class="form-control-file form-control " >
                           </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
-                              <label for="name">Red Social(Opcional)</label>
+                              <label for="name">Red Social (Opcional)</label>
                               <input type="text" name="red" id="RedS" class="form-control " maxlength="50">
                             </div>                           
                         </div>
@@ -112,7 +112,7 @@
                     
                     <hr>
                     <h4> Ubicación</h4>
-                    <p>Presione en el mapa,  la ubicación del comedor lo mas preciso posible.</p>
+                    <p>Presione en el mapa la ubicación del comedor lo mas preciso posible.</p>
                     <div id="map" style="height:400px;margin-bottom:15px;"></div>                    
                     <input id="lat" name="lat" type="hidden" value="0">
                     <input id="lng" name="lng" type="hidden" value="0">                                         
@@ -193,7 +193,7 @@
       var popup = L.popup();
       popup
           .setLatLng([-34.92035241690136, -57.954786306945614])
-          .setContent("<b>Aca se ubicaria el comedor!</b>")
+          .setContent("<b>Acá se ubicaría el comedor!</b>")
           .openOn(mymap);
       
       function onMapClick(e) {
@@ -201,7 +201,7 @@
         document.getElementById('lng').value = e.latlng['lng']
         popup
           .setLatLng(e.latlng)
-          .setContent("<b>Aca se ubicaria el comedor!</b>")
+          .setContent("<b>Acá se ubicaría el comedor!</b>")
           .openOn(mymap);
       }
       mymap.on('click', onMapClick);
