@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
-{% set encabezado = 'Alta usuario' %}
+{% set encabezado = 'Alta Colaborador en red' %}
 
   {% block cuerpo %}
   
       <!-- Contact Section -->
         <div class="container">
+          <p style="font-size: 1.2rem;padding:3px;" class="card ">
+            El propósito del colaborador en red es promover a través de acciones en el campo de una alimentacion saludable y desarrollo sostenible, aportando conocimiento, experiencias, herramientas, recursos, que den respuesta a necesidades de Centros de Asistencia Alimentaria de la ciudad de La Plata, pudiendo contactarse directamente con el centro y trabajar en Red. 
+          </p>
     
           <!-- Contact Section Form -->
           <div class="row">
@@ -33,7 +36,7 @@
                           </div>
                           <div class="col-md-6 form-group">
                               <label for="name">Nombre de usuario</label>
-                              <input type="text"  name="user" class="form-control " required  maxlength="24">
+                              <input type="text" id="user"  name="user" class="form-control " required  maxlength="24">
                             </div>
                         </div>
                         <div class="row">
@@ -59,7 +62,7 @@
                         <div class="row">
                           <div class="col-md-12 form-group">
                             <label for="name">Descripción</label>
-                            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control" name="desc" id="desc" rows="3"></textarea>
                           </div>   
                         </div>
                           
@@ -96,6 +99,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <script>
     function validateForm() {
+      if($('#user').val().indexOf(' ') !== -1){
+        $.alert({
+          title: 'Error al validar usuario',
+          content: 'El nombre de usuario no puede contener espacios!',
+          type: 'red',
+         });
+        return false}
+      if($('#desc').val()== ''){
+        $.alert({
+          title: 'Error al validar usuario',
+          content: 'Debe ingresar una descripcion!',
+          type: 'red',
+        });
+          return false}
       var pass = document.getElementById('pass').value;
       var pass1 = document.getElementById('pass1').value;
       if( pass != pass1){
@@ -105,6 +122,7 @@
           type: 'red',
          });
         return false}
+      $(":submit").attr("disabled", true);
       return true
       }
   </script>

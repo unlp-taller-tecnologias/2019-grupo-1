@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% set encabezado = 'Registrar Comedor' %}
+{% set encabezado = 'Alta Asistente alimentario' %}
 
 {% block styles %}
   {{ super() }}
@@ -14,7 +14,9 @@
   
       <!-- Contact Section -->
         <div class="container">
-    
+            <p style="font-size: 1.2rem;padding:3px;" class="card ">
+                Asistentes alimentarios  son aquellas organizaciones comunitarias y personas que brindan un servicio de alimentacion y contención social a niños, niñas y sus familias, al registrarse pueden incorporarse al trabajo en Red informando sus necesidades y actividades que prestan.
+              </p>
           <!-- Contact Section Form -->
           <div class="row">
             <div class="col-lg-9 mx-auto">
@@ -25,15 +27,15 @@
                     <div class="col-md-12 mb-4 order-2">
                       <form id='formUser' action="{{ url_for('comedor_create') }}" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
                           
-                        <h4>Acerca del comedor</h4>
+                        <h4>Acerca del A. Alimentario</h4>
                         <div class="row">
                               <div class="col-md-6 form-group">
-                                <label for="name">Nombre del comedor </label>
+                                <label for="name">Nombre del A. Alimentario </label>
                                 <input type="text" id="nameC" name="nombreC" class="form-control " required maxlength="30">
                               </div>
                               <div class="col-md-6 form-group">
                                 <label for="name">Nombre de usuario</label>
-                                <input type="text"  name="user" class="form-control " required maxlength="30">
+                                <input type="text"  name="user" id="user" class="form-control " required maxlength="30">
                               </div>
                              
                             </div> 
@@ -153,6 +155,13 @@
   <script>
 
     function validateForm() {
+      if($('#user').val().indexOf(' ') !== -1){
+        $.alert({
+          title: 'Error al validar',
+          content: 'El nombre de usuario no puede contener espacios!',
+          type: 'red',
+         });
+        return false}
       var pass = document.getElementById('pass').value;
       var pass1 = document.getElementById('pass1').value;
       if( pass != pass1){
@@ -170,7 +179,7 @@
           type: 'red',
          });
         return false}
-      
+      $(":submit").attr("disabled", true);
       return true}
   </script>
   

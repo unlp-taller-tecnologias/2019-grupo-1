@@ -56,7 +56,7 @@ def cambiarCantidad():
         stateSitio=Sitio.stateSitio()
         cantP=Sitio.cantPaginado()
         flash(['La cantidad se cambio correctamente', 'green'])
-        return render_template('admin/panelAdmin.html',state=stateSitio[0]['estado'],cantPaginado=cantP[0]['cant_paginado'])
+        return redirect(url_for('panelAdmin'))
     return render_template(Permiso)
     
 def autorizacion():

@@ -149,6 +149,7 @@ def actualizarEstado():
         Comedor.updateRol(rol,request.args.get('idCom'))        
         data = Comedor_usuario.find_user_by_comedorid(request.args.get('idCom'))
         user = User.find_user_by_id(data['referente_id'])
+        User.updateRol(rol,data['referente_id'])        
         if rol == '1':    
             flash(["El comedor es parte del sistema", 'green'])
             enviar('Comedor Aceptado','El usuario ha sido aceptado y ahora posee acceso al sistema.',user['mail_u'])

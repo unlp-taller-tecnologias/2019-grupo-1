@@ -29,7 +29,7 @@
       <!-- Navigation -->
       <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
           <div class="container">
-          <a class="navbar-brand js-scroll-trigger" href="{{url_for('index')}}">Comedores</a>
+          <a class="navbar-brand js-scroll-trigger" href="{{url_for('index')}}">Accion Alimentaria</a>
           <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               Menú
               <i class="fas fa-bars"></i>
@@ -41,7 +41,7 @@
               </li>
               {% if  'username' in session %}                   
               <li class="nav-item mx-0 mx-lg-1">                
-                <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('comedor_list')}}">Comedores</a>
+                <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('comedor_list')}}">A. Alimentarios</a>
               </li>
               {% endif %}
               <li class="nav-item dropdown">
@@ -85,8 +85,8 @@
                   <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">Participar</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="{{ url_for('altaComedor') }}">Registrar Comedor</a>
-                  <a class="dropdown-item" href="{{ url_for('altaUser') }}">Registrar Usuario</a>
+                  <a class="dropdown-item" href="{{ url_for('altaComedor') }}">Registrar A. Alimentario</a>
+                  <a class="dropdown-item" href="{{ url_for('altaUser') }}">Registrar Colaborador</a>
                 </div>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
@@ -152,7 +152,7 @@
   <!-- Copyright Section -->
   <section class="copyright py-4 text-center text-white">
       <div class="container">
-      <small>Todos los derechos reservados &copy; Comedores 2019</small>
+      <small>Todos los derechos reservados &copy; Accion Alimentaria 2019</small>
       </div>
   </section>
   <div class="scroll-to-top d-lg-none position-fixed ">
