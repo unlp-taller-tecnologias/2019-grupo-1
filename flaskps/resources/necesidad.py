@@ -12,7 +12,7 @@ def new_necesidad():
         Tipo_necesidad.db=get_db()
         Comedor.db=get_db()
         tipo_necesidades = Tipo_necesidad.all()
-        comedores = Comedor.all()
+        comedores = Comedor.allActives()
         return render_template('alta_necesidad.html',tipo_necesidades= tipo_necesidades, comedores= comedores)
     return render_template(Permiso)	
     
