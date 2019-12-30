@@ -2,7 +2,7 @@ import os
 from flask import Flask, flash, request, redirect, url_for,  send_from_directory
 from werkzeug.utils import secure_filename
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif','jfif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'cacs'
 

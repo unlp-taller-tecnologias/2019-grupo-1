@@ -37,7 +37,8 @@
                                         Usuario pendiente
                                     </h6>
                                     {% endif %}
-                                    {% if session and (session['rol'] == '3' or session['id'] == user.id) %}
+                                    {{ user.estado}}
+                                    {% if session and ((session['rol'] == '3' or session['id'] == user.id)) and user.estado_u == '1' %}
                                     <div class="col-md-2">
                                         <input type="button" class="btn btn-primary px-3 py-2" onclick="window.location.href='{{ url_for( 'editar_user' , id='') }}{{ request.args.get('idUser') }}'" name="btnAddMore" value="Editar usuario"/>
                                     </div>

@@ -36,7 +36,7 @@
                                         Comedor
                                     </h6>
                                     <div class="col-md-2">
-                                            {% if session and (session['rol'] == '3' or session['idComedor'] == comedor.id) %}
+                                            {% if (session and (session['rol'] == '3' or session['idComedor'] == comedor.id)) and comedor.estado == '1' %}
                                             <input type="button"  class="btn btn-primary px-3 py-2" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_comedor' , idComedor='') }}{{ request.args.get('idComedor') }}'" name="btnAddMore" value="Editar comedor">
                                             {% endif %}                  
                                         </div>

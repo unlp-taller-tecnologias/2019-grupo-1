@@ -145,6 +145,8 @@ def actualizarEstado():
     Permiso = habilitedAccesAdmin()
     if Permiso == 'true':
         Comedor.db=get_db()
+        Comedor_usuario.db=get_db()
+        User.db=get_db()
         rol = request.args.get('rol')
         Comedor.updateRol(rol,request.args.get('idCom'))        
         data = Comedor_usuario.find_user_by_comedorid(request.args.get('idCom'))

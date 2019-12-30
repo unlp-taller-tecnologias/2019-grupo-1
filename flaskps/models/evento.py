@@ -20,10 +20,10 @@ class Evento(object):
     @classmethod
     def allEventos(cls, hoy):
         sql = """
-            SELECT id,usuario_id,fecha,titulo,descripcion,fecha_evento,horario FROM evento WHERE estado_e=0 AND fecha_evento > %s ORDER BY fecha_evento
+            SELECT id,usuario_id,fecha,titulo,descripcion,fecha_evento,horario FROM evento WHERE estado_e=0 ORDER BY fecha_evento DESC
             """
         cursor = cls.db.cursor()
-        cursor.execute(sql, hoy)
+        cursor.execute(sql)
         return cursor.fetchall()
 
 

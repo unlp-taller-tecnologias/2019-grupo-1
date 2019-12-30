@@ -3,15 +3,15 @@ from email.mime.text import MIMEText
 import smtplib
  
 
-def enviar(sujeto="Sistema",contenido="Si ves esto es que hubo en error en el contenido del mail.",mailTo="redcomedoreslp@gmail.com"):
+def enviar(sujeto="Sistema",contenido="Si ves esto es que hubo en error en el contenido del mail.",mailTo="envios@xn--foroporlaniez-skb.org.ar"):
     # create message object instance
     msg = MIMEMultipart()
     
     message = contenido
     
     # setup the parameters of the message
-    password = "Huellaverde19"
-    msg['From'] = "redcomedoreslp@gmail.com"
+    password = "sistema2020"
+    msg['From'] = "envios@xn--foroporlaniez-skb.org.ar"
     msg['To'] = mailTo
     msg['Subject'] = sujeto
     
@@ -19,7 +19,7 @@ def enviar(sujeto="Sistema",contenido="Si ves esto es que hubo en error en el co
     msg.attach(MIMEText(message, 'plain'))
     
     #create server
-    server = smtplib.SMTP('smtp.gmail.com: 587')
+    server = smtplib.SMTP('mail.xn--foroporlaniez-skb.org.ar:587')
     
     server.starttls()
     
