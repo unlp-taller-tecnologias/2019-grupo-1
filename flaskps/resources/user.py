@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, url_for, session, abort, f
 from flaskps.models.user import User
 from flaskps.models.sitio import Sitio
 from flaskps.models.evento import Evento
-from flaskps.helpers.mail import enviar
+# from flaskps.helpers.mail import enviar
 from flaskps.db import get_db
 from flaskps.helpers.auth import *
 from flaskps.helpers.files import upload_file
@@ -28,7 +28,7 @@ def create():
             filename =User.last_user()
             upload_file('usuario',str(filename['id']),file)
             flash(["El usuario debe ser confirmado por el Admin para poder ser utilizado.", 'green'])
-            enviar('Nuevo usuario','Un nuevo usuario se ha registrado y requiere de validacion del administrador.')
+            # enviar('Nuevo usuario','Un nuevo usuario se ha registrado y requiere de validacion del administrador.')
             return redirect(url_for('altaUser'))
         flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
         return redirect(url_for('altaUser'))
@@ -89,10 +89,10 @@ def actualizarEstado():
         user = User.find_user_by_id(request.args.get('idUser'))
         if request.args.get('rol') == '1':
             flash(['El usuario fue aceptado en el sistema', 'green'])
-            enviar('Usuario Aceptado','El usuario ha sido aceptado y ahora posee acceso al sistema.',user['mail_u'])
+            # enviar('Usuario Aceptado','El usuario ha sido aceptado y ahora posee acceso al sistema.',user['mail_u'])
         else:
             flash(['El usuario fue rechazado', 'red'])
-            enviar('Usuario Rechazado','El usuario ha sido rechazado.',user['mail_u'])  
+            # enviar('Usuario Rechazado','El usuario ha sido rechazado.',user['mail_u'])  
         return redirect(url_for('usuario_list_p'))
     return render_template(Permiso)  
 
