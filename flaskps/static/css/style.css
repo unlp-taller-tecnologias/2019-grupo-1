@@ -6386,7 +6386,7 @@ button.bg-primary:focus {
 }
 
 .bg-secondary {
-  background-color: #6c757d !important;
+  background-color: #fff !important;
 }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
@@ -6615,6 +6615,17 @@ button.bg-dark:focus {
   display: -webkit-inline-box !important;
   display: -ms-inline-flexbox !important;
   display: inline-flex !important;
+}
+
+@media (max-width: 576px) {
+  #divLogo{
+    width:100%;
+    height: 1%;
+    margin-bottom: 0px;
+  }
+  #divContent{
+    margin-top: 20%;
+  }
 }
 
 @media (min-width: 576px) {

@@ -5,6 +5,7 @@
 {% block head %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
   {{ super() }}
 {% endblock %}
 
@@ -24,13 +25,33 @@
 {% block content %}
     
   {% block navbar %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+     window.onload = function() {
+      $('.dropdown-toggle').css('color','#00c8ca')
+      if( $( window ).width() < 576)
+        $('#divContent').css('margin-top','20%')
+        $('#dh2Text').css('font-size','2rem')
+        $(".nav-link").click(function(){
+          console.log(12)
+          var color = clicked ? 'red' : 'blue';
+          $(this).css('color', color);
+          clicked = !clicked;
+      });
+      };
+  </script>
   <body id="page-top">
 
       <!-- Navigation -->
       <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+          
           <div class="container">
-          <a class="navbar-brand js-scroll-trigger" href="{{url_for('index')}}">Accion Alimentaria</a>
-          <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <div id="divLogo">
+              <img style="width:80%;height:1%;" src= "{{ url_for('static', filename='images/logoText.png') }} " />
+            </div>
+            
+            
+          <button style="margin-top:10px;margin:auto;" class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               Menú
               <i class="fas fa-bars"></i>
           </button>
@@ -41,7 +62,7 @@
               </li>
               {% if  'username' in session %}                   
               <li class="nav-item mx-0 mx-lg-1">                
-                <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('comedor_list')}}">A. Alimentarios</a>
+                <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('comedor_list')}}">Asistentes Alimentarios</a>
               </li>
               {% endif %}
               <li class="nav-item dropdown">
@@ -105,27 +126,27 @@
   {% endblock %}
 
   {% block plantillaContenido %}
-  <div style='background-color: rgb(75, 207, 75);margin:auto;padding:5%;'>
-  <section class=" jumbotron page-section" id="contact"  style='margin:auto;'>
-      <div class="container">
+  <div style='background-color:#00c8ca;margin:auto;padding:5%;'>
+    <section class=" jumbotron page-section" id="contact"  >
+        <div class="container" display='inline' id="divContent" >
 
-      <!-- Contact Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"> {{ encabezado }} </h2>
+        <!-- Contact Section Heading -->
+        <h2 id="dh2Text" class="page-section-heading text-center text-uppercase text-secondary mb-0"> {{ encabezado }} </h2>
 
-      <!-- Icon Divider -->
-      <div class="divider-custom">
-          <div class="divider-custom-line"></div>
-          <div class="divider-custom-icon">
-          <i class="fas fa-star"></i>
-          </div>
-          <div class="divider-custom-line"></div>
-      </div>
+        <!-- Icon Divider -->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon">
+            <i class="fas fa-star"></i>
+            </div>
+            <div class="divider-custom-line"></div>
+        </div>
 
-      <!-- Contenido -->
-      {% block cuerpo %}       {% endblock %}
+        <!-- Contenido -->
+        {% block cuerpo %}       {% endblock %}
 
-      </div>
-  </section>
+        </div>
+    </section>
   </div>
   {% endblock %}
 
@@ -152,7 +173,7 @@
   <!-- Copyright Section -->
   <section class="copyright py-4 text-center text-white">
       <div class="container">
-      <small>Todos los derechos reservados &copy; Accion Alimentaria 2019</small>
+      <small>Todos los derechos reservados &copy; Accion Alimentaria 2020</small>
       </div>
   </section>
   <div class="scroll-to-top d-lg-none position-fixed ">
