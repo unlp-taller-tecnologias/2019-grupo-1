@@ -29,15 +29,11 @@
   <script>
      window.onload = function() {
       $('.dropdown-toggle').css('color','#00c8ca')
-      if( $( window ).width() < 576)
+      if( $( window ).width() < 576){
         $('#divContent').css('margin-top','20%')
         $('#dh2Text').css('font-size','2rem')
-        $(".nav-link").click(function(){
-          console.log(12)
-          var color = clicked ? 'red' : 'blue';
-          $(this).css('color', color);
-          clicked = !clicked;
-      });
+      }
+        
       };
   </script>
   <body id="page-top">
