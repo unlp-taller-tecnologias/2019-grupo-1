@@ -28,13 +28,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
      window.onload = function() {
+      let ini = $( 'li' ).find('#liIniciarSesion')
       $('.dropdown-toggle').css('color','#00c8ca')
       if( $( window ).width() < 576){
         $('#divContent').css('margin-top','20%')
         $('#dh2Text').css('font-size','2rem')
+        ini.css('width','100%')
       }
+      
+      
+      
+      ini.hover(function(){
+        $(this).css('background-color','#019798')
+      });
         
+      ini.mouseleave(function(){
+        $(this).css('background-color','#00c8ca')
+      });
       };
+      
   </script>
   <body id="page-top">
 
@@ -42,8 +54,8 @@
       <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
           
           <div class="container">
-            <div id="divLogo">
-              <img style="width:80%;height:1%;" src= "{{ url_for('static', filename='images/logoText.png') }} " />
+            <div id="divLogo" style="max-height:1%;">
+              <img style="width:82%;" src= "{{ url_for('static', filename='images/logoText.png') }} " />
             </div>
             
             
@@ -56,11 +68,9 @@
               <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('index')}}">Inicio</a>
               </li>
-              {% if  'username' in session %}                   
               <li class="nav-item mx-0 mx-lg-1">                
                 <a class="nav-link  px-lg-2 rounded js-scroll-trigger" href="{{url_for('comedor_list')}}">Asistentes Alimentarios</a>
               </li>
-              {% endif %}
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">Publicaciones</a>
@@ -107,7 +117,7 @@
                 </div>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
-                  <a class="nav-link px-lg-2 rounded js-scroll-trigger" href="{{url_for('auth_login')}}">Iniciar Sesión</a>
+                  <a id="liIniciarSesion" class="nav-link px-lg-2 text-center  rounded js-scroll-trigger" style="width:200%;background-color: #00c8ca;color:white" href="{{url_for('auth_login')}}">Iniciar Sesión</a>
                 </li>
               {% endif %}
               {% if session['rol'] == '3' %}

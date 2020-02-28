@@ -55,7 +55,7 @@ def listadoComedorP():
     return render_template(Permiso)    
 
 def listadoComedor():
-    Permiso = habilitedAccesLogin()
+    Permiso = habilitedAcces()
     if Permiso == 'true':
         Sitio.db=get_db()
         Comedor.db=get_db()
