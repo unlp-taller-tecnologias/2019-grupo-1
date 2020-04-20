@@ -1,0 +1,44 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Evento'  %} 
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+    <div class="container">
+        <section class="col-xs-12 col-sm-6 col-md-12">
+              <article class="search-result row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                  <h3>{{informe.titulo}}  {{informe.fecha}}</h3>
+                  
+                  <p class="line-clamp">{{informe.cuerpo}}</p>
+                  {% for elem in informe.links: %}
+                    {% if elem[1:5] == "http" %}
+                      <a class="line-clamp" href="{{elem}}">{{elem}}</a>
+                      <br>
+                    {% else %}
+                      <h5 class="line-clamp" >{{elem}}</h5> 
+                    {% endif %}
+                 
+                  {% endfor %}
+                </div>
+                <span class="clearfix borda"></span>
+                <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                </div>
+              </article>
+               <hr>          
+              </section>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+
+
+{% endblock %}        

@@ -10,7 +10,7 @@ import calendar
 def new():
     Permiso = habilitedAccesAdmin()
     if Permiso == 'true':
-        return render_template( 'alta_noticia.html' )
+        return render_template( 'noticia/alta_noticia.html' )
     return render_template(Permiso)        
 
 
@@ -24,9 +24,9 @@ def listado_noticias():
         for elem in noticias:
             elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
         if session and session['rol'] == "3":
-            return render_template('listado_noticias.html',cant=cantPag[0]['cant_paginado'],noticias=noticias,tam=len(noticias))
+            return render_template('noticia/listado_noticias.html',cant=cantPag[0]['cant_paginado'],noticias=noticias,tam=len(noticias))
         else:
-            return render_template('listado_noticias_usuarios.html', noticias=noticias)
+            return render_template('noticia/listado_noticias_usuarios.html', noticias=noticias)
     return render_template(Permiso)        
 
 
@@ -60,7 +60,7 @@ def edite():
         if session['rol'] == "3":
             Noticia.db = get_db()
             noticia = Noticia.find_noticia_by_id(request.args.get('idNoticia'))
-            return render_template('editeNoticia.html', noticia = noticia)
+            return render_template('noticia/editeNoticia.html', noticia = noticia)
         else:
             return render_template('autorizacion.html')
     return render_template(Permiso) 
@@ -78,4 +78,14 @@ def editando():
             Noticia.edite(data,file.filename)
         flash(["La noticia se ha editado con exito", 'green'])  
         return redirect(url_for('listado_noticias'))
-    return render_template(Permiso)    
+    return render_template(Permiso)   
+
+def ver():
+    Permiso = habilitedAcces()
+    if Permiso == 'true':
+        Noticia.db = get_db()
+        data = request.form
+        noticia = Noticia.find_noticia_by_id(request.args.get('idNoticia'))
+        noticia['fecha'] = noticia['fecha'].strftime("%d/%m/%Y")
+        return render_template('noticia/ver_noticia.html', noticia = noticia)
+    return render_template(Permiso) 

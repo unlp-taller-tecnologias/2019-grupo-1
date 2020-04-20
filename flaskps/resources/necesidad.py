@@ -13,7 +13,7 @@ def new_necesidad():
         Comedor.db=get_db()
         tipo_necesidades = Tipo_necesidad.all()
         comedores = Comedor.allActives()
-        return render_template('alta_necesidad.html',tipo_necesidades= tipo_necesidades, comedores= comedores)
+        return render_template('necesidad/alta_necesidad.html',tipo_necesidades= tipo_necesidades, comedores= comedores)
     return render_template(Permiso)	
     
 
@@ -28,7 +28,7 @@ def listado_necesidades():
         tipo_necesidades = Tipo_necesidad.all()
         comedores = Comedor.all()
         cantPag = Sitio.cantPaginado()
-        return render_template('listado_necesidades.html', necesidades= necesidades, tipo_necesidades= tipo_necesidades, comedores= comedores, cant=cantPag[0]['cant_paginado'])
+        return render_template('necesidad/listado_necesidades.html', necesidades= necesidades, tipo_necesidades= tipo_necesidades, comedores= comedores, cant=cantPag[0]['cant_paginado'])
     return render_template(Permiso)
 
 def create():
@@ -51,7 +51,7 @@ def edite():
         Comedor.db=get_db()
         tipo_necesidades = Tipo_necesidad.all()
         comedores = Comedor.all()
-        return render_template('editeNecesidad.html', necesidad = necesidad,tipo_necesidades= tipo_necesidades, comedores= comedores)
+        return render_template('necesidad/editeNecesidad.html', necesidad = necesidad,tipo_necesidades= tipo_necesidades, comedores= comedores)
     return render_template(Permiso)
 
 def editando():

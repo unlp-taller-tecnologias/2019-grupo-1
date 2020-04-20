@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+
+{% set encabezado = 'Informes y Normativas'  %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <style>
+        .child {table-layout:fixed} .child td {word-wrap:break-word; white-space: normal !important;}
+        .line-clamp {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 8;
+          overflow: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block cuerpo %}
+
+<div class="container">
+        <br>
+        {% if session['rol'] == '3' %}
+           <button   type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'alta_infor' ) }}';">Crear informe o normativa</button>
+        {% endif %}
+        <hr>
+        <div class="table-responsive">
+        <select id="select">
+          <option>Fecha</option>
+          <option>Título</option>
+        </select>
+        
+        <table id="example" class="table table-striped table-bordered table-sm dt-responsive">
+          <thead>
+            <tr>
+                <th class="th-sm" width="5%">Fecha </th>
+                <th class="th-sm">Título</th>
+                <th class="th-sm">Cuerpo</th>
+                <th class="th-sm">Ver</th>
+                {% if session['rol'] == '3' %}
+                <th class="th-sm" >Modificar</th>
+                <th class="th-sm">Eliminar</th>
+                {% endif %}
+                
+                
+            </tr>
+          </thead>
+          <tbody>
+            {% for elem in informativas %}
+            <tr id="{{elem.id|upper}}" style="background-color: rgb(223, 220, 219);" >
+                <td>{{elem.fecha}}</td>
+                <td>{{elem.titulo}}</td>        
+                <td><p class="line-clamp">{{elem.cuerpo}}</p></td>
+                <td align="center"><button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'ver_informe' , idinform=elem.id) }}';">Ver informe</button></td>
+                {% if session['rol'] == '3' %}          
+                  <td align="center"><button type="button" class="btn btn-success" onclick="window.location.href='{{ url_for( 'edite_inform' , idInform=elem.id) }}';">Modificar</button></td>
+                  <td align="center"><button type="button" class="btn btn-danger" onclick="deleteA('{{elem.id}}','{{ elem.titulo}}')">Eliminar</button></td>
+                {% endif %}
+                
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+</div>
+        
+  <br>    
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+<script src="static/js/jquery.dataTables.js"></script> 
+<script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+ <script>
+       
+    function deleteA(id,nombre){
+      $.confirm({
+        type:'red',
+        title: 'Eliminar noticia',
+        content: 'Desea eliminar esta noticia: ' +nombre.toUpperCase() +'? ',
+        buttons: {
+            Confirmar: function () {
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('delete_inform', id='' ) }}"+id, success: function(result){
+                if(result['ok']){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se eliminó la noticia correctamente ' ,
+                  type: ('green'),
+                });
+                var elem = document.getElementById(id);
+                elem.parentNode.removeChild(elem);  
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Ha ocurrido un error al eliminar la noticia ' ,
+                  type: ('red'),
+                });
+              }}});              
+            },
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+
+    
+  </script>
+    <script>
+      $(document).ready(function() {
+        var table = $('#example').DataTable({  
+          "language": {
+            "zeroRecords": "No hay elementos disponibles",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sSearch":         "Buscar:",
+            "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                }}, 
+          "bLengthChange":false,
+        //aca va el valor del paginado
+        "lengthMenu": [["{{cant}}"], ["{{cant}}"]],
+      })
+
+
+      $('.dataTables_filter input').unbind().bind('keyup click', function() {
+        var colIndex = document.querySelector('#select').selectedIndex;
+        table.column( colIndex).search( this.value ).draw();
+      });
+      $('#select').focus(function() {
+        document.getElementById('myInput').value = '';
+        var colIndex = document.querySelector('#select').selectedIndex;
+        table.column( colIndex).search( document.getElementById('myInput').value ).draw();
+      });
+
+      })
+    </script>     
+
+ {% block verificarAlerta %}
+  {{ super() }}
+{% endblock %} 
+
+{% endblock %}
+
+
+
+
+

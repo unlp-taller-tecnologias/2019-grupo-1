@@ -39,7 +39,9 @@
                                             {% if (session and (session['rol'] == '3' or session['idComedor'] == comedor.id)) and comedor.estado == '1' %}
                                             <input type="button"  class="btn btn-primary px-3 py-2" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_comedor' , idComedor='') }}{{ request.args.get('idComedor') }}'" name="btnAddMore" value="Editar comedor">
                                             {% endif %}                  
-                                        </div>
+                                            <input type="button"  class="btn btn-primary px-3 py-2" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'AA_alta',idRefe='') }}{{referente.id}}'"  value="Alta AA">
+
+                                    </div>
                                     <br>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">

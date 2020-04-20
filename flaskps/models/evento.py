@@ -57,4 +57,11 @@ class Evento(object):
         cls.db.commit()
         return True
 
+    @classmethod
+    def find_evento_only_id(cls, idEvento):
+        sql = """   SELECT * FROM evento WHERE id = %s"""
+        cursor = cls.db.cursor()
+        cursor.execute(sql, (idEvento))
+        return cursor.fetchone()
+
     

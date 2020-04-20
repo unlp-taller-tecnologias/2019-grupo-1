@@ -13,6 +13,7 @@ from flaskps.resources import necesidad
 from flaskps.resources import evento
 from flaskps.resources import noticia
 from flaskps.resources import registro
+from flaskps.resources import informativa
 from flaskps.config import Config
 from flask_bootstrap import Bootstrap
 from flaskps.db import get_db
@@ -52,6 +53,12 @@ app.add_url_rule("/listadoComedor" , "comedor_list" , comedor.listadoComedor)
 app.add_url_rule("/comedorProfile" , "comedor_profile" , comedor.profile)
 app.add_url_rule("/deleteComedor" , "delete_com" , comedor.delete)
 app.add_url_rule("/actualizarEstadoComedor","comedor_actualizar_estado",comedor.actualizarEstado,methods=['GET'])
+app.add_url_rule("/altaAA","AA_alta",comedor.altaAA ,methods=['GET'])
+app.add_url_rule("/altaAA/creado","AA_create",comedor.createAA ,methods=['POST'])
+app.add_url_rule("/cambioComedor","cambio_comedor",comedor.cambioComedor ,methods=['GET'])
+
+
+
 
 # Admin
 app.add_url_rule("/panelAdmin" , "panelAdmin" , sitio.renderPanelAdmin)
@@ -98,6 +105,7 @@ app.add_url_rule("/editandoregistro" , "editando_registro" , registro.editando,m
 app.add_url_rule("/mapInfoOne" , "mapInfoOne" , comedor.mapInfoOne, methods=['GET'])
 app.add_url_rule("/mapInfoAll" , "mapInfoAll" , comedor.mapInfoAll, methods=['GET'])
 app.add_url_rule("/getRedes" , "getRedes" , sitio.getRedes, methods=['GET'])
+app.add_url_rule("/getAllComedoresFromReferente", "getComFromRef", comedor.allComedoresDeUnReferente, methods=['GET'])
 
 #Eventos
 app.add_url_rule("/altaEvento", 'alta_evento', evento.new , methods=['GET'])
@@ -108,6 +116,7 @@ app.add_url_rule("/misEventos" , "mis_eventos" , evento.mis_eventos)
 app.add_url_rule("/deleteEvento" , "delete_evento" , evento.delete)
 app.add_url_rule("/editeEvento" , "edite_evento" , evento.edite,methods=['POST','GET'])
 app.add_url_rule("/editandoEvento" , "editando_evento" , evento.editando,methods=['POST'])
+app.add_url_rule("/verEvento", 'ver_evento', evento.ver , methods=['GET'])
 
 #Noticias
 app.add_url_rule("/altaNoticia", 'alta_noticia', noticia.new , methods=['GET'])
@@ -116,4 +125,14 @@ app.add_url_rule("/altaNoticia/creado" , "create_noticia" , noticia.create, meth
 app.add_url_rule("/deleteNoticia" , "delete_noticia" , noticia.delete)
 app.add_url_rule("/editeNoticia" , "edite_noticia" , noticia.edite,methods=['POST','GET'])
 app.add_url_rule("/editandoNoticia" , "editando_noticia" , noticia.editando,methods=['POST'])
+app.add_url_rule("/verNoticia" , "ver_noticia" , noticia.ver,methods=['GET'])
+
+#informes y normativas
+app.add_url_rule("/altainfor", 'alta_infor', informativa.new , methods=['GET'])
+app.add_url_rule("/listadoinforme" , "listado_inform" , informativa.listado_inform)
+app.add_url_rule("/altainform/creado" , "create_inforNorma" , informativa.create, methods=['POST'])
+app.add_url_rule("/deleteinform" , "delete_inform" , informativa.delete)
+app.add_url_rule("/editeinform" , "edite_inform" , informativa.edite,methods=['POST','GET'])
+app.add_url_rule("/editandoinform" , "editando_inform" , informativa.editando,methods=['POST'])
+app.add_url_rule("/verInforme" , "ver_informe" , informativa.ver,methods=['GET'])
 

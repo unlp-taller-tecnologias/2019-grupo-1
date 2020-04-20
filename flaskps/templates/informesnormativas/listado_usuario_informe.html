@@ -1,0 +1,60 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Eventos'  %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+     .line-clamp {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 8;
+        overflow: hidden;
+      }
+    </style>
+{% endblock %}
+
+{% block cuerpo %}
+<div class="container">
+<section class="col-xs-12 col-sm-6 col-md-12">
+  {% for elem in informativas %}
+    <article class="search-result row">
+      <div class="col-xs-12 col-sm-12 col-md-2">
+       
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <ul class="meta-search">
+          <li><i class="glyphicon glyphicon-calendar"></i> <span>{{elem.fecha}}</span></li>
+
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+        <h3>{{elem.titulo}}</h3>
+        <p class="line-clamp">{{elem.cuerpo}}</p>            
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+      </div>
+      <span class="clearfix borda"></span>
+      <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+        <input type="button" class="btn btn-info" value="Ver informe" onclick="window.location.href='{{ url_for( 'ver_informe' , idinform=elem.id) }}';"/>
+      </div>
+    </article>
+    <hr>
+    {% endfor %}
+
+    </section>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+
+ 
+
+     
+{% endblock %}
+
+
+
+
+

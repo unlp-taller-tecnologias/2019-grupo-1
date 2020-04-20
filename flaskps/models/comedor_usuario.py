@@ -48,3 +48,12 @@ class Comedor_usuario(object):
         cursor.execute(sql,(comId,refId))
         cls.db.commit()
         return True
+
+    @classmethod
+    def getAllComedoresByIdReferente(cls,idCom):
+        sql = """ SELECT c.id, c.nombre FROM comedor as c INNER JOIN comedor_usuario as ca 
+        ON ca.comedor_id= c.id WHERE ca.referente_id = %s
+        """
+        cursor = cls.db.cursor()
+        cursor.execute(sql, idCom)
+        return cursor.fetchall()

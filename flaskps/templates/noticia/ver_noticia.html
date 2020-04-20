@@ -1,0 +1,40 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Noticia'  %} 
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+    <div class="container">
+        <section class="col-xs-12 col-sm-6 col-md-12">
+              <article class="search-result row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    {% if noticia.foto != '' %}
+                      <img style="width: 100%;"  src= "{{ url_for('static', filename='images/noticia/') }}{{elem.id}}{{elem.foto}}" />
+                    {% else %}
+                      <img  src= "{{ url_for('static', filename='images/noFoto.jpg') }}" />    
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                  <h3>{{noticia.titulo}}</h3>
+                  <h3>{{noticia.fecha}}</h3>
+                  <p class="line-clamp">{{noticia.descripcion}}</p>
+                </div>
+                <span class="clearfix borda"></span>
+                <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                </div>
+              </article>
+               <hr>          
+              </section>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+
+
+{% endblock %}        

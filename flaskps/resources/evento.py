@@ -24,11 +24,11 @@ def listado_eventos():
             elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
             elem['fecha_evento'] = elem['fecha_evento'].strftime("%d/%m/%Y")
         if not session:
-            return render_template('listado_eventos_usuarios.html',eventos=eventos)
+            return render_template('evento/listado_eventos_usuarios.html',eventos=eventos)
         if session['rol'] == "3":
-            return render_template('listado_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
+            return render_template('evento/listado_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
         else:
-            return render_template('listado_eventos_usuarios.html',eventos=eventos)
+            return render_template('evento/listado_eventos_usuarios.html',eventos=eventos)
     return render_template(Permiso)
 
 def mis_eventos():
@@ -43,7 +43,7 @@ def mis_eventos():
         for elem in eventos:
             elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
             elem['fecha_evento'] = elem['fecha_evento'].strftime("%d/%m/%Y")
-        return render_template('listado_mis_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
+        return render_template('evento/listado_mis_eventos.html',cant=cantPag[0]['cant_paginado'],eventos=eventos,tam=len(eventos))
     return render_template(Permiso)
 
 def create():
@@ -76,7 +76,7 @@ def edite():
         else:
             Evento.db = get_db()
             evento = Evento.find_evento_by_id(request.args.get('idEvento'),datetime.now())
-            return render_template('editeEvento.html', evento = evento)
+            return render_template('evento/editeEvento.html', evento = evento)
     return render_template(Permiso)
 
 def editando():
@@ -87,4 +87,13 @@ def editando():
         Evento.edite(data,datetime.now())
         flash(["Se edito el evento exitosamente!", 'green'])     
         return redirect(url_for('mis_eventos'))
-    return render_template(Permiso)    
+    return render_template(Permiso)
+
+def ver():
+    Permiso = habilitedAcces()
+    if Permiso == 'true':
+        Evento.db = get_db()
+        evento = Evento.find_evento_only_id(request.args.get('idEvento'))
+        evento['fecha'] = evento['fecha'].strftime("%d/%m/%Y")
+        return render_template('evento/ver_evento.html', evento = evento)
+    return render_template(Permiso)   

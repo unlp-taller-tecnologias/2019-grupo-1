@@ -31,7 +31,6 @@ def create():
         exist =  User.find_user(data['user'])
         if not exist:
             file = request.files['file']
-            
             Comedor.create(data,file.filename)
             User.createRef(data)
             Comedor_usuario.create(Comedor.last_comedor()['id'], User.last_user()['id'])
@@ -161,6 +160,48 @@ def actualizarEstado():
         return redirect(url_for('comedor_list_p'))
     return render_template(Permiso)
 
+def altaAA():
+    Permiso = habilitedAcces()
+    if Permiso == 'true':  
+        return render_template(  'comedor/altaAA.html' )
+
+# Deberia crear un comedor y un comedor_usuario
+def createAA():
+    Permiso = habilitedAcces()
+    if Permiso == 'true':
+        Comedor.db = get_db()
+        Comedor_usuario.db = get_db()
+        User.db=get_db()
+        data = request.form
+        exist =  User.find_user(data["idRefe"])
+        if not exist:
+            file = request.files['file']
+            Comedor.createAA(data,file.filename)          
+            Comedor_usuario.create(Comedor.last_comedor()['id'], data["idRefe"])
+            filename = Comedor.last_comedor()
+            upload_file('comedor',str(filename['id']),file)
+            flash(["El comedor fue creado correctamente", 'green'])
+            return redirect(url_for('comedor_profile',idComedor=filename["id"]))
+        flash(["Ya existe un usuario con ese nombre, elija otro!", 'red'])   
+        return redirect(url_for('altaComedor'))
+    return render_template(Permiso)   
+
+
+def cambioComedor():
+    Permiso = habilitedAcces()
+    if Permiso == 'true':
+        Comedor.db = get_db()
+        com = request.args.get('id')
+        exist = Comedor.find_comedor_by_id(com)
+        if(exist):
+            print(id)
+            session['idComedor'] = request.args.get('id')
+            return redirect(url_for('index'))
+    return render_template(Permiso)
+
+    
+
+
 #API
 
 def mapInfoOne():
@@ -171,4 +212,10 @@ def mapInfoOne():
 def mapInfoAll():
     Comedor.db=get_db()
     comedor = Comedor.allActives()
-    return jsonify(comedores = comedor)     
+    return jsonify(comedores = comedor)
+
+def allComedoresDeUnReferente():
+    Comedor_usuario.db=get_db()
+    comedores = Comedor_usuario.getAllComedoresByIdReferente(request.args.get('id'))
+    print(comedores)
+    return jsonify(comedores=comedores)

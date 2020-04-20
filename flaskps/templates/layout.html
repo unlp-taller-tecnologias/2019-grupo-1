@@ -20,7 +20,12 @@
         <!-- Theme Style -->
     <link rel="stylesheet" href="static/css/freelancer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">  
-  {% endblock %}  
+    <style> #tula{
+      
+      } 
+    
+    </style>
+    {% endblock %}  
 
 {% block content %}
     
@@ -80,7 +85,8 @@
                    {% endif %}
                   <a class="dropdown-item" href="{{ url_for('listado_necesidades') }}">Necesidades</a>
                   <a class="dropdown-item" href="{{ url_for('listado_noticias') }}">Noticias</a>
-                  <a class="dropdown-item" href="{{ url_for('listado_eventos') }}">Eventos</a>                  
+                  <a class="dropdown-item" href="{{ url_for('listado_eventos') }}">Eventos</a>
+                  <a class="dropdown-item" href="{{ url_for('listado_inform') }}">Informes y Normativas</a>                  
                 </div>
               </li>
               {% if  'username' in session %}
@@ -103,8 +109,17 @@
                   <a class="dropdown-item" href="{{ url_for( 'mis_eventos' ) }}">Mis eventos</a>
                   <a class="dropdown-item" href="{{ url_for('auth_logout') }}">Cerrar sesión</a>
                   
-                  
                 </div>
+                {% if session['idComedor'] %}
+                <li id="listItem6" class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="services.html" id="dropdown06" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">Centros A.A.</a>
+                      <div class="dropdown-menu" id="divJavascript" aria-labelledby="dropdown06">
+                      
+                      </div>  
+                </li>     
+                {% endif %}
+                
                 </li>
               {% else %}
               
@@ -132,13 +147,15 @@
   {% endblock %}
 
   {% block plantillaContenido %}
+
   <div style='background-color:#00c8ca;margin:auto;padding:5%;'>
     <section class=" jumbotron page-section" id="contact"  >
         <div class="container" display='inline' id="divContent" >
+          <br>
 
         <!-- Contact Section Heading -->
         <h2 id="dh2Text" class="page-section-heading text-center text-uppercase text-secondary mb-0"> {{ encabezado }} </h2>
-
+          
         <!-- Icon Divider -->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
@@ -198,6 +215,53 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
   <script src="https://kit.fontawesome.com/0d1e8a0e70.js" crossorigin="anonymous"></script>	
   <script>
+
+    function cumplir(e){
+      var aux = '{{session['idComedor']}}';
+        $.confirm({
+          type:'green',
+          title: 'Cambiar el centro de Asistencia Alimentaria',
+          content: 'Desea cambiar de centro alimentario? ',          
+          buttons: {
+            Confirmar: function () {
+              if(e.id == aux){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'El centro seleccionado es el que esta actualmente usando ' ,
+                  type: ('green'),
+                });
+              }
+              else{
+              window.location.href="{{url_for('cambio_comedor' , id='')}}"+ e.id;        
+            }},
+            Cancelar: function () {
+                null
+            },
+        }
+    })             
+    };
+  </script>
+  <script>
+    //comedor = rol 3
+    let ide= "{{session['id']}}";
+    
+    $.ajax({url: "{{ url_for('getComFromRef', id='' ) }}"+ide, success: function(result){
+      var comedor = result["comedores"];
+      var div = document.getElementById("listItem6");
+      for(var i = 0; i < comedor.length; i++) {
+        var opt = comedor[i];
+        var el = document.createElement("a");
+        el.textContent = opt["nombre"];
+        el.className = "dropdown-item";
+        el.onclick = function(){return cumplir(this); };
+        el.id=opt["id"]
+        //el.href = "{{url_for('cambio_comedor' , id='')}}"+ opt["id"];
+        $('#divJavascript ').append(el);
+      }
+      }})
+      ;
+  </script>
+  <script>
   $.ajax({url: "{{ url_for('getRedes') }}", success: function(result){
       face=result['redes'][0]['facebook'];
       twi=result['redes'][0]['twitter'];
@@ -208,10 +272,11 @@
       if(face==''){ face='#' }
       if(twi==''){ twi='#' }
       if(ins==''){ ins='#' }
-      }})
-  
-  
+      }});
   </script>
+
+
+
  
 {% endblock %}
 

@@ -5,7 +5,7 @@ class Necesidad(object):
     @classmethod
     def all(cls):
         sql = """
-            SELECT necesidad.id,necesidad.descripcion,tipo_necesidad.nombre, comedor.id as idC, comedor.nombre as nombreC FROM necesidad
+            SELECT necesidad.id,necesidad.descripcion,necesidad.subtipo,tipo_necesidad.nombre, comedor.id as idC, comedor.nombre as nombreC FROM necesidad
             INNER JOIN tipo_necesidad ON tipo_necesidad.id = necesidad.tipo_necesidad_id
             INNER JOIN comedor ON comedor.id = necesidad.comedor_id
             WHERE necesidad.estado=0
@@ -31,12 +31,12 @@ class Necesidad(object):
     @classmethod
     def create(cls, data):
         sql = """
-            INSERT INTO necesidad (tipo_necesidad_id,estado,descripcion,comedor_id)
-            VALUES (%s,0,%s,%s)
+            INSERT INTO necesidad (tipo_necesidad_id,estado,descripcion,comedor_id,subtipo)
+            VALUES (%s,0,%s,%s,%s)
         """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, (data['tipo'],data['desc'],data['comedor']))
+        cursor.execute(sql, (data['tipo'],data['desc'],data['comedor'],data['subtipo']))
         cls.db.commit()
 
         return True
@@ -44,10 +44,10 @@ class Necesidad(object):
     
     @classmethod
     def edite(cls, data):
-        sql = """  UPDATE necesidad  SET tipo_necesidad_id=%s,comedor_id=%s, descripcion=%s WHERE id =%s """
+        sql = """  UPDATE necesidad  SET tipo_necesidad_id=%s,comedor_id=%s, descripcion=%s, subtipo=%s WHERE id =%s """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, ( data['tipo'],data['comedor'],data['desc'],data['idU']))
+        cursor.execute(sql, ( data['tipo'],data['comedor'],data['desc'],data['idU'],data['subtipo']))
         cls.db.commit()
 
         return True

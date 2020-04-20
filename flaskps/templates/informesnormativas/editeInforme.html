@@ -1,0 +1,135 @@
+{% extends "tablaLayout.html" %}
+
+{% set encabezado = 'Editar el informe y/o normativa'  %} 
+
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block cuerpo %}
+    <!-- Contact Section -->
+
+    <div class="container">
+        <!-- Contact Section Form -->
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="card">
+            <div style="border-width:2px !important;" class="card-body text-center border border-secondary">
+
+                <div class="row">
+                  <div class="col-md-12 mb-4 order-2">
+                    <form id='formNoticia' action="{{ url_for('editando_inform') }}" method="post" enctype="multipart/form-data">
+                          <div class="row">
+                              <div class="col-md-6 form-group">
+                                <label for="titulo">Título</label>
+                                <input value="{{ informe.titulo }}" type="text" id="titulo" name="titulo" class="form-control " required maxlength="24">
+                              </div>
+                              <div class="col-md-6 form-group">
+                                <label for="fecha">Fecha</label>
+                                <input value="{{ informe.fecha }}" type="date" id="fecha" name="fecha" class="form-control " required maxlength="24">
+                              </div>
+                            </div>
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="descripcion">Cuerpo</label>
+                            <textarea class="form-control" name="descripcion" id="descripcion" rows="10" required>{{ informe.cuerpo }}</textarea>
+                          </div>   
+                        </div>      
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="links">Links (Por cada link que pongas no te olvides del http://)</label>
+                            <textarea class="form-control" name="links" id="links" rows="5" required>{{informe.links}}</textarea>
+                          </div>   
+                        </div> 
+                        <div class="row">
+                          <div class="col-md-3">
+                            <input type="hidden" value="{{informe.id}}" name="idInform" id="idInform">
+                          </div>
+                          <div class="col-md-6 form-group">
+                             <input type="button" onclick="return validateForm()" value="Editar informe y/o normativa" class="btn btn-info px-3 py-2">
+                          </div>
+                          <div class="col-md-3">
+                         
+                          </div>                         
+                        </div>
+                      </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+<script>
+       
+    function editada(id,nombre){
+      $.confirm({
+        type:'green',
+        title: 'Eliminar informe y/o normativa',
+        content: 'Desea eliminar este informe y/o normativa: ' +nombre.toUpperCase() +'? ',
+        buttons: {
+            Confirmar: function () {
+              var ok=true;
+              $.ajax({
+                url: "{{ url_for('listado_inform') }}", success: function(result){
+                if(result['ok']){
+                $.alert({
+                  title: 'Mensaje informativo',
+                  content:  'Se eliminó el informe y/o normativa correctamente ' ,
+                  type: ('green'),
+                });
+                }else{
+                $.alert({
+                  title: 'Error al eliminar',
+                  content:  'Ha ocurrido un error al eliminar el informe y/o normativa ' ,
+                  type: ('red'),
+                });
+              }}});              
+            }
+        }
+    })             
+    };
+
+    function validateForm(){
+      ok= ''
+      if(document.getElementById('titulo').value == ''){ ok ='Debe ingresar un título' }
+      if(document.getElementById('descripcion').value == ''){ ok ='Debe ingresar una cuerpo' }
+      if(document.getElementById('fecha').value == 0000-00-00){ ok = 'Debe ingresar una fecha válida' }
+      $.confirm({
+        type:'green',
+        title: 'Guardar cambios',
+        content: '¿Desea guardar los cambios realizados?' ,
+        buttons: {
+            Confirmar: function () {                
+              if (ok == ''){document.getElementById("formNoticia").submit();}
+              else{
+                $.alert({
+                  title: 'Error',
+                  content: ok,
+                  type: 'red',
+                 });
+              }
+            },
+            Cancelar: function () {
+              null
+            },
+        }
+    })     
+    return false
+  }
+    
+  </script>    
+
+
+{% endblock %}        
