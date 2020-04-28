@@ -6,18 +6,18 @@ class Noticia(object):
     @classmethod
     def create(cls, data, hoy,foto):
         sql = """
-            INSERT INTO noticia (fecha,titulo,descripcion,foto,estado_n)
-            VALUES (%s,%s,%s,%s,0)
+            INSERT INTO noticia (fecha,titulo,descripcion,foto,links,estado_n)
+            VALUES (%s,%s,%s,%s,%s,0)
         """
         cursor = cls.db.cursor()
-        cursor.execute(sql,(hoy,data['titulo'],data['descripcion'],foto))
+        cursor.execute(sql,(hoy,data['titulo'],data['descripcion'],foto,data['links']))
         cls.db.commit()
         return True
 
     @classmethod
     def allNoticias(cls):
         sql = """
-            SELECT id,fecha,titulo,descripcion,foto FROM noticia WHERE estado_n=0 ORDER BY fecha
+            SELECT * FROM noticia WHERE estado_n=0 ORDER BY fecha
             """
         cursor = cls.db.cursor()
         cursor.execute(sql)
@@ -43,10 +43,10 @@ class Noticia(object):
 
     @classmethod
     def edite(cls, data,foto):
-        sql = """  UPDATE noticia  SET fecha=%s,titulo=%s, descripcion=%s, foto=%s WHERE id =%s """
+        sql = """  UPDATE noticia  SET fecha=%s,titulo=%s, descripcion=%s, links=%s, foto=%s WHERE id =%s """
 
         cursor = cls.db.cursor()
-        cursor.execute(sql, ( data['fecha'],data['titulo'],data['descripcion'],foto,data['idNoticia']))
+        cursor.execute(sql, ( data['fecha'],data['titulo'],data['descripcion'],data['links'],foto,data['idNoticia']))
         cls.db.commit()
 
         return True

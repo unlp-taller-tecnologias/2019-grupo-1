@@ -21,18 +21,24 @@
                                 <input type="text" id="titulo" name="titulo" class="form-control " required maxlength="24">
                               </div>
                             </div>
-                             <div class="row">
+                        <div class="row">
                           <div class="col-md-12 form-group">
                             <label for="descripcion">Descripción</label>
                             <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
                           </div>   
                         </div>
-                         <div class="row">
-                              <div class="col-md-12 form-group">
-                                <label for="foto">Foto (opcional)</label>
-                                <input type="file" id="foto" name="file" class="form-control " maxlength="24">
-                              </div>
-                            </div>              
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="links">Links(Por cada link que pongas no te olvides del http://)</label>
+                            <textarea class="form-control" name="links" id="links" rows="5"></textarea>
+                          </div>   
+                        </div>  
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="foto">Foto (opcional)</label>
+                            <input type="file" id="foto" name="file" class="form-control " maxlength="24">
+                          </div>
+                        </div>              
                                           
                         <div class="row">
                           <div class="col-md-3">
@@ -95,8 +101,12 @@
     })     
     return false
   }
-
     </script>
+  <script> 
+    var url = 'http:www.google.com';
+    var r = new RegExp('/^(ftp|http|https):\/\/[^ "]+$/');
+    r.test(url);
+  </script>
 {% endblock %}        
 
 

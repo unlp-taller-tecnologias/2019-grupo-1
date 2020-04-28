@@ -36,7 +36,7 @@ class Registro(object):
 		for elem in alimentosAnteriores:
 			if not elem in alimentos:
 				lis.append(  """ DELETE FROM alimento_xreg WHERE registro_id="""+str(idRreg)+""" AND alimento_id="""+elem+""" """)
-				print(""" DELTE FROM alimento_xreg WHERE registro_id="""+str(idRreg)+""" AND alimento_id="""+elem+"""); """)
+				
 			else:
 				alimentos.remove(elem)
 		for elem in alimentos:

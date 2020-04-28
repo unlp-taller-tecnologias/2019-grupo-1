@@ -33,8 +33,8 @@
       $.ajax({url: "{{ url_for('mapInfoAll') }}", success: function(result){
         comedores=result['comedores']
         var mymap = L.map('map',{
-          center: [-34.92035241690136, -57.954786306945614],
-          zoom: 12,
+          center: [-33.92035241690136, -57.954786306945614],
+          zoom: 13,
           maxZoom: 18,
           minZoom: 8
         });

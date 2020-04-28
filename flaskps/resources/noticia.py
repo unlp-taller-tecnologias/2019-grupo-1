@@ -87,5 +87,7 @@ def ver():
         data = request.form
         noticia = Noticia.find_noticia_by_id(request.args.get('idNoticia'))
         noticia['fecha'] = noticia['fecha'].strftime("%d/%m/%Y")
+        links = ((noticia['links']).split("\r"))
+        noticia['links'] = links
         return render_template('noticia/ver_noticia.html', noticia = noticia)
     return render_template(Permiso) 

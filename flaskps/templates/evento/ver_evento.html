@@ -4,6 +4,13 @@
 
 {% block styles %}
     {{ super() }}
+    <style>
+      .line-clamp {
+         display: -webkit-box;
+         -webkit-box-orient: vertical;
+         overflow: hidden;
+       }
+     </style>
 {% endblock %}
 
 {% block cuerpo %}
@@ -16,7 +23,17 @@
                   <h3>{{evento.titulo}}</h3>
                   <h3>{{evento.fecha}}</h3>
                   <p class="line-clamp">{{evento.descripcion}}</p>
+                  {% for elem in evento.links: %}
+                    {% if elem[1:5] == "http" %}
+                      <a class="line-clamp" href="{{elem}}">{{elem}}</a>
+                      <br>
+                    {% else %}
+                      <h5 class="line-clamp" >{{elem}}</h5> 
+                    {% endif %}
+               
+                  {% endfor %}
                 </div>
+                
                 <span class="clearfix borda"></span>
                 <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
                 </div>

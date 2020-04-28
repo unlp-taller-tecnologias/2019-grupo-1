@@ -10,7 +10,7 @@ import calendar
 def new():
     Permiso = habilitedAccesLogin()
     if Permiso == 'true':  
-        return render_template( 'alta_evento.html' )
+        return render_template( 'evento/alta_evento.html' )
     return render_template(Permiso)
 
 def listado_eventos():
@@ -19,7 +19,7 @@ def listado_eventos():
         Sitio.db=get_db()
         Evento.db=get_db()
         cantPag=Sitio.cantPaginado()
-        eventos=Evento.allEventos(datetime.now())
+        eventos=Evento.allEventos(str(datetime.now())[0:11])
         for elem in eventos:
             elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
             elem['fecha_evento'] = elem['fecha_evento'].strftime("%d/%m/%Y")
@@ -39,7 +39,7 @@ def mis_eventos():
         Sitio.db=get_db()
         Evento.db=get_db()
         cantPag=Sitio.cantPaginado()
-        eventos=Evento.find_evento_by_user(session['id'],datetime.now())
+        eventos=Evento.find_evento_by_user(session['id'],str(datetime.now())[0:11])
         for elem in eventos:
             elem['fecha'] = elem['fecha'].strftime("%d/%m/%Y")
             elem['fecha_evento'] = elem['fecha_evento'].strftime("%d/%m/%Y")
@@ -52,7 +52,7 @@ def create():
         Sitio.db=get_db()
         Evento.db = get_db() 
         data = request.form
-        Evento.create(data,session['id'],datetime.now())
+        Evento.create(data,session['id'],str(datetime.now())[0:11])
         flash(["El evento se ha creado con exito", 'green']) 
         return redirect(url_for('mis_eventos'))
     return render_template(Permiso)
@@ -75,7 +75,7 @@ def edite():
             return render_template('autorizacion.html')
         else:
             Evento.db = get_db()
-            evento = Evento.find_evento_by_id(request.args.get('idEvento'),datetime.now())
+            evento = Evento.find_evento_only_id(request.args.get('idEvento'))
             return render_template('evento/editeEvento.html', evento = evento)
     return render_template(Permiso)
 
@@ -84,7 +84,8 @@ def editando():
     if Permiso == 'true':    
         Evento.db = get_db()
         data = request.form
-        Evento.edite(data,datetime.now())
+        Evento.edite(data,str(datetime.now())[0:11])
+
         flash(["Se edito el evento exitosamente!", 'green'])     
         return redirect(url_for('mis_eventos'))
     return render_template(Permiso)
@@ -95,5 +96,7 @@ def ver():
         Evento.db = get_db()
         evento = Evento.find_evento_only_id(request.args.get('idEvento'))
         evento['fecha'] = evento['fecha'].strftime("%d/%m/%Y")
+        links = ((evento['links']).split("\r"))
+        evento['links'] = links
         return render_template('evento/ver_evento.html', evento = evento)
     return render_template(Permiso)   

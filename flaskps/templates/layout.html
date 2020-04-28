@@ -20,11 +20,6 @@
         <!-- Theme Style -->
     <link rel="stylesheet" href="static/css/freelancer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">  
-    <style> #tula{
-      
-      } 
-    
-    </style>
     {% endblock %}  
 
 {% block content %}
@@ -60,7 +55,9 @@
           
           <div class="container">
             <div id="divLogo" style="max-height:1%;">
-              <img style="width:82%;" src= "{{ url_for('static', filename='images/logoText.png') }} " />
+              <a href="{{url_for('index')}}">
+              <img style="width:82%;" alt="Logo Accion alimentaria" src= "{{ url_for('static', filename='images/logoText.png') }} " />
+              </a>
             </div>
             
             
@@ -244,18 +241,21 @@
   <script>
     //comedor = rol 3
     let ide= "{{session['id']}}";
-    
+    let come= "{{session['idComedor']}}";
     $.ajax({url: "{{ url_for('getComFromRef', id='' ) }}"+ide, success: function(result){
       var comedor = result["comedores"];
       var div = document.getElementById("listItem6");
       for(var i = 0; i < comedor.length; i++) {
         var opt = comedor[i];
         var el = document.createElement("a");
+        console.log(ide, opt['id'])
+        if(come == (opt['id'])){
+          $('#dropdown06 ').text(opt['nombre']);
+        }
         el.textContent = opt["nombre"];
         el.className = "dropdown-item";
         el.onclick = function(){return cumplir(this); };
         el.id=opt["id"]
-        //el.href = "{{url_for('cambio_comedor' , id='')}}"+ opt["id"];
         $('#divJavascript ').append(el);
       }
       }})

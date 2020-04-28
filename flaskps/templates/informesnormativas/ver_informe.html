@@ -1,9 +1,16 @@
 {% extends "tablaLayout.html" %}
 
-{% set encabezado = 'Evento'  %} 
+{% set encabezado = 'Informe y/o Normativa'  %} 
 
 {% block styles %}
     {{ super() }}
+    <style>
+      .line-clamp {
+         display: -webkit-box;
+         -webkit-box-orient: vertical;
+         overflow: hidden;
+       }
+     </style>
 {% endblock %}
 
 {% block cuerpo %}

@@ -42,7 +42,12 @@
                                 <input value="{{ evento.horario }}" type="text" name="horario" id="horario" class="form-control " required maxlength="24">
                               </div>
                         </div>                      
-                                          
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label for="links">Links(Por cada link que pongas no te olvides del http://)</label>
+                            <textarea class="form-control" name="links" id="links" rows="5" required>{{ evento.links }}</textarea>
+                          </div>   
+                        </div>                 
                         <div class="row">
                           <div class="col-md-3">
                             <input type="hidden" value="{{ evento.id }}" name="idEvento" id="idEvento">

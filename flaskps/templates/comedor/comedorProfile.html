@@ -35,13 +35,15 @@
                                     <h6>
                                         Comedor
                                     </h6>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
+                                        <div style="flex-wrap: nowrap;" class="row">
                                             {% if (session and (session['rol'] == '3' or session['idComedor'] == comedor.id)) and comedor.estado == '1' %}
-                                            <input type="button"  class="btn btn-primary px-3 py-2" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_comedor' , idComedor='') }}{{ request.args.get('idComedor') }}'" name="btnAddMore" value="Editar comedor">
-                                            {% endif %}                  
-                                            <input type="button"  class="btn btn-primary px-3 py-2" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'AA_alta',idRefe='') }}{{referente.id}}'"  value="Alta AA">
-
+                                            <input type="button"  class="btn btn-primary px-3 py-2 mr-1" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'editar_comedor' , idComedor='') }}{{ request.args.get('idComedor') }}'" name="btnAddMore" value="Editar comedor">     
+                                            <input  type="button"  class="btn btn-primary px-3 py-2" class="profile-edit-btn" onclick="window.location.href='{{ url_for( 'AA_alta',idRefe='') }}{{referente.id}}'"  value="Crear Asistente Alimentario">
+                                            {% endif %} 
+                                        </div>
                                     </div>
+                                </div>
                                     <br>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">

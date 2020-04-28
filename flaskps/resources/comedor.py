@@ -194,7 +194,6 @@ def cambioComedor():
         com = request.args.get('id')
         exist = Comedor.find_comedor_by_id(com)
         if(exist):
-            print(id)
             session['idComedor'] = request.args.get('id')
             return redirect(url_for('index'))
     return render_template(Permiso)
@@ -217,5 +216,4 @@ def mapInfoAll():
 def allComedoresDeUnReferente():
     Comedor_usuario.db=get_db()
     comedores = Comedor_usuario.getAllComedoresByIdReferente(request.args.get('id'))
-    print(comedores)
     return jsonify(comedores=comedores)
